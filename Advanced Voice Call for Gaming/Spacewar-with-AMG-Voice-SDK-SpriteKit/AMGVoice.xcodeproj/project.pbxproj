@@ -1,0 +1,439 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		070227CB1E8520C900004AE2 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 070227CA1E8520C900004AE2 /* libresolv.tbd */; };
+		0728272C1E691DDF007D2EF2 /* space.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0728272B1E691DDF007D2EF2 /* space.mp3 */; };
+		072827E01E6D35BC007D2EF2 /* boom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 072827DF1E6D35BC007D2EF2 /* boom.mp3 */; };
+		072827E51E6D368E007D2EF2 /* shoot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 072827E41E6D368E007D2EF2 /* shoot.mp3 */; };
+		072827E71E6D3D6C007D2EF2 /* KeyCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072827E61E6D3D6C007D2EF2 /* KeyCenter.swift */; };
+		072827FB1E6D7AAD007D2EF2 /* FileCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072827FA1E6D7AAD007D2EF2 /* FileCenter.swift */; };
+		0759B91E1E6816F0004DF60A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0759B91D1E6816F0004DF60A /* AppDelegate.swift */; };
+		0759B9291E6816F0004DF60A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0759B9271E6816F0004DF60A /* Main.storyboard */; };
+		0759B92B1E6816F0004DF60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0759B92A1E6816F0004DF60A /* Assets.xcassets */; };
+		0759B92E1E6816F0004DF60A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0759B92C1E6816F0004DF60A /* LaunchScreen.storyboard */; };
+		0759B9481E68180A004DF60A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0759B9471E68180A004DF60A /* AVFoundation.framework */; };
+		0759B94A1E681813004DF60A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0759B9491E681813004DF60A /* AudioToolbox.framework */; };
+		0759B94C1E681818004DF60A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0759B94B1E681818004DF60A /* CoreTelephony.framework */; };
+		0759B94E1E68181D004DF60A /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0759B94D1E68181D004DF60A /* libc++.tbd */; };
+		0759B95C1E681BE2004DF60A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0759B95B1E681BE2004DF60A /* MainViewController.swift */; };
+		0759B95E1E68220E004DF60A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0759B95D1E68220D004DF60A /* GameViewController.swift */; };
+		0759B9751E682764004DF60A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0759B9741E682764004DF60A /* GameScene.swift */; };
+		07B07E991EB331E0003DF680 /* AgoraAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B07E981EB331E0003DF680 /* AgoraAudioKit.framework */; };
+		07E326C81E79278A0019310C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E326C71E79278A0019310C /* Helper.swift */; };
+		07E326CA1E792CF40019310C /* AudioSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E326C91E792CF40019310C /* AudioSettingsViewController.swift */; };
+		8BB772A72008816000157CFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB772A62008815A00157CFC /* SystemConfiguration.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		070227CA1E8520C900004AE2 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		0728272B1E691DDF007D2EF2 /* space.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = space.mp3; sourceTree = "<group>"; };
+		072827DF1E6D35BC007D2EF2 /* boom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boom.mp3; sourceTree = "<group>"; };
+		072827E41E6D368E007D2EF2 /* shoot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = shoot.mp3; sourceTree = "<group>"; };
+		072827E61E6D3D6C007D2EF2 /* KeyCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCenter.swift; sourceTree = "<group>"; };
+		072827FA1E6D7AAD007D2EF2 /* FileCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCenter.swift; sourceTree = "<group>"; };
+		0759B91A1E6816F0004DF60A /* AMGVoice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AMGVoice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0759B91D1E6816F0004DF60A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0759B9281E6816F0004DF60A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0759B92A1E6816F0004DF60A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0759B92D1E6816F0004DF60A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0759B92F1E6816F0004DF60A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0759B9471E68180A004DF60A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0759B9491E681813004DF60A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		0759B94B1E681818004DF60A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		0759B94D1E68181D004DF60A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		0759B9501E68184B004DF60A /* AMGVoice-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMGVoice-Bridging-Header.h"; sourceTree = "<group>"; };
+		0759B95B1E681BE2004DF60A /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		0759B95D1E68220D004DF60A /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		0759B9741E682764004DF60A /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		07B07E981EB331E0003DF680 /* AgoraAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AgoraAudioKit.framework; sourceTree = "<group>"; };
+		07E326C71E79278A0019310C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		07E326C91E792CF40019310C /* AudioSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSettingsViewController.swift; sourceTree = "<group>"; };
+		8BB772A62008815A00157CFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0759B9171E6816F0004DF60A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BB772A72008816000157CFC /* SystemConfiguration.framework in Frameworks */,
+				070227CB1E8520C900004AE2 /* libresolv.tbd in Frameworks */,
+				0759B94E1E68181D004DF60A /* libc++.tbd in Frameworks */,
+				0759B94C1E681818004DF60A /* CoreTelephony.framework in Frameworks */,
+				07B07E991EB331E0003DF680 /* AgoraAudioKit.framework in Frameworks */,
+				0759B94A1E681813004DF60A /* AudioToolbox.framework in Frameworks */,
+				0759B9481E68180A004DF60A /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0759B9111E6816F0004DF60A = {
+			isa = PBXGroup;
+			children = (
+				0759B91C1E6816F0004DF60A /* AMGVoice */,
+				0759B91B1E6816F0004DF60A /* Products */,
+				0759B9461E68180A004DF60A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0759B91B1E6816F0004DF60A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0759B91A1E6816F0004DF60A /* AMGVoice.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0759B91C1E6816F0004DF60A /* AMGVoice */ = {
+			isa = PBXGroup;
+			children = (
+				0759B95B1E681BE2004DF60A /* MainViewController.swift */,
+				0759B95D1E68220D004DF60A /* GameViewController.swift */,
+				0759B9741E682764004DF60A /* GameScene.swift */,
+				07E326C91E792CF40019310C /* AudioSettingsViewController.swift */,
+				072827E61E6D3D6C007D2EF2 /* KeyCenter.swift */,
+				072827FA1E6D7AAD007D2EF2 /* FileCenter.swift */,
+				07E326C71E79278A0019310C /* Helper.swift */,
+				0759B9271E6816F0004DF60A /* Main.storyboard */,
+				07B07E981EB331E0003DF680 /* AgoraAudioKit.framework */,
+				0759B94F1E681827004DF60A /* Support files */,
+				0759B9501E68184B004DF60A /* AMGVoice-Bridging-Header.h */,
+			);
+			path = AMGVoice;
+			sourceTree = "<group>";
+		};
+		0759B9461E68180A004DF60A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8BB772A62008815A00157CFC /* SystemConfiguration.framework */,
+				070227CA1E8520C900004AE2 /* libresolv.tbd */,
+				0759B94D1E68181D004DF60A /* libc++.tbd */,
+				0759B94B1E681818004DF60A /* CoreTelephony.framework */,
+				0759B9491E681813004DF60A /* AudioToolbox.framework */,
+				0759B9471E68180A004DF60A /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0759B94F1E681827004DF60A /* Support files */ = {
+			isa = PBXGroup;
+			children = (
+				0759B91D1E6816F0004DF60A /* AppDelegate.swift */,
+				0759B92A1E6816F0004DF60A /* Assets.xcassets */,
+				0759B92C1E6816F0004DF60A /* LaunchScreen.storyboard */,
+				0759B92F1E6816F0004DF60A /* Info.plist */,
+				0728272B1E691DDF007D2EF2 /* space.mp3 */,
+				072827E41E6D368E007D2EF2 /* shoot.mp3 */,
+				072827DF1E6D35BC007D2EF2 /* boom.mp3 */,
+			);
+			name = "Support files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0759B9191E6816F0004DF60A /* AMGVoice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0759B9321E6816F0004DF60A /* Build configuration list for PBXNativeTarget "AMGVoice" */;
+			buildPhases = (
+				0759B9161E6816F0004DF60A /* Sources */,
+				0759B9171E6816F0004DF60A /* Frameworks */,
+				0759B9181E6816F0004DF60A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AMGVoice;
+			productName = AMGVoice;
+			productReference = 0759B91A1E6816F0004DF60A /* AMGVoice.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0759B9121E6816F0004DF60A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = Agora;
+				TargetAttributes = {
+					0759B9191E6816F0004DF60A = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 48TB6ZZL5S;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 0759B9151E6816F0004DF60A /* Build configuration list for PBXProject "AMGVoice" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0759B9111E6816F0004DF60A;
+			productRefGroup = 0759B91B1E6816F0004DF60A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0759B9191E6816F0004DF60A /* AMGVoice */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0759B9181E6816F0004DF60A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0759B9291E6816F0004DF60A /* Main.storyboard in Resources */,
+				072827E01E6D35BC007D2EF2 /* boom.mp3 in Resources */,
+				0759B92B1E6816F0004DF60A /* Assets.xcassets in Resources */,
+				0759B92E1E6816F0004DF60A /* LaunchScreen.storyboard in Resources */,
+				072827E51E6D368E007D2EF2 /* shoot.mp3 in Resources */,
+				0728272C1E691DDF007D2EF2 /* space.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0759B9161E6816F0004DF60A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				072827E71E6D3D6C007D2EF2 /* KeyCenter.swift in Sources */,
+				07E326C81E79278A0019310C /* Helper.swift in Sources */,
+				07E326CA1E792CF40019310C /* AudioSettingsViewController.swift in Sources */,
+				0759B91E1E6816F0004DF60A /* AppDelegate.swift in Sources */,
+				072827FB1E6D7AAD007D2EF2 /* FileCenter.swift in Sources */,
+				0759B95E1E68220E004DF60A /* GameViewController.swift in Sources */,
+				0759B9751E682764004DF60A /* GameScene.swift in Sources */,
+				0759B95C1E681BE2004DF60A /* MainViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0759B9271E6816F0004DF60A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0759B9281E6816F0004DF60A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0759B92C1E6816F0004DF60A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0759B92D1E6816F0004DF60A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0759B9301E6816F0004DF60A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0759B9311E6816F0004DF60A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0759B9331E6816F0004DF60A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuhua Gong (TH5SJ72C94)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 48TB6ZZL5S;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AMGVoice",
+				);
+				INFOPLIST_FILE = AMGVoice/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.agora.gaming.spritekit.spacewar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "87f6e50f-6472-4e90-a6d4-f19c7bd21f23";
+				PROVISIONING_PROFILE_SPECIFIER = AgoraIODev2017;
+				SWIFT_OBJC_BRIDGING_HEADER = "AMGVoice/AMGVoice-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		0759B9341E6816F0004DF60A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Agora Lab, Inc. (48TB6ZZL5S)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 48TB6ZZL5S;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AMGVoice",
+				);
+				INFOPLIST_FILE = AMGVoice/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.agora.gaming.spritekit.spacewar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "87f6e50f-6472-4e90-a6d4-f19c7bd21f23";
+				PROVISIONING_PROFILE_SPECIFIER = AgoraIODev2017;
+				SWIFT_OBJC_BRIDGING_HEADER = "AMGVoice/AMGVoice-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0759B9151E6816F0004DF60A /* Build configuration list for PBXProject "AMGVoice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0759B9301E6816F0004DF60A /* Debug */,
+				0759B9311E6816F0004DF60A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0759B9321E6816F0004DF60A /* Build configuration list for PBXNativeTarget "AMGVoice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0759B9331E6816F0004DF60A /* Debug */,
+				0759B9341E6816F0004DF60A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0759B9121E6816F0004DF60A /* Project object */;
+}

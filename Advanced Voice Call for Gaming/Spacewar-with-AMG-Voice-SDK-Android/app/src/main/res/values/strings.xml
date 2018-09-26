@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+    <string name="app_name">Hello Gaming Agora Android</string>
+
+    <string name="msg_welcome_message">Welcome to Agora Gaming!</string>
+
+    <string name="label_channel_name_hint">Channel name</string>
+
+    <string name="label_join">Join</string>
+
+    <string name="label_pitch">Pitch</string>
+
+    <string name="label_voice">Voice</string>
+
+    <string name="label_background">BGM</string>
+
+    <string name="label_all">Effect</string>
+
+    <string name="label_useam">Use AudioMixing</string>
+
+    <string-array name="mode_array">
+        <item>Free</item>
+        <item>Commander</item>
+        <item>Audience</item>
+    </string-array>
+
+    <string-array name="music_list_for_effect">
+        <item>shoot</item>
+    </string-array>
+
+    <string name="msg_no_network_connection">No network connection, please check the network settings</string>
+
+    // DO NOT TRANSLATE
+    <string name="bit_rate_value_with_unit">%d kbps</string>
+</resources>
