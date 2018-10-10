@@ -35,7 +35,6 @@ public class HelloUnity3D : MonoBehaviour
 			mRtcEngine = IRtcEngine.GetEngine (appId);
 			versionText.GetComponent<Text> ().text ="Version : " + IRtcEngine.GetSdkVersion ();
 
-			Debug.Log ("zzzzz  version  =   " + IRtcEngine.GetSdkVersion ());
 			mRtcEngine.OnJoinChannelSuccess += (string channelName, uint uid, int elapsed) => {
 				string joinSuccessMessage = string.Format ("joinChannel callback uid: {0}, channel: {1}, version: {2}", uid, channelName, IRtcEngine.GetSdkVersion ());
 				Debug.Log (joinSuccessMessage);
