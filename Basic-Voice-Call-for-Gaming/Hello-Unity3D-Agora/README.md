@@ -102,18 +102,18 @@ The `HelloUnity3D` class has five variables representing the UI objects.
 
 Variable|Description
 ---|---
-`mChannelNameInputField`|Text input field for the channel name
-`mShownMessage`|Welcome message for the user
-`versionText`|Display text for the application version number
-`joinChannel`|**Join Channel** button
-`leaveChannel`|**Leave Channel** button
+`mChannelNameInputField`|Text input field for the channel name.
+`mShownMessage`|Welcome message for the user.
+`versionText`|Display text for the application version number.
+`joinChannel`|**Join Channel** button.
+`leaveChannel`|**Leave Channel** button.
 
 ``` C++
-	public InputField mChannelNameInputField;
-	public Text mShownMessage;
-	public Text versionText;
-	public Button joinChannel;
-	public Button leaveChannel;
+public InputField mChannelNameInputField;
+public Text mShownMessage;
+public Text versionText;
+public Button joinChannel;
+public Button leaveChannel;
 ```
 
 Declare the `mRtcEngine` variable, which represents the Agora RTC engine for the application and App ID `appId`. The `appId` variable is initialized with the Agora App ID from your Agora Dashboard.
@@ -121,12 +121,12 @@ Declare the `mRtcEngine` variable, which represents the Agora RTC engine for the
 **Note:** `#YOUR APP ID#` must be replaced with a valid Agora App ID.
 
 ``` C++
-	private IRtcEngine mRtcEngine = null;
+private IRtcEngine mRtcEngine = null;
 
-	// PLEASE KEEP THIS App ID IN SAFE PLACE
-	// Get your own App ID at https://dashboard.agora.io/
-	// After you entered the App ID, remove ## outside of Your App ID
-	private string appId = #YOUR APP ID#;
+// PLEASE KEEP THIS App ID IN SAFE PLACE
+// Get your own App ID at https://dashboard.agora.io/
+// After you entered the App ID, remove ## outside of Your App ID
+private string appId = #YOUR APP ID#;
 ```
 
 #### Create Initialization Methods
@@ -142,11 +142,11 @@ The `Awake()` method is invoked when the application awakens.
 Set video sync count `QualitySettings.vSyncCount` to `0` and the target frame rate `Application.targetFrameRate` to `30`.
 
 ``` C++
-	void Awake ()
-	{
-		QualitySettings.vSyncCount = 0;
-		Application.targetFrameRate = 30;
-	}
+void Awake ()
+{
+	QualitySettings.vSyncCount = 0;
+	Application.targetFrameRate = 30;
+}
 ```
 
 ##### Create the Start() Method
@@ -154,11 +154,11 @@ Set video sync count `QualitySettings.vSyncCount` to `0` and the target frame ra
 The `Start()` method initializes the application, Agora engine and UI event listeners.
 
 ``` C++
-	// Use this for initialization
-	void Start ()
-	{
-		...
-	}
+// Use this for initialization
+void Start ()
+{
+	...
+}
 ```
 
 - [Add UI Event Listeners and Initialize Agora Engine](#add-ui-event-listeners-and-initialize-agora-engine)
@@ -176,8 +176,8 @@ The `Start()` method initializes the application, Agora engine and UI event list
 Add click event listeners to the `joinChannel` and `leaveChannel` buttons using `onClick.AddListener`.
 
 ``` C++
-			joinChannel.onClick.AddListener (JoinChannel);	
-			leaveChannel.onClick.AddListener (LeaveChannel);
+joinChannel.onClick.AddListener (JoinChannel);	
+leaveChannel.onClick.AddListener (LeaveChannel);
 ```
 
 Initialize the Agora RTC engine `mRtcEngine` by passing `appId ` into `IRtcEngine.GetEngine()`.
@@ -185,8 +185,8 @@ Initialize the Agora RTC engine `mRtcEngine` by passing `appId ` into `IRtcEngin
 Update the version display text by retrieving the SDK version using `IRtcEngine.GetSdkVersion()`.
 
 ``` C++
-			mRtcEngine = IRtcEngine.GetEngine (appId);
-			versionText.GetComponent<Text> ().text ="Version : " + IRtcEngine.GetSdkVersion ();
+mRtcEngine = IRtcEngine.GetEngine (appId);
+versionText.GetComponent<Text> ().text ="Version : " + IRtcEngine.GetSdkVersion ();
 ```
 
 ###### Add Channel Join / Leave Event Listeners
@@ -198,11 +198,11 @@ The `OnJoinChannelSuccess` event listener for `mRtcEngine` triggers when a user 
 2. Set a debug log using `Debug.Log ()` and the text for `mShownMessage.GetComponent<Text> ()` with `joinSuccessMessage`.
 
 ``` C++
-			mRtcEngine.OnJoinChannelSuccess += (string channelName, uint uid, int elapsed) => {
-				string joinSuccessMessage = string.Format ("joinChannel callback uid: {0}, channel: {1}, version: {2}", uid, channelName, IRtcEngine.GetSdkVersion ());
-				Debug.Log (joinSuccessMessage);
-				mShownMessage.GetComponent<Text> ().text = (joinSuccessMessage);
-			};
+mRtcEngine.OnJoinChannelSuccess += (string channelName, uint uid, int elapsed) => {
+	string joinSuccessMessage = string.Format ("joinChannel callback uid: {0}, channel: {1}, version: {2}", uid, channelName, IRtcEngine.GetSdkVersion ());
+	Debug.Log (joinSuccessMessage);
+	mShownMessage.GetComponent<Text> ().text = (joinSuccessMessage);
+};
 ```
 
 The `OnLeaveChannel` event listener for `mRtcEngine` triggers when a user successfully leaves a channel.
@@ -212,11 +212,11 @@ The `OnLeaveChannel` event listener for `mRtcEngine` triggers when a user succes
 2. Set a debug log using `Debug.Log ()` and the text for `mShownMessage.GetComponent<Text> ()` with `leaveChannelMessage`.
 
 ``` C++
-			mRtcEngine.OnLeaveChannel += (RtcStats stats) => {
-				string leaveChannelMessage = string.Format ("onLeaveChannel callback duration {0}, tx: {1}, rx: {2}, tx kbps: {3}, rx kbps: {4}", stats.duration, stats.txBytes, stats.rxBytes, stats.txKBitRate, stats.rxKBitRate);
-				Debug.Log (leaveChannelMessage);
-				mShownMessage.GetComponent<Text> ().text = (leaveChannelMessage);
-			};
+mRtcEngine.OnLeaveChannel += (RtcStats stats) => {
+	string leaveChannelMessage = string.Format ("onLeaveChannel callback duration {0}, tx: {1}, rx: {2}, tx kbps: {3}, rx kbps: {4}", stats.duration, stats.txBytes, stats.rxBytes, stats.txKBitRate, stats.rxKBitRate);
+	Debug.Log (leaveChannelMessage);
+	mShownMessage.GetComponent<Text> ().text = (leaveChannelMessage);
+};
 ```
 
 ###### Add User Event Listeners
@@ -226,10 +226,10 @@ The `onUserJoined` event listener for `mRtcEngine` triggers when a user joins th
 Set a debug log for the user's `uid` and `elapsed` time using `Debug.Log ()`.
 
 ``` C++
-			mRtcEngine.OnUserJoined += (uint uid, int elapsed) => {
-				string userJoinedMessage = string.Format ("onUserJoined callback uid {0} {1}", uid, elapsed);
-				Debug.Log (userJoinedMessage);
-			};
+mRtcEngine.OnUserJoined += (uint uid, int elapsed) => {
+	string userJoinedMessage = string.Format ("onUserJoined callback uid {0} {1}", uid, elapsed);
+	Debug.Log (userJoinedMessage);
+};
 ```
 
 The `OnUserOffline` event listener for `mRtcEngine` triggers when a user goes offline.
@@ -237,10 +237,10 @@ The `OnUserOffline` event listener for `mRtcEngine` triggers when a user goes of
 Set a debug log for the user's `uid` and `reason` using `Debug.Log ()`.
 
 ``` C++
-			mRtcEngine.OnUserOffline += (uint uid, USER_OFFLINE_REASON reason) => {
-				string userOfflineMessage = string.Format ("onUserOffline callback uid {0} {1}", uid, reason);
-				Debug.Log (userOfflineMessage);
-			};
+mRtcEngine.OnUserOffline += (uint uid, USER_OFFLINE_REASON reason) => {
+	string userOfflineMessage = string.Format ("onUserOffline callback uid {0} {1}", uid, reason);
+	Debug.Log (userOfflineMessage);
+};
 ```
 
 The `OnUserMuted` event listener for `mRtcEngine` triggers when a user mutes their audio.
@@ -248,10 +248,10 @@ The `OnUserMuted` event listener for `mRtcEngine` triggers when a user mutes the
 Set a debug log for the user's `uid` and `muted` status using `Debug.Log ()`.
 
 ``` C++
-			mRtcEngine.OnUserMuted += (uint uid, bool muted) => {
-				string userMutedMessage = string.Format ("onUserMuted callback uid {0} {1}", uid, muted);
-				Debug.Log (userMutedMessage);
-			};
+mRtcEngine.OnUserMuted += (uint uid, bool muted) => {
+	string userMutedMessage = string.Format ("onUserMuted callback uid {0} {1}", uid, muted);
+	Debug.Log (userMutedMessage);
+};
 ```
 
 ###### Add Audio Change Event Listeners
@@ -263,16 +263,16 @@ If the number of speakers is `0` or invalid, set a debug log for the total volum
 Iterate through the speakers and set a debug log for the `speakerNumber`, the speaker's `uid`, and `volume` of the speaker using `Debug.Log ()`.
 
 ``` C++
-			mRtcEngine.OnVolumeIndication += (AudioVolumeInfo[] speakers, int speakerNumber, int totalVolume) => {
-				if (speakerNumber == 0 || speakers == null) {
-					Debug.Log (string.Format("onVolumeIndication only local {0}", totalVolume));
-				}
+mRtcEngine.OnVolumeIndication += (AudioVolumeInfo[] speakers, int speakerNumber, int totalVolume) => {
+	if (speakerNumber == 0 || speakers == null) {
+		Debug.Log (string.Format("onVolumeIndication only local {0}", totalVolume));
+	}
 
-				for (int idx = 0; idx < speakerNumber; idx++) {
-					string volumeIndicationMessage = string.Format ("{0} onVolumeIndication {1} {2}", speakerNumber, speakers[idx].uid, speakers[idx].volume);
-					Debug.Log (volumeIndicationMessage);
-				}
-			};
+	for (int idx = 0; idx < speakerNumber; idx++) {
+		string volumeIndicationMessage = string.Format ("{0} onVolumeIndication {1} {2}", speakerNumber, 	speakers[idx].uid, speakers[idx].volume);
+		Debug.Log (volumeIndicationMessage);
+	}
+};
 ```
 
 The `OnAudioRouteChanged` event listener for `mRtcEngine` triggers when the audio route changes.
@@ -281,10 +281,10 @@ Set a debug log for the `route` using `Debug.Log ()`.
 
 
 ``` C++
-			mRtcEngine.OnAudioRouteChanged += (AUDIO_ROUTE route) => {
-				string routeMessage = string.Format ("onAudioRouteChanged {0}", route);
-				Debug.Log (routeMessage);
-			};
+mRtcEngine.OnAudioRouteChanged += (AUDIO_ROUTE route) => {
+	string routeMessage = string.Format ("onAudioRouteChanged {0}", route);
+	Debug.Log (routeMessage);
+};
 ```
 
 ###### Add Warning and Error Event Listeners
@@ -294,11 +294,11 @@ The `OnWarning` event listener for `mRtcEngine` triggers when a warning occurs i
 Set a debug log for the `warn` object, warning `msg`, and warning `description` using `Debug.Log ()`.
 
 ``` C++
-			mRtcEngine.OnWarning += (int warn, string msg) => {
-				string description = IRtcEngine.GetErrorDescription(warn);
-				string warningMessage = string.Format ("onWarning callback {0} {1} {2}", warn, msg, description);
-				Debug.Log (warningMessage);
-			};
+mRtcEngine.OnWarning += (int warn, string msg) => {
+	string description = IRtcEngine.GetErrorDescription(warn);
+	string warningMessage = string.Format ("onWarning callback {0} {1} {2}", warn, msg, description);
+	Debug.Log (warningMessage);
+};
 ```
 
 The `OnError` event listener for `mRtcEngine` triggers when an error occurs in the Agora RTC engine.
@@ -306,11 +306,11 @@ The `OnError` event listener for `mRtcEngine` triggers when an error occurs in t
 Set a debug log for the `error` object, error `msg`, and error `description` using `Debug.Log ()`.
 
 ``` C++
-			mRtcEngine.OnError += (int error, string msg) => {
-				string description = IRtcEngine.GetErrorDescription(error);
-				string errorMessage = string.Format ("onError callback {0} {1} {2}", error, msg, description);
-				Debug.Log (errorMessage);
-			};
+mRtcEngine.OnError += (int error, string msg) => {
+	string description = IRtcEngine.GetErrorDescription(error);
+	string errorMessage = string.Format ("onError callback {0} {1} {2}", error, msg, description);
+	Debug.Log (errorMessage);
+};
 ```
 
 ###### Add Statistics Event Listeners
@@ -324,17 +324,17 @@ The `OnRtcStats` event listener for `mRtcEngine` triggers when the statistics ch
 3. Set a debug log of `lengthOfMixingFile` and `currentTs` using `Debug.Log ()`.
 
 ``` C++
-			mRtcEngine.OnRtcStats += (RtcStats stats) => {
-				string rtcStatsMessage = string.Format ("onRtcStats callback duration {0}, tx: {1}, rx: {2}, tx kbps: {3}, rx kbps: {4}, tx(a) kbps: {5}, rx(a) kbps: {6} users {7}",
-					stats.duration, stats.txBytes, stats.rxBytes, stats.txKBitRate, stats.rxKBitRate, stats.txAudioKBitRate, stats.rxAudioKBitRate, stats.users);
-				Debug.Log (rtcStatsMessage);
+mRtcEngine.OnRtcStats += (RtcStats stats) => {
+	string rtcStatsMessage = string.Format ("onRtcStats callback duration {0}, tx: {1}, rx: {2}, tx kbps: {3}, rx kbps: {4}, tx(a) kbps: {5}, rx(a) kbps: {6} users {7}",
+	stats.duration, stats.txBytes, stats.rxBytes, stats.txKBitRate, stats.rxKBitRate, stats.txAudioKBitRate, stats.rxAudioKBitRate, stats.users);
+	Debug.Log (rtcStatsMessage);
 
-				int lengthOfMixingFile = mRtcEngine.GetAudioMixingDuration();
-				int currentTs = mRtcEngine.GetAudioMixingCurrentPosition();
+	int lengthOfMixingFile = mRtcEngine.GetAudioMixingDuration();
+	int currentTs = mRtcEngine.GetAudioMixingCurrentPosition();
 
-				string mixingMessage = string.Format ("Mixing File Meta {0}, {1}", lengthOfMixingFile, currentTs);
-				Debug.Log (mixingMessage);
-			};
+	string mixingMessage = string.Format ("Mixing File Meta {0}, {1}", lengthOfMixingFile, currentTs);
+	Debug.Log (mixingMessage);
+};
 ```
 ###### Add Connection Event Listeners
 
@@ -343,10 +343,10 @@ The `OnRequestToken` event listener for `mRtcEngine` triggers when the request t
 Set a debug log for the request key message `requestKeyMessage` using `Debug.Log ()`.
 
 ``` C++
-			mRtcEngine.OnRequestToken += () => {
-				string requestKeyMessage = string.Format ("OnRequestToken");
-				Debug.Log (requestKeyMessage);
-			};
+mRtcEngine.OnRequestToken += () => {
+	string requestKeyMessage = string.Format ("OnRequestToken");
+	Debug.Log (requestKeyMessage);
+};
 ```
 
 The `OnConnectionInterrupted` event listener for `mRtcEngine` triggers when the connection is interrupted.
@@ -354,10 +354,10 @@ The `OnConnectionInterrupted` event listener for `mRtcEngine` triggers when the 
 Set a debug log for the interruption message `interruptedMessage` using `Debug.Log ()`.
 
 ``` C++
-			mRtcEngine.OnConnectionInterrupted += () => {
-				string interruptedMessage = string.Format ("OnConnectionInterrupted");
-				Debug.Log (interruptedMessage);
-			};
+mRtcEngine.OnConnectionInterrupted += () => {
+	string interruptedMessage = string.Format ("OnConnectionInterrupted");
+	Debug.Log (interruptedMessage);
+};
 ```
 
 The `OnConnectionLost` event listener for `mRtcEngine` triggers when the connection is lost.
@@ -365,10 +365,10 @@ The `OnConnectionLost` event listener for `mRtcEngine` triggers when the connect
 Set a debug log for the connection lost message `lostMessage` using `Debug.Log ()`.
 
 ``` C++
-			mRtcEngine.OnConnectionLost += () => {
-				string lostMessage = string.Format ("OnConnectionLost");
-				Debug.Log (lostMessage);
-			};
+mRtcEngine.OnConnectionLost += () => {
+	string lostMessage = string.Format ("OnConnectionLost");
+	Debug.Log (lostMessage);
+};
 ```
 
 ###### Initialize the Agora RTC Engine
@@ -378,14 +378,14 @@ Set a debug log for the connection lost message `lostMessage` using `Debug.Log (
 - Set the client role broadcaster by passing `CLIENT_ROLE.BROADCASTER` into `mRtcEngine.SetClientRole ()`.
 
 ``` C++
-			mRtcEngine.SetLogFilter (LOG_FILTER.INFO);
+mRtcEngine.SetLogFilter (LOG_FILTER.INFO);
 
-			// mRtcEngine.setLogFile("path_to_file_unity.log");
+// mRtcEngine.setLogFile("path_to_file_unity.log");
 
-			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_FREE_MODE);
+mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_FREE_MODE);
 
-			// mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_COMMAND_MODE);
-			// mRtcEngine.SetClientRole (CLIENT_ROLE.BROADCASTER);
+// mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_COMMAND_MODE);
+// mRtcEngine.SetClientRole (CLIENT_ROLE.BROADCASTER);
 ```
 
 
@@ -396,13 +396,13 @@ The `Update()` method is invoked when the application updates.
 If `mRtcEngine` is valid, invoke `mRtcEngine.Poll ()`.
 
 ``` C++
-	// Update is called once per frame
-	void Update ()
-	{
-		if (mRtcEngine != null) {
-			mRtcEngine.Poll ();
-		}
+// Update is called once per frame
+void Update ()
+{
+	if (mRtcEngine != null) {
+		mRtcEngine.Poll ();
 	}
+}
 ```
 
 #### Join / Leave Channel Methods
@@ -419,19 +419,19 @@ The `JoinChannel ()` method joins the user to the channel specified by the text 
 
 
 ```
-	public void JoinChannel ()
-	{
-		string channelName = mChannelNameInputField.text.Trim ();
+public void JoinChannel ()
+{
+	string channelName = mChannelNameInputField.text.Trim ();
 
-		Debug.Log (string.Format ("tap joinChannel with channel name {0}", channelName));
+	Debug.Log (string.Format ("tap joinChannel with channel name {0}", channelName));
 
-		if (string.IsNullOrEmpty (channelName)) {
-			return;
-		}
-
-		mRtcEngine.JoinChannel (channelName, "extra", 0);
-		// mRtcEngine.JoinChannelByKey ("YOUR_CHANNEL_KEY", channelName, "extra", 9527);
+	if (string.IsNullOrEmpty (channelName)) {
+		return;
 	}
+
+	mRtcEngine.JoinChannel (channelName, "extra", 0);
+	// mRtcEngine.JoinChannelByKey ("YOUR_CHANNEL_KEY", channelName, "extra", 9527);
+}
 ```
 
 ##### Create the LeaveChannel() Method
@@ -441,16 +441,16 @@ The `LeaveChannel ()` method exits the user from the current channel.
 Leave the channel using `mRtcEngine.LeaveChannel()`.
 
 ```
-	public void LeaveChannel ()
-	{
-		// int duration = mRtcEngine.GetAudioMixingDuration ();
-		// int current_duration = mRtcEngine.GetAudioMixingCurrentPosition ();
+public void LeaveChannel ()
+{
+	// int duration = mRtcEngine.GetAudioMixingDuration ();
+	// int current_duration = mRtcEngine.GetAudioMixingCurrentPosition ();
 
-		// IAudioEffectManager effect = mRtcEngine.GetAudioEffectManager();
-		// effect.StopAllEffects ();
+	// IAudioEffectManager effect = mRtcEngine.GetAudioEffectManager();
+	// effect.StopAllEffects ();
 
-		mRtcEngine.LeaveChannel ();
-	}
+	mRtcEngine.LeaveChannel ();
+}
 ```
 
 ## Learn More
