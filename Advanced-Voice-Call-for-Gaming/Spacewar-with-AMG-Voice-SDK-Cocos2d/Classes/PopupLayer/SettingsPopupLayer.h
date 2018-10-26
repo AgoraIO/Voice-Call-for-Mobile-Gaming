@@ -41,10 +41,24 @@ public:
     typedef std::function<void(bool)> onUseMixingCallback;
 
     onUseMixingCallback onUseMixing = nullptr;
+    
+    onUseMixingCallback onEnableSpeaker = nullptr;
 
     typedef std::function<void(float)> onPitchChangedCallback;
 
     onPitchChangedCallback onPitchChanged = nullptr;
+    
+    typedef std::function<void(int)> onRecordVolumeCallback;
+    
+    onRecordVolumeCallback onRecordVolume = nullptr;
+    
+    typedef std::function<void(int)> onPlayBackVolumeCallback;
+    
+    onPlayBackVolumeCallback onPlayBackVolume = nullptr;
+    
+    typedef std::function<void(int)> onSpeakerPhoneVolumeCallback;
+    
+    onSpeakerPhoneVolumeCallback onSpeakerVolume = nullptr;
 
 private:
     bool isSetAble;
@@ -55,6 +69,12 @@ private:
     void onBGMVolumeChanged(Ref* sender, Control::EventType evtT);
     void onAudioEffectVolumeChanged(Ref* sender, Control::EventType evtT);
     void onMixingBGMChanged(Ref* sender, Control::EventType evtT);
+    
+    void onRecordVolumeChanged(Ref* sender, Control::EventType evtT);
+    void onPlayBackVolumeChanged(Ref* sender, Control::EventType evtT);
+    void onSpeakerVolumeChanged(Ref* sender, Control::EventType evtT);
+    
+    void onEnableSpeakerChanged(Ref* sender, Control::EventType evtT);
 
     Ref* m_callbackListener;
     SEL_CallFuncN m_callback;
@@ -78,5 +98,17 @@ private:
     CC_SYNTHESIZE_RETAIN(Label*, mAudioEffectLabel, AudioEffectLabel);
     CC_SYNTHESIZE_RETAIN(ControlSlider*, mAudioEffectVolumeControlSlider, AudioEffectVolumeControlSlider);
     CC_SYNTHESIZE_RETAIN(Label*, mAudioEffectValueLabel, AudioEffectVolumeValueLabel);
+    
+    CC_SYNTHESIZE_RETAIN(Label*, mRecordVolumeLabel, RecordVolumeLabel);
+    CC_SYNTHESIZE_RETAIN(ControlSlider*, mRecordVolumeSlider, RecordVolumeSlider);
+    CC_SYNTHESIZE_RETAIN(Label*, mRecordVolumeValueLabel, RecordVolumeValueLabel);
+    
+    CC_SYNTHESIZE_RETAIN(Label*, mPlayBackVolumeLabel, PlayBackVolumeLabel);
+    CC_SYNTHESIZE_RETAIN(ControlSlider*, mPlayBackVolumeSlider, PlayBackVolumeSlider);
+    CC_SYNTHESIZE_RETAIN(Label*, mPlayBackVolumeValueLabel, PlayBackVolumeValueLabel);
+    
+    CC_SYNTHESIZE_RETAIN(Label*, mSpeakerVolumeLabel, SpeakerVolumeLabel);
+    CC_SYNTHESIZE_RETAIN(ControlSlider*, mSpeakerVolumeSlider, SpeakerVolumeSlider);
+    CC_SYNTHESIZE_RETAIN(Label*, mSpeakerVolumeValueLabel, SpeakerVolumeValueLabel);
 };
 #endif /* __PopupLayer_h__ */

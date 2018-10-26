@@ -7,8 +7,8 @@
 
 #include "DropDownList/DropDownListBox.h"
 
-#include "../AgoraGamingSDK/include/AgoraGamingRtcHelper.h"
-#include "../AgoraGamingSDK/include/IAgoraRtcEngineForGaming.h"
+// #include "../AgoraGamingSDK/include/AgoraGamingRtcHelper.h"
+// #include "../AgoraGamingSDK/include/IAgoraRtcEngineForGaming.h"
 
 #include "MainGameScene.h"
 
@@ -45,6 +45,7 @@ bool HelloAgora::init()
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    auto WinSize = Director::getInstance()->getWinSize();
 
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -64,6 +65,13 @@ bool HelloAgora::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
+    // 3
+    auto background = DrawNode::create();
+//    background->drawSolidRect(origin, WinSize, Color4F(0.6, 0.6, 0.6, 1.0));
+    background->drawSolidRect(origin, WinSize, Color4F(0.1, 0.2, 0.2, 0.6));
+    
+    this->addChild(background);
+    
     /////////////////////////////
     // 3. add your codes below...
 
@@ -72,7 +80,7 @@ bool HelloAgora::init()
     std::stringstream title;
     title << "Agora Gaming Demo";
     title << " ";
-    title << AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->getVersion();
+    title << AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->getVersion(nullptr);
     auto label = Label::createWithTTF(title.str().c_str(), "fonts/Marker Felt.ttf", 24);
 
     // position the label on the center of the screen
@@ -113,11 +121,11 @@ bool HelloAgora::init()
                                                  "Arial",
                                                  18);
     mModeListBox = DropDownListBox::Create(labelMode, box_size, box_size);
-    auto label1 = Label::createWithSystemFont("Free Mode",
+    auto label1 = Label::createWithSystemFont("COMMUNICATION",
                                               "Arial",
                                               18);
     mModeListBox->AddLabel(label1);
-    auto label2 = Label::createWithSystemFont("Commander Mode",
+    auto label2 = Label::createWithSystemFont("BROADCASTING",
                                               "Arial",
                                               18);
     mModeListBox->AddLabel(label2);
@@ -133,7 +141,7 @@ bool HelloAgora::init()
     mModeListBox->OpenListener();
 
     auto joinButton = ui::Button::create("Button.png", "ButtonPressed.png", "ButtonPressed.png");
-    joinButton->setTitleText("Join");
+    joinButton->setTitleText("Enter");
     joinButton->setPosition(Vec2(origin.x + visibleSize.width - padding - joinButton->getContentSize().width / 2, origin.y + visibleSize.height / 2 -  joinButton->getContentSize().height / 2));
 
     joinButton->addTouchEventListener([&](cocos2d::Ref* sender, ui::Widget::TouchEventType type) {
@@ -160,13 +168,75 @@ bool HelloAgora::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
 
+    
+    
+    //add the voiceOnly label & checkBox
+    auto voiceLabel = Label::createWithTTF("SetVoiceOnlyMode", "fonts/Marker Felt.ttf", 12);
+    voiceLabel->setPosition(Vec2(origin.x + visibleSize.width / 2 - 80,origin.y + visibleSize.height / 2 - mModeListBox->getContentSize().height - 10));
+    this->addChild(voiceLabel, 1);
+    
+    auto voiceCheckBox = cocos2d::ui::CheckBox::create("CheckBox_Normal.png",
+                                     "CheckBox_Press.png",
+                                     "CheckBoxNode_Normal.png",
+                                     "CheckBox_Disable.png",
+                                     "CheckBoxNode_Disable.png");
+    voiceCheckBox->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type){
+        switch (type)
+        {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                CCLOG("Voicecheckbox  clicked");
+                SceneMgr::getInstance()->config.bVoiceOnly = !SceneMgr::getInstance()->config.bVoiceOnly;
+                break;
+            default:
+                break;
+        }
+    });
+    voiceCheckBox->setPosition(Vec2(origin.x + visibleSize.width / 2 - 20,
+                               origin.y + visibleSize.height / 2 - mModeListBox->getContentSize().height - 10));
+    this->addChild(voiceCheckBox, 1);
+    
+    //add the DefaultSpkearPhone Label & checkBox
+    auto deSpeakerPhoneLabel = Label::createWithTTF("defaultSpeakerphone", "fonts/Marker Felt.ttf", 12);
+    deSpeakerPhoneLabel->setPosition(Vec2(origin.x + visibleSize.width / 2 - 80,
+                                             origin.y + visibleSize.height / 2 - mModeListBox->getContentSize().height - 30));
+    this->addChild(deSpeakerPhoneLabel, 1);
+    
+
+    auto deSpeakerPhonecheckbox = cocos2d::ui::CheckBox::create("CheckBox_Normal.png",
+                                                       "CheckBox_Press.png",
+                                                       "CheckBoxNode_Normal.png",
+                                                       "CheckBox_Disable.png",
+                                                       "CheckBoxNode_Disable.png");
+    deSpeakerPhonecheckbox->addTouchEventListener([&](Ref* sender, cocos2d::ui::Widget::TouchEventType type){
+        switch (type)
+        {
+            case ui::Widget::TouchEventType::BEGAN:
+                break;
+            case ui::Widget::TouchEventType::ENDED:
+                CCLOG("bSetDefSpeaker  clicked");
+                SceneMgr::getInstance()->config.bSetDefSpeaker = !SceneMgr::getInstance()->config.bSetDefSpeaker;
+                break;
+            default:
+                break;
+        }
+    });
+    deSpeakerPhonecheckbox->setPosition(Vec2(origin.x + visibleSize.width / 2  - 20,
+                                    origin.y + visibleSize.height / 2 - mModeListBox->getContentSize().height - 30));
+    this->addChild(deSpeakerPhonecheckbox, 1);
+    
     SceneMgr::getInstance()->addScene(this, "Main");
 
     auto rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
-    rtcEngine->setLogFilter(34781);
+    RtcEngineParameters rep(rtcEngine);
+    rep.setLogFilter(34781);
+
+    // rtcEngine->setLogFilter(34781);
     std::string log_file = FileUtils::getInstance()->getWritablePath() + RTC_SDK_LOG_FILE;
     CCLOG("setLogFile %s", log_file.c_str());
-    rtcEngine->setLogFile(log_file.c_str());
+    // rtcEngine->setLogFile(log_file.c_str());
+    rep.setLogFile(log_file.c_str());
 
     return true;
 }
@@ -194,12 +264,12 @@ void HelloAgora::onJoinChannelClicked()
     }
 
     if (0 == mModeListBox->GetSelectedIndex()) {
-        SceneMgr::getInstance()->config.cft = agora::rtc::CHANNEL_PROFILE_GAME_FREE_MODE;
+        SceneMgr::getInstance()->config.cft = agora::rtc::CHANNEL_PROFILE_COMMUNICATION;
     } else if (1 == mModeListBox->GetSelectedIndex()) {
-        SceneMgr::getInstance()->config.cft = agora::rtc::CHANNEL_PROFILE_GAME_COMMAND_MODE;
+        SceneMgr::getInstance()->config.cft = agora::rtc::CHANNEL_PROFILE_LIVE_BROADCASTING;
         SceneMgr::getInstance()->config.crt = agora::rtc::CLIENT_ROLE_BROADCASTER;
     } else if (2 == mModeListBox->GetSelectedIndex()) {
-        SceneMgr::getInstance()->config.cft = agora::rtc::CHANNEL_PROFILE_GAME_COMMAND_MODE;
+        SceneMgr::getInstance()->config.cft = agora::rtc::CHANNEL_PROFILE_LIVE_BROADCASTING;
         SceneMgr::getInstance()->config.crt = agora::rtc::CLIENT_ROLE_AUDIENCE;
     }
 

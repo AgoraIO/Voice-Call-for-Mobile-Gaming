@@ -10,6 +10,10 @@ android {
         targetSdkVersion 25
         versionCode System.getenv("BUILD_NUMBER") as Integer ?: 8
         versionName System.getenv("GAME_SDK_VERSION") ?: "1.0"
+
+        ndk {
+            abiFilters  "armeabi-v7a"
+        }
     }
 
     sourceSets.main {

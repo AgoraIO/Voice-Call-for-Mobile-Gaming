@@ -4,9 +4,6 @@
 
 #include "SceneMgr.h"
 
-#include "../AgoraGamingSDK/include/AgoraGamingRtcHelper.h"
-#include "../AgoraGamingSDK/include/IAgoraRtcEngineForGaming.h"
-
 #include "SimpleAudioEngine.h"
 
 #include <math.h>
@@ -15,11 +12,19 @@ using namespace CocosDenshion;
 
 using namespace agora::rtc;
 
+enum AUDIO_ROUTE_TYPE {
+        AUDIO_ROUTE_DEFAULT = -1,
+        AUDIO_ROUTE_HEADSET = 0,
+        AUDIO_ROUTE_EARPIECE = 1,
+        AUDIO_ROUTE_SPEAKERPHONE = 3,
+        AUDIO_ROUTE_BLUETOOTH = 5,
+};
+
 #define BACKGROUND_MUSIC_SFX  "background-music-aac.mp3"
 #define PEW_PEW_SFX           "pew-pew-lei.mp3"
 #define COLLISION_SOUND       "boom.mp3"
 
-class MyIGamingRtcEngineEventHandler : public agora::rtc::IGamingRtcEngineEventHandler
+class MyIGamingRtcEngineEventHandler : public agora::rtc::IRtcEngineEventHandler
 {
 public:
     MyIGamingRtcEngineEventHandler() {
@@ -28,21 +33,21 @@ public:
     ~MyIGamingRtcEngineEventHandler() {
     }
 
-    void onJoinChannelSuccess(const char* channel, uid_t uid, int elapsed) override
+    void onJoinChannelSuccess(const char* channel, uid_t uid, int elapsed) 
     {
         CCLOG("[General C++]:onJoinChannelSuccess %s, %d, %d", channel, uid, elapsed);
         std::stringstream rawMsg;
         rawMsg << "onJoinChannelSuccess " << channel << " " << uid << " " << elapsed;
     }
 
-    void onLeaveChannel(const RtcStats& stats) override
+    void onLeaveChannel(const RtcStats& stats) 
     {
         CCLOG("[General C++]:onLeaveChannel %d, %d, %d", stats.duration, stats.txBytes, stats.rxBytes);
         std::stringstream rawMsg;
         rawMsg << "onLeaveChannel " << stats.duration << " " << stats.txBytes << " " << stats.rxBytes;
     }
 
-    void onUserJoined(uid_t uid, int elapsed) override
+    void onUserJoined(uid_t uid, int elapsed) 
     {
         auto scenes = SceneMgr::getInstance()->getScenes();
         auto scene = (scenes.begin() + 1)->first;
@@ -50,7 +55,7 @@ public:
         (static_cast<MainGame*>(scene))->onUserOnline(uid);
     }
 
-    void onUserOffline(uid_t uid, USER_OFFLINE_REASON_TYPE reason) override
+    void onUserOffline(uid_t uid, USER_OFFLINE_REASON_TYPE reason) 
     {
         auto scenes = SceneMgr::getInstance()->getScenes();
         auto scene = (scenes.begin() + 1)->first;
@@ -58,18 +63,17 @@ public:
         (static_cast<MainGame*>(scene))->onUserOffline(uid);
     }
 
-    void onAudioRouteChanged(AUDIO_ROUTE_TYPE route) override
+    void onAudioRoutingChanged(int route) 
     {
         auto scenes = SceneMgr::getInstance()->getScenes();
         auto scene = (scenes.begin() + 1)->first;
-
         (static_cast<MainGame*>(scene))->onAudioRouteChanged(route);
         std::stringstream rawMsg;
-        rawMsg << "onAudioRouteChanged " << route;
-        CCLOG("[General C++]:onAudioRouteChanged %d", route);
+        rawMsg << "onAudioRoutingChanged " << route;
+        CCLOG("[General C++]:onAudioRoutingChanged %d", route);
     }
 
-    void onAudioVolumeIndication(const AudioVolumeInfo* speakers, unsigned int speakerNumber, int totalVolume) override
+    void onAudioVolumeIndication(const AudioVolumeInfo* speakers, unsigned int speakerNumber, int totalVolume) 
     {
         auto scenes = SceneMgr::getInstance()->getScenes();
         auto scene = (scenes.begin() + 1)->first;
@@ -77,7 +81,7 @@ public:
         (static_cast<MainGame*>(scene))->onUserVolumeIndication(speakers, speakerNumber);
     }
 
-    void onWarning(int warn, const char* msg) override {
+    void onWarning(int warn, const char* msg)  {
         auto scenes = SceneMgr::getInstance()->getScenes();
         auto scene = (scenes.begin() + 1)->first;
 
@@ -86,7 +90,7 @@ public:
         (static_cast<MainGame*>(scene))->onError(warn, rawMsg.str());
     }
 
-    void onError(int err, const char* msg) override {
+    void onError(int err, const char* msg)  {
         auto scenes = SceneMgr::getInstance()->getScenes();
         auto scene = (scenes.begin() + 1)->first;
 
@@ -128,6 +132,7 @@ bool MainGame::init()
     }
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
+    auto winSize = Director::getInstance()->getWinSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     /////////////////////////////
@@ -150,7 +155,7 @@ bool MainGame::init()
 
     // 3
     auto background = DrawNode::create();
-    background->drawSolidRect(origin, visibleSize, Color4F(0.6, 0.6, 0.6, 1.0));
+    background->drawSolidRect(origin, winSize, Color4F(0.6, 0.6, 0.6, 1.0));
     this->addChild(background);
 
     // 4
@@ -163,9 +168,20 @@ bool MainGame::init()
     mSpeakerSquare->onSpeakerReleased = CC_CALLBACK_3(MainGame::onSpeakerReleased, this);
     this->addChild(mSpeakerSquare);
 
-    AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->setEventHandler(new MyIGamingRtcEngineEventHandler());
-
+    // AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->setEventHandler(new MyIGamingRtcEngineEventHandler());
     SceneMgr::getInstance()->addScene(this, "Game");
+
+    //testing 
+    AgoraRtcEngineForGaming_CreateAgoraObject(AGORA_APP_ID, new MyIGamingRtcEngineEventHandler());
+    
+    joinLeaveSwitch = ControlSwitch::create(
+                                                       Sprite::create("switch-mask-hd.png"),
+                                                       Sprite::create("switch-on-hd.png"),
+                                                       Sprite::create("switch-off-hd.png"),
+                                                       Sprite::create("switch-thumb-hd.png"),
+                                                       Label::create("Leave", "fonts/Arial-BoldMT", 10),
+                                                       Label::create("Joined", "fonts/Arial-BoldMT", 10)
+                                                       );
 
     auto settingsButton = ui::Button::create("btn_settings.png", "btn_settings.png", "btn_settings.png");
     auto enableAudioButton = ui::Button::create("btn_speaker.png", "btn_speaker_enabled.png", "btn_speaker.png");
@@ -176,8 +192,8 @@ bool MainGame::init()
                                                            Sprite::create("switch-on-hd.png"),
                                                            Sprite::create("switch-off-hd.png"),
                                                            Sprite::create("switch-thumb-hd.png"),
-                                                           Label::create("On", "Arial-BoldMT", 12),
-                                                           Label::create("Off", "Arial-BoldMT", 12)
+                                                           Label::create("Host", "fonts/Arial-BoldMT", 10),
+                                                           Label::create("audience", "fonts/Arial-BoldMT", 8)
                                                            );
 
     mMsgLabel = Label::create();
@@ -191,6 +207,11 @@ bool MainGame::init()
     int x = origin.x + visibleSize.width / 2;
     int y = origin.y + sizeh;
 
+    
+    joinLeaveSwitch->setPosition(Vec2(x - 2 * padding - 2 * sizew - 60, y));
+    joinLeaveSwitch->addTargetWithActionForControlEvents(this, cccontrol_selector(MainGame::onSwitchValueChanged), Control::EventType::VALUE_CHANGED);
+    this->addChild(joinLeaveSwitch);
+    
     settingsButton->setPosition(Vec2(x - 2 * padding - 2 * sizew, y));
 
     settingsButton->addTouchEventListener([&](cocos2d::Ref* sender, ui::Widget::TouchEventType type) {
@@ -216,7 +237,7 @@ bool MainGame::init()
             case ui::Widget::TouchEventType::BEGAN:
                 break;
             case ui::Widget::TouchEventType::ENDED:
-                onAudioEnableBtnClicked(enableAudioButton);
+                onAudioBtnClicked(enableAudioButton);
                 break;
             default:
                 break;
@@ -269,10 +290,10 @@ bool MainGame::init()
     this->addChild(mChannelLabel);
 
     SceneMgr* sceneMgr = SceneMgr::getInstance();
-    if (sceneMgr->config.cft == CHANNEL_PROFILE_GAME_FREE_MODE) {
+    if (sceneMgr->config.cft == CHANNEL_PROFILE_COMMUNICATION) {
         mBroadcasterAudienceSwitch->setVisible(false);
         commanderModeButton->setVisible(false);
-    } else if (sceneMgr->config.cft == CHANNEL_PROFILE_GAME_COMMAND_MODE) {
+    } else if (sceneMgr->config.cft == CHANNEL_PROFILE_LIVE_BROADCASTING) {
         mBroadcasterAudienceSwitch->setOn(sceneMgr->config.crt == CLIENT_ROLE_BROADCASTER);
 
         mBroadcasterAudienceSwitch->setVisible(true);
@@ -286,28 +307,50 @@ bool MainGame::init()
     return true;
 }
 
-void MainGame::onAudioEnableBtnClicked(ui::Button* btn)
+void MainGame::onSwitchValueChanged(Ref* sender, Control::EventType evtType)
+{
+    ControlSwitch* slider = (ControlSwitch*) sender;
+    bool toJoin = slider->isOn();
+    join_Leave_func();
+    return ;
+}
+
+void MainGame::join_Leave_func(void)
 {
     SceneMgr* sceneMgr = SceneMgr::getInstance();
     long long ts = sceneMgr->config.ts;
-
+    
     long long nowTs = utils::getTimeInMilliseconds();
-
+    
     if (nowTs - ts <= 500) {
         return;
     }
-
-    IRtcEngineForGaming* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
-
+    
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    RtcEngineParameters rep(rtcEngine);
     if (ts == 0) {
         rtcEngine->setChannelProfile(sceneMgr->config.cft);
-
-        if (sceneMgr->config.cft == CHANNEL_PROFILE_GAME_COMMAND_MODE) {
-            rtcEngine->setClientRole(sceneMgr->config.crt, nullptr);
+        
+        if (sceneMgr->config.cft == CHANNEL_PROFILE_LIVE_BROADCASTING) {
+            rtcEngine->setClientRole(sceneMgr->config.crt);
         }
+        
+        if (true == sceneMgr->config.bVoiceOnly) {        
+            agora::base::AParameter apm(rtcEngine);
+		    apm->setParameters("{\"che.audio.voice_over_mode\":true}");
 
-        rtcEngine->joinChannel(sceneMgr->config.channel.c_str(), "Cocos2d", 0);
-        rtcEngine->enableAudioVolumeIndication(200, 3);
+            // rtcEngine->getAudioEffectManager()->setVoiceOnlyMode(true);
+        }
+        
+        if (true == sceneMgr->config.bSetDefSpeaker) {
+            rtcEngine->setDefaultAudioRouteToSpeakerphone(true);
+        }
+        
+        // rtcEngine->joinChannel(sceneMgr->config.channel.c_str(), "Cocos2d", 0);
+        rtcEngine->joinChannel("",sceneMgr->config.channel.c_str(), "Cocos2d", 0);
+        rep.enableAudioVolumeIndication(800, 3);
+        // rtcEngine->enableAudioVolumeIndication(200, 3);
+
         SceneMgr::getInstance()->config.ts = nowTs;
         
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -315,7 +358,15 @@ void MainGame::onAudioEnableBtnClicked(ui::Button* btn)
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
         const string& file = FileUtils::getInstance()->getWritablePath() + PEW_PEW_SFX;
 #endif
-        AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->getAudioEffectManager()->preloadEffect(1, file.c_str());
+        // AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->getAudioEffectManager()->preloadEffect(1, file.c_str());
+        char * writable = new char[file.size() + 1];
+        std::copy(file.begin(), file.end(), writable);
+        writable[file.size()] = '\0'; // don't forget the terminating 0
+
+        rep.preloadEffect(1, writable);
+        // don't forget to free the string after finished using it
+        delete[] writable;
+
         doPlayBackgroundMusic(SceneMgr::getInstance()->config.useMixing);
     } else {
         rtcEngine->leaveChannel();
@@ -328,8 +379,35 @@ void MainGame::onAudioEnableBtnClicked(ui::Button* btn)
         SceneMgr::getInstance()->config.mMixingVolume = 100;
         SceneMgr::getInstance()->config.mEffectVolume = 100;
         
+        SceneMgr::getInstance()->config.mRecordVolume = 100;
+        SceneMgr::getInstance()->config.mPlayBackVolume = 100;
+        SceneMgr::getInstance()->config.mSpeakerPhoneVolume = 100;
+        
+        SceneMgr::getInstance()->config.bVoiceOnly = false;
+        SceneMgr::getInstance()->config.bSetDefSpeaker = false;
+        SceneMgr::getInstance()->config.enbleSpeaker = false;
+        
         doPlayBackgroundMusic(SceneMgr::getInstance()->config.useMixing);
     }
+}
+
+void MainGame::onAudioBtnClicked(ui::Button* btn)
+{
+    bool inChannel = SceneMgr::getInstance()->config.ts > 0;
+    
+    VoicePopupLayer* pl = VoicePopupLayer::create("popup_bg.png");
+    pl->setContentSize(Size(220, 180));
+    pl->setColor(Color3B(250, 60, 60));
+    pl->setCallbackFunc(this, CC_CALLFUNCN_SELECTOR(MainGame::onPopupButtonCallback));
+
+    pl->onMuteAllRemote = CC_CALLBACK_1(MainGame::onMuteAllRemote, this);
+    pl->onMuteLocal = CC_CALLBACK_1(MainGame::onMuteLocal, this);
+    pl->onAudioToggle = CC_CALLBACK_1(MainGame::onAudioToggle, this);
+
+    pl->addButton("Button.png", "Button.png", "Ok", 1);
+    
+    pl->sliderSetAble(inChannel);
+    this->addChild(pl, 1);
 }
 
 void MainGame::onAudioMuteBtnClicked(ui::Button* btn)
@@ -337,7 +415,7 @@ void MainGame::onAudioMuteBtnClicked(ui::Button* btn)
     SceneMgr* sceneMgr = SceneMgr::getInstance();
     bool muted = sceneMgr->config.muted;
 
-    IRtcEngineForGaming* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
 
     muted = !muted;
     rtcEngine->muteLocalAudioStream(muted);
@@ -349,14 +427,14 @@ void MainGame::onClientRoleBtnClicked(ui::Button* btn)
     SceneMgr* sceneMgr = SceneMgr::getInstance();
     CLIENT_ROLE_TYPE role = sceneMgr->config.crt;
 
-    IRtcEngineForGaming* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
 
     if (role == CLIENT_ROLE_BROADCASTER) {
         role = CLIENT_ROLE_AUDIENCE;
     } else {
         role = CLIENT_ROLE_BROADCASTER;
     }
-    rtcEngine->setClientRole(role, nullptr);
+    rtcEngine->setClientRole(role);
     sceneMgr->config.crt = role;
 
     mBroadcasterAudienceSwitch->setOn(role == CLIENT_ROLE_BROADCASTER);
@@ -365,7 +443,7 @@ void MainGame::onClientRoleBtnClicked(ui::Button* btn)
 void MainGame::onEnter()
 {
     Layer::onEnter();
-    CCLOG("onExit");
+    CCLOG("onEnter");
     doCopyAssets(BACKGROUND_MUSIC_SFX);
     doCopyAssets(PEW_PEW_SFX);
     doCopyAssets(COLLISION_SOUND);
@@ -399,13 +477,18 @@ void MainGame::popupLayer()
     bool inChannel = SceneMgr::getInstance()->config.ts > 0;
     
     SettingsPopupLayer* pl = SettingsPopupLayer::create("popup_bg.png");
-    pl->setContentSize(Size(320, 160));
+    pl->setContentSize(Size(320, 220));
     pl->setColor(Color3B(250, 60, 60));
     pl->setCallbackFunc(this, CC_CALLFUNCN_SELECTOR(MainGame::onPopupButtonCallback));
     pl->onVolumeChanged = CC_CALLBACK_2(MainGame::onVolumeChanged, this);
     pl->onUseMixing = CC_CALLBACK_1(MainGame::onUseMixing, this);
     pl->onPitchChanged = CC_CALLBACK_1(MainGame::onPitchChanged, this);
-    pl->addButton("Button.png", "Button2.png", "Okay", 1);
+    
+    pl->onRecordVolume = CC_CALLBACK_1(MainGame::onRecordVolume, this);
+    pl->onPlayBackVolume = CC_CALLBACK_1(MainGame::onPlayBackVolume, this);
+    pl->onSpeakerVolume = CC_CALLBACK_1(MainGame::onSpeakerVolume, this);
+    pl->onEnableSpeaker = CC_CALLBACK_1(MainGame::onEnableSpeaker, this);
+    pl->addButton("Button.png", "Button.png", "Ok", 1);
 
     pl->sliderSetAble(inChannel);
     this->addChild(pl, 1);
@@ -424,11 +507,13 @@ void MainGame::onVolumeChanged(SettingsPopupLayer::VolumeType type, float volume
     CCLOG("onVolumeChanged %d, %f, %s, %f", type, volume, useMixing ? "true" : "false", volume / 100.0);
 
     if (useMixing) {
-        agora::rtc::IRtcEngineForGaming* engine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+        IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+        RtcEngineParameters rep(rtcEngine);
+
         if (type == SettingsPopupLayer::BGM_VOLUME) {
-            engine->adjustAudioMixingVolume((int) volume);
+            rep.adjustAudioMixingVolume((int) volume);
         } else if (type == SettingsPopupLayer::EFFECT_VOLUME) {
-            engine->getAudioEffectManager()->setEffectsVolume(volume);
+           rep.setEffectsVolume(volume);
         }
     }
 #if 0 //no need change out of channel's BMG
@@ -443,8 +528,9 @@ void MainGame::onVolumeChanged(SettingsPopupLayer::VolumeType type, float volume
 #endif
     
     if (type == SettingsPopupLayer::VOICE_VOLUME) {
-        agora::rtc::IRtcEngineForGaming* engine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
-        engine->adjustRecordingSignalVolume(volume);
+        IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+        RtcEngineParameters rep(rtcEngine);
+        rep.adjustRecordingSignalVolume(volume);
     }
 }
 
@@ -457,7 +543,69 @@ void MainGame::onUseMixing(bool useMixing)
 void MainGame::onPitchChanged(float pitch)
 {
     CCLOG("onPitchChanged %f", pitch);
-    AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->getAudioEffectManager()->setLocalVoicePitch(pitch);
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    RtcEngineParameters rep(rtcEngine);
+    rep.setLocalVoicePitch(pitch);
+}
+
+void MainGame::onRecordVolume(int vol)
+{
+    CCLOG("onRecordVolume %d", vol);
+
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    RtcEngineParameters rep(rtcEngine);
+    rep.adjustRecordingSignalVolume(vol);
+}
+
+void MainGame::onPlayBackVolume(int vol)
+{
+    CCLOG("onPlayBackVolume %d", vol);
+
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    RtcEngineParameters rep(rtcEngine);
+    rep.adjustPlaybackSignalVolume(vol);
+}
+
+void MainGame::onSpeakerVolume(int vol)
+{
+    CCLOG("onSpeakerVolume %d", vol);
+    // Android, iOS no such API: SetSpeakerphoneVolume
+//    AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->SetSpeakerphoneVolume(vol);
+}
+
+void MainGame::onEnableSpeaker(bool val)
+{
+    bool inChannel = SceneMgr::getInstance()->config.ts > 0;
+    
+    if (inChannel) {
+        AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->setEnableSpeakerphone(val);
+        return;
+    }
+    CCLOG("Not in Channel, skip setEnableSpeakerphone !");
+}
+
+void MainGame::onAudioToggle(bool val)
+{
+    if (val) {
+        AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->enableAudio();
+    }else {
+        AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->disableAudio();
+    }
+    return;
+}
+
+void MainGame::onMuteAllRemote(bool val)
+{    
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    RtcEngineParameters rep(rtcEngine);
+    rep.muteAllRemoteAudioStreams(val);
+    return;
+}
+
+void MainGame::onMuteLocal(bool val)
+{
+    AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->muteLocalAudioStream(val);
+    return;
 }
 
 void MainGame::doCopyAssets(const std::string &filename)
@@ -476,6 +624,9 @@ void MainGame::doPlayBackgroundMusic(bool useAgoraMixing)
 {
     bool inChannel = SceneMgr::getInstance()->config.ts > 0;
 
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    RtcEngineParameters rep(rtcEngine);
+
     if (useAgoraMixing && inChannel) {
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -485,9 +636,10 @@ void MainGame::doPlayBackgroundMusic(bool useAgoraMixing)
 #endif
 
         SimpleAudioEngine::getInstance()->stopBackgroundMusic();
-        AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->startAudioMixing(file.c_str(), true, false, -1, 0);
+
+        rep.startAudioMixing(file.c_str(), true, false, -1);
     } else {
-        AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->stopAudioMixing();
+        rep.stopAudioMixing();
         SimpleAudioEngine::getInstance()->playBackgroundMusic(BACKGROUND_MUSIC_SFX, true);
     }
 }
@@ -495,6 +647,9 @@ void MainGame::doPlayBackgroundMusic(bool useAgoraMixing)
 void MainGame::doPlayEffect(bool useAgoraMixing)
 {
     bool inChannel = SceneMgr::getInstance()->config.ts > 0;
+
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    RtcEngineParameters rep(rtcEngine);
 
     if (useAgoraMixing && inChannel) {
 
@@ -506,7 +661,8 @@ void MainGame::doPlayEffect(bool useAgoraMixing)
 
         CCLOG("doPlayEffect %s in channel %s path %s ", useAgoraMixing ? "true" : "false", inChannel ? "true" : "false", file.c_str());
 
-        AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->getAudioEffectManager()->playEffect(1, file.c_str());
+        // AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->getAudioEffectManager()->playEffect(1, file.c_str());
+        rep.playEffect(1, file.c_str(),1, 1.0,0,100,false);
     } else {
         SimpleAudioEngine::getInstance()->playEffect(PEW_PEW_SFX);
     }
@@ -515,14 +671,21 @@ void MainGame::doPlayEffect(bool useAgoraMixing)
 void MainGame::doStopPlayBackgroundMusic()
 {
     SimpleAudioEngine::getInstance()->stopBackgroundMusic();
-    AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->stopAudioMixing();
+
+    // AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->stopAudioMixing();
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    RtcEngineParameters rep(rtcEngine);
+    rep.stopAudioMixing();
 }
 
 void MainGame::onSpeakerReleased(uid_t uid, Vec2 loc, Vec2 myLoc)
 {
     CCLOG("onSpeakerReleased %u, %f, %f, %f, %f", uid, loc.x, loc.y, myLoc.x, myLoc.y);
-    agora::rtc::IRtcEngineForGaming* engine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
-    agora::rtc::IAudioEffectManager* effectMgr = engine->getAudioEffectManager();
+    // agora::rtc::IRtcEngine* engine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
+    // agora::rtc::IAudioEffectManager* effectMgr = engine->getAudioEffectManager();
+
+    IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);    
+    agora::base::AParameter apm(rtcEngine);
 
     // Location to Pan/Gain
     Vec2 direction = loc - myLoc;
@@ -541,12 +704,17 @@ void MainGame::onSpeakerReleased(uid_t uid, Vec2 loc, Vec2 myLoc)
         gain = 20;
     }
     
-    effectMgr->setRemoteVoicePosition(uid, pan, gain);
+    // effectMgr->setRemoteVoicePosition(uid, pan, gain);
+    const char *fmt = "{\"che.audio.game_place_sound_position\": {\"uid\":%u,\"pan\":%f,\"gain\":%f}}";
+    char buf[512];
+    sprintf(buf, fmt, uid, pan, gain);
+
+    apm->setParameters (buf);
 }
 
 void MainGame::update(float delta)
 {
-    AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->poll();
+    // AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID)->poll();
 }
 
 void MainGame::menuCloseCallback(Ref* pSender)
@@ -693,17 +861,17 @@ void MainGame::onUserOffline(uid_t uid)
     mSpeakerSquare->removeSpeaker(uid);
 }
 
-void MainGame::onAudioRouteChanged(agora::rtc::AUDIO_ROUTE_TYPE route)
+void MainGame::onAudioRouteChanged(int route)
 {
     CCLOG("onAudioRouteChanged %d", route);
     std::ostringstream oss;
-    if (route == agora::rtc::AUDIO_ROUTE_TYPE::AUDIO_ROUTE_HEADSET) {
+    if (route == AUDIO_ROUTE_HEADSET) {
         oss << "Headset";
-    } else if (route == agora::rtc::AUDIO_ROUTE_TYPE::AUDIO_ROUTE_EARPIECE) {
+    } else if (route == AUDIO_ROUTE_EARPIECE) {
         oss << "Earpiece";
-    } else if (route == agora::rtc::AUDIO_ROUTE_TYPE::AUDIO_ROUTE_SPEAKERPHONE) {
+    } else if (route == AUDIO_ROUTE_SPEAKERPHONE) {
         oss << "Speakerphone";
-    } else if (route == agora::rtc::AUDIO_ROUTE_TYPE::AUDIO_ROUTE_BLUETOOTH) {
+    } else if (route == AUDIO_ROUTE_BLUETOOTH) {
         oss << "Bluetooth";
     } else {
         oss << "Something ";

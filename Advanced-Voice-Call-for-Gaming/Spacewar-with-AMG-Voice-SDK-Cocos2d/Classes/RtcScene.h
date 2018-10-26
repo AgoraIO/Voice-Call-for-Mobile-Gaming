@@ -3,8 +3,7 @@
 #define __RtcScene_h__
 
 #include "cocos2d.h"
-
-#include "../AgoraGamingSDK/include/AgoraGamingRtcHelper.h"
+#include "agoraInstance/IAgoraRtcEngineForGaming.hpp"
 
 class RtcCallback {
 public:
@@ -14,7 +13,7 @@ public:
 
     virtual void onUserVolumeIndication(const agora::rtc::AudioVolumeInfo* speakers, unsigned int speakerNumber) = 0;
 
-    virtual void onAudioRouteChanged(agora::rtc::AUDIO_ROUTE_TYPE route) = 0;
+    virtual void onAudioRouteChanged(int route) = 0;
 
     virtual void onError(int error, const std::string& description) = 0;
 };

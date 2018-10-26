@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 public class AppActivity extends Cocos2dxActivity {
     static {
-        System.loadLibrary("agoraSdkCWrapper");
+        System.loadLibrary("agora-rtc-sdk-jni");
     }
 
     private final static int REQUEST_CODE = 200;

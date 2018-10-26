@@ -2,7 +2,7 @@
 #include "SceneMgr.h"
 #include "HelloAgoraScene.h"
 
-#include "../AgoraGamingSDK/include/IAgoraRtcEngineForGaming.h"
+// #include "../AgoraGamingSDK/include/IAgoraRtcEngineForGaming.h"
 
 USING_NS_CC;
 
@@ -90,7 +90,8 @@ void AppDelegate::applicationDidEnterBackground() {
     // if you use SimpleAudioEngine, it must be paused
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
     auto rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
-    rtcEngine->pause();
+    // rtcEngine->pause();
+    rtcEngine->disableAudio();
 }
 
 // this function will be called when the app is active again
@@ -100,5 +101,6 @@ void AppDelegate::applicationWillEnterForeground() {
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
     auto rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
-    rtcEngine->resume();
+    // rtcEngine->resume();
+    rtcEngine->enableAudio();
 }

@@ -129,6 +129,12 @@
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		8C152BC2201378D10085AFF8 /* boom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C152BC0201378D10085AFF8 /* boom.mp3 */; };
+		8CB4D61C20FC547700F30218 /* CheckBoxNode_Disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4D61720FC547500F30218 /* CheckBoxNode_Disable.png */; };
+		8CB4D61D20FC547700F30218 /* CheckBox_Press.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4D61820FC547500F30218 /* CheckBox_Press.png */; };
+		8CB4D61E20FC547700F30218 /* CheckBox_Disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4D61920FC547600F30218 /* CheckBox_Disable.png */; };
+		8CB4D61F20FC547700F30218 /* CheckBoxNode_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4D61A20FC547600F30218 /* CheckBoxNode_Normal.png */; };
+		8CB4D62020FC547700F30218 /* CheckBox_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4D61B20FC547600F30218 /* CheckBox_Normal.png */; };
+		8CB4D62A20FF817600F30218 /* VoicePopupLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CB4D62820FF817600F30218 /* VoicePopupLayer.cpp */; };
 		8CCACA602008CF6700C17363 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CCACA5E2008CF6700C17363 /* CFNetwork.framework */; };
 		8CCACA622008CF7000C17363 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CCACA612008CF7000C17363 /* SystemConfiguration.framework */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
@@ -280,6 +286,13 @@
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8C152BC0201378D10085AFF8 /* boom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boom.mp3; sourceTree = "<group>"; };
+		8CB4D61720FC547500F30218 /* CheckBoxNode_Disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckBoxNode_Disable.png; sourceTree = "<group>"; };
+		8CB4D61820FC547500F30218 /* CheckBox_Press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckBox_Press.png; sourceTree = "<group>"; };
+		8CB4D61920FC547600F30218 /* CheckBox_Disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckBox_Disable.png; sourceTree = "<group>"; };
+		8CB4D61A20FC547600F30218 /* CheckBoxNode_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckBoxNode_Normal.png; sourceTree = "<group>"; };
+		8CB4D61B20FC547600F30218 /* CheckBox_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckBox_Normal.png; sourceTree = "<group>"; };
+		8CB4D62820FF817600F30218 /* VoicePopupLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VoicePopupLayer.cpp; sourceTree = "<group>"; };
+		8CB4D62920FF817600F30218 /* VoicePopupLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VoicePopupLayer.hpp; sourceTree = "<group>"; };
 		8CCACA5E2008CF6700C17363 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.1.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		8CCACA612008CF7000C17363 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -459,6 +472,11 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8CB4D61920FC547600F30218 /* CheckBox_Disable.png */,
+				8CB4D61B20FC547600F30218 /* CheckBox_Normal.png */,
+				8CB4D61820FC547500F30218 /* CheckBox_Press.png */,
+				8CB4D61720FC547500F30218 /* CheckBoxNode_Disable.png */,
+				8CB4D61A20FC547600F30218 /* CheckBoxNode_Normal.png */,
 				2F12EB6D1E852C6500EBC2B4 /* Images.xcassets */,
 				2F0ABED31E7ECD1300A9AD40 /* btn_speaker_enabled.png */,
 				8C152BC0201378D10085AFF8 /* boom.mp3 */,
@@ -510,6 +528,7 @@
 				2FDCF0CE1E752AEA00C2AB84 /* PeerSquareLayer.h */,
 				2FDCF0E81E758C7F00C2AB84 /* RtcScene.h */,
 				2FDCF0E21E752D7D00C2AB84 /* SceneMgr.h */,
+				8CB4D62620FF812800F30218 /* PopupVoice */,
 				2FEF4C361E7B801E000A57D6 /* DropdownList */,
 				2F0ABE9B1E7D6EDC00A9AD40 /* PopupLayer */,
 				2F1F05D01E729BCE00244919 /* TextBox */,
@@ -564,6 +583,15 @@
 			name = Icons;
 			path = ios;
 			sourceTree = SOURCE_ROOT;
+		};
+		8CB4D62620FF812800F30218 /* PopupVoice */ = {
+			isa = PBXGroup;
+			children = (
+				8CB4D62820FF817600F30218 /* VoicePopupLayer.cpp */,
+				8CB4D62920FF817600F30218 /* VoicePopupLayer.hpp */,
+			);
+			path = PopupVoice;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -673,6 +701,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CB4D61C20FC547700F30218 /* CheckBoxNode_Disable.png in Resources */,
+				8CB4D61D20FC547700F30218 /* CheckBox_Press.png in Resources */,
+				8CB4D61E20FC547700F30218 /* CheckBox_Disable.png in Resources */,
+				8CB4D61F20FC547700F30218 /* CheckBoxNode_Normal.png in Resources */,
+				8CB4D62020FC547700F30218 /* CheckBox_Normal.png in Resources */,
 				8C152BC2201378D10085AFF8 /* boom.mp3 in Resources */,
 				5087E78117EB970100C73F5D /* Icon-120.png in Resources */,
 				5087E78617EB970100C73F5D /* Icon-76.png in Resources */,
@@ -771,6 +804,7 @@
 			files = (
 				2F1F05D31E729BCE00244919 /* HelloAgoraScene.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				8CB4D62A20FF817600F30218 /* VoicePopupLayer.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				2FDCF0E31E752D7D00C2AB84 /* SceneMgr.cpp in Sources */,
 				2F0ABE9E1E7D6EDC00A9AD40 /* SettingsPopupLayer.cpp in Sources */,
@@ -847,8 +881,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.agora.gaming.cocos2d.spacewar;
 				PRODUCT_NAME = "app-mobile";
-				PROVISIONING_PROFILE = "87f6e50f-6472-4e90-a6d4-f19c7bd21f23";
-				PROVISIONING_PROFILE_SPECIFIER = AgoraIODev2017;
+				PROVISIONING_PROFILE = "28d072e1-f550-49ef-a601-6038e4fddc51";
+				PROVISIONING_PROFILE_SPECIFIER = AgoraIODev2018;
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -888,8 +922,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.agora.gaming.cocos2d.spacewar;
 				PRODUCT_NAME = "app-mobile";
-				PROVISIONING_PROFILE = "87f6e50f-6472-4e90-a6d4-f19c7bd21f23";
-				PROVISIONING_PROFILE_SPECIFIER = AgoraIODev2017;
+				PROVISIONING_PROFILE = "28d072e1-f550-49ef-a601-6038e4fddc51";
+				PROVISIONING_PROFILE_SPECIFIER = AgoraIODev2018;
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";

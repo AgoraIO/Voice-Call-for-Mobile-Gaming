@@ -22,6 +22,18 @@ isSetAble(false)
 , mAudioEffectLabel(nullptr)
 , mAudioEffectVolumeControlSlider(nullptr)
 , mAudioEffectValueLabel(nullptr)
+
+,mRecordVolumeLabel(nullptr)
+,mRecordVolumeSlider(nullptr)
+,mRecordVolumeValueLabel(nullptr)
+
+,mPlayBackVolumeLabel(nullptr)
+,mPlayBackVolumeSlider(nullptr)
+,mPlayBackVolumeValueLabel(nullptr)
+
+,mSpeakerVolumeLabel(nullptr)
+,mSpeakerVolumeSlider(nullptr)
+,mSpeakerVolumeValueLabel(nullptr)
 {
 }
 
@@ -42,6 +54,19 @@ SettingsPopupLayer::~SettingsPopupLayer()
     CC_SAFE_RELEASE(mLocalPitchControlSlider);
     CC_SAFE_RELEASE(mLocalPitchLabel);
     CC_SAFE_RELEASE(m__s9BackGround);
+    
+    CC_SAFE_RELEASE(mRecordVolumeValueLabel);
+    CC_SAFE_RELEASE(mRecordVolumeSlider);
+    CC_SAFE_RELEASE(mRecordVolumeLabel);
+    
+    CC_SAFE_RELEASE(mPlayBackVolumeLabel);
+    CC_SAFE_RELEASE(mPlayBackVolumeSlider);
+    CC_SAFE_RELEASE(mPlayBackVolumeValueLabel);
+    
+    CC_SAFE_RELEASE(mSpeakerVolumeLabel);
+    CC_SAFE_RELEASE(mSpeakerVolumeSlider);
+    CC_SAFE_RELEASE(mSpeakerVolumeValueLabel);
+    
 }
 
 bool SettingsPopupLayer::init()
@@ -95,7 +120,7 @@ bool SettingsPopupLayer::addButton(const char *normalImage, const char *selected
     ttf->setColor(Color3B(0, 0, 0));
     ttf->setPosition(Vec2(imenu.width / 2, imenu.height / 2));
     menuImage->addChild(ttf);
-
+    menuImage->setScale(0.5);
     getMenuButton()->addChild(menuImage);
     return true;
 }
@@ -182,6 +207,24 @@ void SettingsPopupLayer::onMixingBGMChanged(Ref* sender, Control::EventType evtT
     }
 }
 
+void SettingsPopupLayer::onEnableSpeakerChanged(Ref* sender, Control::EventType evtType)
+{
+    ControlSwitch* slider = (ControlSwitch*) sender;
+    
+    bool bEnable = slider->isOn();
+    
+    bool bVal = SceneMgr::getInstance()->config.enbleSpeaker;
+    if (bVal == bEnable) {
+        return;
+    }
+    
+    SceneMgr::getInstance()->config.enbleSpeaker = bEnable;
+    
+    if (onEnableSpeaker) {
+        onEnableSpeaker(bEnable);
+    }
+}
+
 void SettingsPopupLayer::onLocalPitchChanged(Ref* sender, Control::EventType evtType)
 {
     ControlSlider* slider = (ControlSlider*) sender;
@@ -200,6 +243,64 @@ void SettingsPopupLayer::onLocalPitchChanged(Ref* sender, Control::EventType evt
         onPitchChanged(valueFloat);
     }
 }
+
+void SettingsPopupLayer::onRecordVolumeChanged(Ref* sender, Control::EventType evtType)
+{
+    ControlSlider* slider = (ControlSlider*) sender;
+    Label* label = getRecordVolumeValueLabel();
+    int value = slider->getValue();
+    ostringstream oss;
+    oss << std::fixed << value;
+    string sVal = oss.str();
+    label->setString(oss.str());
+    CCLOG("onRecordVolumeChanged : %s", sVal.c_str());
+
+    SceneMgr::getInstance()->config.mRecordVolume = value;
+
+    if (onRecordVolume) {
+        onRecordVolume(value);
+    }
+}
+
+void SettingsPopupLayer::onPlayBackVolumeChanged(Ref* sender, Control::EventType evtType)
+{
+    ControlSlider* slider = (ControlSlider*) sender;
+    Label* label = getPlayBackVolumeValueLabel();
+    int value = slider->getValue();
+    ostringstream oss;
+    oss << std::fixed << value;
+    string sVal = oss.str();
+    label->setString(oss.str());
+    CCLOG("onPlayBackVolumeChanged : %s", sVal.c_str());
+    
+    SceneMgr::getInstance()->config.mPlayBackVolume = value;
+    
+    if (onPlayBackVolume) {
+        onPlayBackVolume(value);
+    }
+}
+
+
+void SettingsPopupLayer::onSpeakerVolumeChanged(Ref* sender, Control::EventType evtType)
+{
+    ControlSlider* slider = (ControlSlider*) sender;
+    Label* label = getSpeakerVolumeValueLabel();
+    int value = slider->getValue();
+    ostringstream oss;
+    oss << std::fixed << value;
+    string sVal = oss.str();
+    label->setString(oss.str());
+    CCLOG("onSpeakerVolumeChanged : %s", sVal.c_str());
+    
+    SceneMgr::getInstance()->config.mSpeakerPhoneVolume = value;
+    
+    if (onSpeakerVolume) {
+        onSpeakerVolume(value);
+    }
+}
+
+
+
 
 void SettingsPopupLayer::onEnter()
 {
@@ -247,7 +348,7 @@ void SettingsPopupLayer::onEnter()
     }
 
     ControlSlider* pitchSlider = getLocalPitchControlSlider();
-    double height = winSize.height / 2 + 55.0f;
+    double height = winSize.height / 2 + 100;
     pitchSlider->setPosition(Vec2(winSize.width / 2, height));
     pitchSlider->setMinimumValue(0.5);
     pitchSlider->setMaximumValue(2);
@@ -352,9 +453,9 @@ void SettingsPopupLayer::onEnter()
     this->addChild(getAudioEffectLabel());
 
     getAudioEffectVolumeValueLabel()->setPosition(Vec2(winSize.width / 2 + aeVSlider->getContentSize().width, height - 60));
-    std::ostringstream oss2;
-    oss2 << SceneMgr::getInstance()->config.mEffectVolume;
-    getAudioEffectVolumeValueLabel()->setString(oss2.str());
+    std::ostringstream oss_2;
+    oss_2 << SceneMgr::getInstance()->config.mEffectVolume;
+    getAudioEffectVolumeValueLabel()->setString(oss_2.str());
     this->addChild(getAudioEffectVolumeValueLabel());
 
     aeVSlider->addTargetWithActionForControlEvents(this, cccontrol_selector(SettingsPopupLayer::onAudioEffectVolumeChanged), Control::EventType::VALUE_CHANGED);
@@ -379,7 +480,118 @@ void SettingsPopupLayer::onEnter()
     mixingSwitch->setOn(SceneMgr::getInstance()->config.useMixing);
 
     mixingSwitch->addTargetWithActionForControlEvents(this, cccontrol_selector(SettingsPopupLayer::onMixingBGMChanged), Control::EventType::VALUE_CHANGED);
-
+    
+    //Add AdjustRecordingSignalVolume ui
+    if (getRecordVolumeSlider() == nullptr) {
+        ControlSlider* slider = ControlSlider::create("sliderTrack.png", "sliderProgress.png", "sliderThumb.png");
+        slider->setEnabled(isSetAble);
+        setRecordVolumeSlider(slider);
+        
+        Label* label = Label::create();
+        label->setString("RecordVolume");
+        setRecordVolumeLabel(label);
+        
+        Label* labelVolumeValue = Label::create();
+        setRecordVolumeValueLabel(labelVolumeValue);
+    }
+    ControlSlider* recordVolumeSlider = getRecordVolumeSlider();
+    recordVolumeSlider->setPosition(Vec2(winSize.width / 2, height - 100));
+    recordVolumeSlider->setMinimumValue(0);
+    recordVolumeSlider->setMaximumValue(400);
+    recordVolumeSlider->setValue(SceneMgr::getInstance()->config.mRecordVolume);
+    recordVolumeSlider->addTargetWithActionForControlEvents(this, cccontrol_selector(SettingsPopupLayer::onRecordVolumeChanged), Control::EventType::VALUE_CHANGED);
+    this->addChild(recordVolumeSlider);
+    
+    getRecordVolumeLabel()->setPosition(Vec2(winSize.width / 2 - recordVolumeSlider->getContentSize().width, height - 100));
+    this->addChild(getRecordVolumeLabel());
+    
+    getRecordVolumeValueLabel()->setPosition(Vec2(winSize.width / 2 + recordVolumeSlider->getContentSize().width, height - 100));
+    std::ostringstream oss1;
+    oss1 << SceneMgr::getInstance()->config.mRecordVolume;
+    getRecordVolumeValueLabel()->setString(oss1.str());
+    this->addChild(getRecordVolumeValueLabel());
+ 
+    //Add AdjustPlaybackSignalVolume ui
+    if ( getPlayBackVolumeSlider() == nullptr) {
+        ControlSlider* slider = ControlSlider::create("sliderTrack.png", "sliderProgress.png", "sliderThumb.png");
+        slider->setEnabled(isSetAble);
+        setPlayBackVolumeSlider(slider);
+        
+        Label* label = Label::create();
+        label->setString("PlayBackVolume");
+        setPlayBackVolumeLabel(label);
+        
+        Label* labelVolumeValue = Label::create();
+        setPlayBackVolumeValueLabel(labelVolumeValue);
+    }
+    ControlSlider* playBackVolumeSlider = getPlayBackVolumeSlider();
+    playBackVolumeSlider->setPosition(Vec2(winSize.width / 2, height - 120));
+    playBackVolumeSlider->setMinimumValue(0);
+    playBackVolumeSlider->setMaximumValue(400);
+    playBackVolumeSlider->setValue(SceneMgr::getInstance()->config.mPlayBackVolume);
+    playBackVolumeSlider->addTargetWithActionForControlEvents(this, cccontrol_selector(SettingsPopupLayer::onPlayBackVolumeChanged), Control::EventType::VALUE_CHANGED);
+    this->addChild(playBackVolumeSlider);
+    
+    getPlayBackVolumeLabel()->setPosition(Vec2(winSize.width / 2 - playBackVolumeSlider->getContentSize().width, height - 120));
+    this->addChild(getPlayBackVolumeLabel());
+    
+    getPlayBackVolumeValueLabel()->setPosition(Vec2(winSize.width / 2 + playBackVolumeSlider->getContentSize().width, height - 120));
+    std::ostringstream oss2;
+    oss2 << SceneMgr::getInstance()->config.mPlayBackVolume;
+    getPlayBackVolumeValueLabel()->setString(oss2.str());
+    this->addChild(getPlayBackVolumeValueLabel());
+    
+#if 0 // No SetSpeakerphoneVolume on Android & iOS
+    //Add SetSpeakerphoneVolume ui
+    if ( getSpeakerVolumeSlider() == nullptr) {
+        ControlSlider* slider = ControlSlider::create("sliderTrack.png", "sliderProgress.png", "sliderThumb.png");
+        slider->setEnabled(isSetAble);
+        setSpeakerVolumeSlider(slider);
+        
+        Label* label = Label::create();
+        label->setString("SpeakerVolume");
+        setSpeakerVolumeLabel(label);
+        
+        Label* labelVolumeValue = Label::create();
+        setSpeakerVolumeValueLabel(labelVolumeValue);
+    }
+    ControlSlider* speakerVolumeSlider = getSpeakerVolumeSlider();
+    speakerVolumeSlider->setPosition(Vec2(winSize.width / 2, height - 140));
+    speakerVolumeSlider->setMinimumValue(0);
+    speakerVolumeSlider->setMaximumValue(255);
+    speakerVolumeSlider->setValue(SceneMgr::getInstance()->config.mSpeakerPhoneVolume);
+    speakerVolumeSlider->addTargetWithActionForControlEvents(this, cccontrol_selector(SettingsPopupLayer::onSpeakerVolumeChanged), Control::EventType::VALUE_CHANGED);
+    this->addChild(speakerVolumeSlider);
+    
+    getSpeakerVolumeLabel()->setPosition(Vec2(winSize.width / 2 - playBackVolumeSlider->getContentSize().width, height - 140));
+    this->addChild(getSpeakerVolumeLabel());
+    
+    getSpeakerVolumeValueLabel()->setPosition(Vec2(winSize.width / 2 + playBackVolumeSlider->getContentSize().width, height - 140));
+    std::ostringstream oss3;
+    oss3 << SceneMgr::getInstance()->config.mSpeakerPhoneVolume;
+    getSpeakerVolumeValueLabel()->setString(oss3.str());
+    this->addChild(getSpeakerVolumeValueLabel());
+#endif
+    
+    auto enableSpeakerSwitch = ControlSwitch::create(
+                                              Sprite::create("switch-mask-hd.png"),
+                                              Sprite::create("switch-on-hd.png"),
+                                              Sprite::create("switch-off-hd.png"),
+                                              Sprite::create("switch-thumb-hd.png"),
+                                              Label::create("On", "Arial-BoldMT", 12),
+                                              Label::create("Off", "Arial-BoldMT", 12)
+                                              );
+    enableSpeakerSwitch->setPosition(Vec2(winSize.width / 2, height - 140));
+    this->addChild(enableSpeakerSwitch);
+    enableSpeakerSwitch->setOn(SceneMgr::getInstance()->config.enbleSpeaker);
+    enableSpeakerSwitch->addTargetWithActionForControlEvents(this, cccontrol_selector(SettingsPopupLayer::onEnableSpeakerChanged), Control::EventType::VALUE_CHANGED);
+    enableSpeakerSwitch->setEnabled(isSetAble);
+    
+    Label* enableSpeakerLabel = Label::create();
+    enableSpeakerLabel->setString("EnableSpeaker");
+    enableSpeakerLabel->setPosition(Vec2(winSize.width / 2 - aeVSlider->getContentSize().width, height - 140));
+    this->addChild(enableSpeakerLabel);
+    
     Action* popupLayer = Sequence::create(ScaleTo::create(0.0, 0.6),
                                           ScaleTo::create(0.06, 0.85),
                                           ScaleTo::create(0.08, 1.15),

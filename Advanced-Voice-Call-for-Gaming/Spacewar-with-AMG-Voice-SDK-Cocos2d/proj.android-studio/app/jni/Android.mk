@@ -5,10 +5,10 @@ LOCAL_MODULE := agora-rtc
 LOCAL_SRC_FILES := ../../../AgoraGamingSDK/libs/Android/$(TARGET_ARCH_ABI)/libagora-rtc-sdk-jni.so
 include $(PREBUILT_SHARED_LIBRARY)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := agora-rtc-wrapper
-LOCAL_SRC_FILES := ../../../AgoraGamingSDK/libs/Android/$(TARGET_ARCH_ABI)/libagoraSdkCWrapper.so
-include $(PREBUILT_SHARED_LIBRARY)
+#include $(CLEAR_VARS)
+#LOCAL_MODULE := agora-rtc-wrapper
+#LOCAL_SRC_FILES := ../../../AgoraGamingSDK/libs/Android/$(TARGET_ARCH_ABI)/libagoraSdkCWrapper.so
+#include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 $(call import-add-path,$(LOCAL_PATH)/../../../cocos2d)
@@ -21,8 +21,10 @@ LOCAL_MODULE := MyGame_shared
 LOCAL_MODULE_FILENAME := libMyGame
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
+                   ../../../Classes/agoraInstance/IAgoraRtcEngineForGaming.cpp \
                    ../../../Classes/DropDownList/DropDownListBox.cpp \
                    ../../../Classes/PopupLayer/SettingsPopupLayer.cpp \
+                   ../../../Classes/PopupVoice/VoicePopupLayer.cpp \
                    ../../../Classes/TextBox/TextBox.cpp \
                    ../../../Classes/PeerSquareLayer.cpp \
                    ../../../Classes/RtcScene.cpp \
@@ -32,11 +34,15 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/MainGameScene.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes \
-                    $(LOCAL_PATH)/../../../AgoraGamingSDK/include
+                    $(LOCAL_PATH)/../../../AgoraGamingSDK/libs/Android/include
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
 
-LOCAL_SHARED_LIBRARIES := agora-rtc agora-rtc-wrapper
+
+LOCAL_LDLIBS += -llog
+
+#LOCAL_SHARED_LIBRARIES := agora-rtc agora-rtc-wrapper
+LOCAL_SHARED_LIBRARIES := agora-rtc
 
 include $(BUILD_SHARED_LIBRARY)
 

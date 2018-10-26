@@ -4,6 +4,7 @@
 #include "RtcScene.h"
 
 #include "PopupLayer/SettingsPopupLayer.h"
+#include "PopupVoice/VoicePopupLayer.hpp"
 
 USING_NS_CC;
 
@@ -18,6 +19,7 @@ private:
     Label* mChannelLabel = nullptr;
 
     ControlSwitch* mBroadcasterAudienceSwitch;
+    ControlSwitch* joinLeaveSwitch;
 
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -49,9 +51,20 @@ public:
     void onUseMixing(bool);
 
     void onPitchChanged(float pitch);
+    
+    void onRecordVolume(int vol);
+    void onPlayBackVolume(int vol);
+    void onSpeakerVolume(int vol);
+    
+    void onEnableSpeaker(bool);
+    
+    void onMuteAllRemote(bool);
+    void onMuteLocal(bool);
+    void onAudioToggle(bool);
 
 private:
-    void onAudioEnableBtnClicked(ui::Button* btn);
+    void join_Leave_func(void);
+    void onAudioBtnClicked(ui::Button* btn);
     void onAudioMuteBtnClicked(ui::Button* btn);
     void onClientRoleBtnClicked(ui::Button* btn);
 
@@ -60,12 +73,14 @@ private:
     void doPlayEffect(bool useAgoraMixing);
 
     void doCopyAssets(const std::string &filename);
+    
+    void onSwitchValueChanged(Ref* sender, Control::EventType evtT);
 
 public:
     void onUserOnline(uid_t uid) override;
     void onUserOffline(uid_t uid) override;
     void onUserVolumeIndication(const agora::rtc::AudioVolumeInfo *speakers, unsigned int speakerNumber) override;
-    void onAudioRouteChanged(agora::rtc::AUDIO_ROUTE_TYPE route) override;
+    void onAudioRouteChanged(int  route) ;
     void onError(int error, const std::string& description) override;
 
 public:
