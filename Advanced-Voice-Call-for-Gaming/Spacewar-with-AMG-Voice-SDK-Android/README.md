@@ -14,7 +14,7 @@ With this sample app, you can:
 - Set posotion of voice and audio effect (In Progress)
 - Set volume of voice and audio effect
 
-A tutorial demo can be found here: [Hello-Gaming-Agora-Android](https://github.com/AgoraIO/Video-Call-for-Mobile-Gaming/tree/master/Hello-Video-Unity-Agora)
+A tutorial demo can be found here: [Hello-Gaming-Agora-Android](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Basic-Voice-Call-for-Gaming/Hello-Gaming-Agora-Android)
 
 ## Running the App
 First, create a developer account at [Agora.io](https://dashboard.agora.io/signin/), and obtain an App ID. Update "app/src/main/res/values/strings_config.xml" with your App ID.
