@@ -14,12 +14,7 @@ With this sample app, you can:
 - Set posotion of voice and audio effect
 - Set volume of voice and audio effect
 
-A tutorial demo can be found here: [Hello-Gaming-Agora-iOS](https://github.com/AgoraIO/Hello-Gaming-Agora-iOS)
-
-Agora Gaming SDK supports iOS / Android / Unity / Cocos2d etc. You can find demos of these platform here:
-
-- [Spacewar-with-AMG-Voice-SDK-Unity](https://github.com/AgoraIO/Spacewar-with-AMG-Voice-SDK-Unity)
-- [Spacewar-with-AMG-Voice-SDK-Cocos2d](https://github.com/AgoraIO/Spacewar-with-AMG-Voice-SDK-Cocos2d)
+A tutorial demo can be found here: [Hello-Gaming-Agora-iOS](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Basic-Voice-Call-for-Gaming/Hello-Gaming-Agora-iOS)
 
 ## Running the App
 First, create a developer account at [Agora.io](https://dashboard.agora.io/signin/), and obtain an App ID. Update "AMGVoice/KeyCenter.swift" with your App ID.
@@ -40,7 +35,7 @@ Finally, Open AMGVoice.xcodeproj, connect your iPhone／iPad device, setup your 
 ## Connect Us
 
 - You can find full API document at [Document Center](https://docs.agora.io/en/)
-- You can file bugs about this demo at [issue](https://github.com/AgoraIO/Spacewar-with-AMG-Voice-SDK-SpriteKit/issues)
+- You can file bugs about this demo at [issue](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/issues)
 
 ## License
 
