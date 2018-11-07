@@ -10,7 +10,7 @@ With this sample app, you can:
 - Mute / unmute audio
 - Switch speaker
 
-A full-fledged demo can be found here: [Spacewar-with-AMG-Voice-SDK-SpriteKit](https://github.com/AgoraIO/Spacewar-with-AMG-Voice-SDK-SpriteKit)
+A full-fledged demo can be found here: [Spacewar-with-AMG-Voice-SDK-SpriteKit](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Advanced-Voice-Call-for-Gaming/Spacewar-with-AMG-Voice-SDK-SpriteKit)
 
 ## Running the App
 First, create a developer account at [Agora.io](https://dashboard.agora.io/signin/), and obtain an App ID. Update "KeyCenter.swift" with your App ID.
