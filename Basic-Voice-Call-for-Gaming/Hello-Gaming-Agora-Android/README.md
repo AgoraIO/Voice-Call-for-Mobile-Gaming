@@ -10,12 +10,6 @@ With this sample app, you can:
 - Mute / unmute audio
 - Switch speaker
 
-Agora Gaming SDK supports iOS / Android / Unity / Cocos2d. You can find demos of these platform here:
-
-- [Hello-Gaming-Agora-iOS](https://github.com/AgoraIO/Hello-Gaming-Agora-iOS)
-- [Hello-Unity3D-Agora](https://github.com/AgoraIO/Hello-Unity3D-Agora)
-- [Hello-Cocos2d-Agora](https://github.com/AgoraIO/Hello-Cocos2d-Agora)
-
 ## Running the App
 First, create a developer account at [Agora.io](https://dashboard.agora.io/signin/), and obtain an App ID. Update "app/src/main/res/values/strings_config.xml" with your App ID.
 
@@ -37,7 +31,7 @@ Or use `Gradle` to build and run.
 ## Connect Us
 
 - You can find full API document at [Document Center](https://docs.agora.io/en/)
-- You can file bugs about this demo at [issue](https://github.com/AgoraIO/Hello-Gaming-Agora-Android/issues)
+- You can file bugs about this demo at [issue](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/issues)
 
 ## License
 

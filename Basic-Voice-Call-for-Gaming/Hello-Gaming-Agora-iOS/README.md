@@ -10,13 +10,7 @@ With this sample app, you can:
 - Mute / unmute audio
 - Switch speaker
 
-A full-fledged demo can be found here: [Spacewar-with-AMG-Voice-SDK-SpriteKit](https://github.com/AgoraIO/Spacewar-with-AMG-Voice-SDK-SpriteKit)
-
-Agora Video SDK supports iOS / Android / Windows / macOS etc. You can find demos of these platform here:
-
-- [Hello-Gaming-Agora-Android](https://github.com/AgoraIO/Hello-Gaming-Agora-Android)
-- [Hello-Unity3D-Agora](https://github.com/AgoraIO/Hello-Unity3D-Agora)
-- [Hello-Cocos2d-Agora](https://github.com/AgoraIO/Hello-Cocos2d-Agora)
+A full-fledged demo can be found here: [Spacewar-with-AMG-Voice-SDK-SpriteKit](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Advanced-Voice-Call-for-Gaming/Spacewar-with-AMG-Voice-SDK-SpriteKit)
 
 ## Running the App
 First, create a developer account at [Agora.io](https://dashboard.agora.io/signin/), and obtain an App ID. Update "KeyCenter.swift" with your App ID.
@@ -37,7 +31,7 @@ Finally, Open HelloGaming.xcodeproj, connect your iPhone／iPad device, setup yo
 ## Connect Us
 
 - You can find full API document at [Document Center](https://docs.agora.io/en/)
-- You can file bugs about this demo at [issue](https://github.com/AgoraIO/Hello-Gaming-Agora-iOS/issues)
+- You can file bugs about this demo at [issue](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/issues)
 
 ## License
 
