@@ -236,7 +236,7 @@ public class GameController : MonoBehaviour {
 	...
 	
 }
-```csharp
+```
 
 - [Declare the Global Variables](#declare-the-global-variables)
 - [Add Base Application Control Methods](#add-base-application-control-methods)
