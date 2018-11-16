@@ -303,7 +303,7 @@ void MainGame::onAudioEnableBtnClicked(ui::Button* btn)
         rtcEngine->setChannelProfile(sceneMgr->config.cft);
 
         if (sceneMgr->config.cft == CHANNEL_PROFILE_GAME_COMMAND_MODE) {
-            rtcEngine->setClientRole(sceneMgr->config.crt, nullptr);
+            rtcEngine->setClientRole(sceneMgr->config.crt);
         }
 
         rtcEngine->joinChannel(sceneMgr->config.channel.c_str(), "Cocos2d", 0);
