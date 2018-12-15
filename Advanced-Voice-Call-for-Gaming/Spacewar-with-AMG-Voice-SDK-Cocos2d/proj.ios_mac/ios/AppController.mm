@@ -28,9 +28,6 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 
-//#include "../../AgoraGamingSDK/include/AgoraGamingRtcHelper.h"
-//#include "../../AgoraGamingSDK/include/IAgoraRtcEngineForGaming.h"
-
 // for AGORA_APP_ID
 #include "../../Classes/SceneMgr.h"
 
