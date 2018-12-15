@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := agora-rtc
-LOCAL_SRC_FILES := ../../../AgoraGamingSDK/libs/Android/$(TARGET_ARCH_ABI)/libagora-rtc-sdk-jni.so
+LOCAL_SRC_FILES := ../../../libs/Android/$(TARGET_ARCH_ABI)/libagora-rtc-sdk-jni.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 #include $(CLEAR_VARS)
@@ -34,7 +34,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/MainGameScene.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes \
-                    $(LOCAL_PATH)/../../../AgoraGamingSDK/libs/Android/include
+                    $(LOCAL_PATH)/../../../libs/Android/include
 
 LOCAL_STATIC_LIBRARIES := cocos2dx_static
 

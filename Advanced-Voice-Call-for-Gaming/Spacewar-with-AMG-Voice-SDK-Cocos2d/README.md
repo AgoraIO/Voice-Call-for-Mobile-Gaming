@@ -28,7 +28,9 @@ First, create a developer account at [Agora.io](https://dashboard.agora.io/signi
 #define AGORA_APP_ID <#YOUR APP ID#>
 ```
 
-Next, download the **Agora Gaming SDK** from [Agora.io SDK](https://www.agora.io/en/download/). Unzip the downloaded SDK package and copy **include** and **libs** to **AgoraGamingSDK**.
+Next, download the **Android V2.2** and  **iOS V2.2** at  **Gaming SDK** from [Agora.io SDK](https://docs.agora.io/cn/Agora%20Platform/downloads). Unzip the downloaded SDK package and copy to Demo's **libs**, follow as **file layout hints** in the libs .
+
+libagora-crypto.so(Android)，AgoraRtcCryptoLoader.framework、libcrypto.a(iOS) are encryption libraries. You can delete,when no need. 
 
 - This sample app needs open-source project [Cocos2d-x](http://www.cocos2d-x.org/), download it from http://www.cocos2d-x.org/filedown/cocos2d-x-3.14.1.zip and replace files under **cocos2d**
 - Agora Gaming SDK does not rely on specific version of Cocos2d, so it's unnecessary to worry about the version which you are already using 

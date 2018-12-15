@@ -29,7 +29,9 @@ Agora 游戏 SDK 支持 iOS / Android / Unity / Cocos2d 等多个平台，你可
 ```
 
 
-然后在 [Agora.io SDK](https://www.agora.io/cn/download/) 下载 **Agora 游戏语音 SDK for Cocos2d**，解压后将其中的 **include** 和 **libs** 文件夹复制到本项目的 **AgoraGamingSDK** 下。
+然后在 [游戏 SDK](https://docs.agora.io/cn/Agora%20Platform/downloads) 下载**Android 语音版V2.2**、**iOS 语音版V2.2**，将解压后的文件，按照本项目根目录下libs里的文件布局提示，复制到**libs**下。
+
+其中Android的libagora-crypto.so，iOS的AgoraRtcCryptoLoader.framework，libcrypto.a是加密库，一般不需要，可以直接去掉。
 
 - 本示例项目依赖于开源的 [Cocos2d-x](http://www.cocos2d-x.org/) 项目，下载 http://www.cocos2d-x.org/filedown/cocos2d-x-3.14.1.zip 并用相应内容来替换本项目下的 **cocos2d** 文件夹
 - Agora 游戏 SDK 本身并不依赖于特定的 Cocos2d 的版本，所以不比担心自己用的是不同版本的 Cocos2d

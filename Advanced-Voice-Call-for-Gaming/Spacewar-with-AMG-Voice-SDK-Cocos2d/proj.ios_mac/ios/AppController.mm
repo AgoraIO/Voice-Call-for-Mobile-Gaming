@@ -28,8 +28,8 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 
-#include "../../AgoraGamingSDK/include/AgoraGamingRtcHelper.h"
-#include "../../AgoraGamingSDK/include/IAgoraRtcEngineForGaming.h"
+//#include "../../AgoraGamingSDK/include/AgoraGamingRtcHelper.h"
+//#include "../../AgoraGamingSDK/include/IAgoraRtcEngineForGaming.h"
 
 // for AGORA_APP_ID
 #include "../../Classes/SceneMgr.h"
@@ -96,7 +96,7 @@ static AppDelegate s_sharedApplication;
     // We don't need to call this method any more. It will interrupt user defined game pause&resume logic
     /* cocos2d::Director::getInstance()->pause(); */
     auto rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
-    rtcEngine->pause();
+    rtcEngine->disableAudio();
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -106,7 +106,7 @@ static AppDelegate s_sharedApplication;
     // We don't need to call this method any more. It will interrupt user defined game pause&resume logic
     /* cocos2d::Director::getInstance()->resume(); */
     auto rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);
-    rtcEngine->resume();
+    rtcEngine->enableAudio();
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

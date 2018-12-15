@@ -48,8 +48,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile fileTree(include: ['*.jar'], dir: '../../AgoraGamingSDK/libs/Android')
+    compile fileTree(include: ['*.jar'], dir: '../../libs/Android')
     compile project(':libcocos2dx')
     compile 'com.android.support:appcompat-v7:25.1.0'
 }

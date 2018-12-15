@@ -35,23 +35,22 @@
 #define AGORA_CALL
 #endif
 
-#include <IAgoraRtcEngine.h>
+#if defined(__APPLE__)
+     #include <AgoraAudioKit/IAgoraRtcEngine.h>
+#elif defined(__ANDROID__)
+    #include "IAgoraRtcEngine.h"
+    #include <android/log.h>
+    #define LOG_TAG "beck-debug"
+    #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
+#else
 
-#include <android/log.h>
-
-#define LOG_TAG "beck-debug"
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
-
+#endif
 
 using namespace agora::rtc;
 
-class AgoraObject
-{
-
+class AgoraObject {
 private:
-    
     static AgoraObject  *mAgoraObject;
-
     static IRtcEngine *mAgoraEngine;
     static IRtcEngineEventHandler *mEventHandler;
 
@@ -60,7 +59,6 @@ private:
     virtual ~AgoraObject();
 
 public:
-    
     static IRtcEngine *GetEngine();
     static AgoraObject *GetAgoraObject(const char *appId, IRtcEngineEventHandler *evenHandler);
     
@@ -73,10 +71,7 @@ public:
     static IRtcEngineEventHandler* getEventHandler();
 
     static void CloseAgoraObject();
-
 };
-
-
 
 /**
 * create the engine instance and return the pointer

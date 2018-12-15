@@ -62,10 +62,8 @@
 		2F1F05E01E729CD300244919 /* HelloAgora.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F1F05D91E729CD300244919 /* HelloAgora.png */; };
 		2F1F05E11E729CD300244919 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F1F05DA1E729CD300244919 /* TextBox.png */; };
 		2F1F05E21E729CD300244919 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F1F05DA1E729CD300244919 /* TextBox.png */; };
-		2F32B2A11F3104960056E2A9 /* libagoraSdkCWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F32B2A01F3104960056E2A9 /* libagoraSdkCWrapper.a */; };
 		2F32B2A51F3104D10056E2A9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F32B2A41F3104D10056E2A9 /* CoreVideo.framework */; };
 		2F32B2A61F3104ED0056E2A9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F32B2A21F3104B90056E2A9 /* CoreMedia.framework */; };
-		2F8E06081EB1C28E005A48BA /* AgoraAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F8E06071EB1C28E005A48BA /* AgoraAudioKit.framework */; };
 		2FDCF0CF1E752AEA00C2AB84 /* MainGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCF0CB1E752AEA00C2AB84 /* MainGameScene.cpp */; };
 		2FDCF0D01E752AEA00C2AB84 /* PeerSquareLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCF0CD1E752AEA00C2AB84 /* PeerSquareLayer.cpp */; };
 		2FDCF0D71E752B6400C2AB84 /* background-music-aac.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2FDCF0D21E752B6400C2AB84 /* background-music-aac.mp3 */; };
@@ -129,6 +127,8 @@
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		8C152BC2201378D10085AFF8 /* boom.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C152BC0201378D10085AFF8 /* boom.mp3 */; };
+		8C7FA5A8217096540098BE8F /* AgoraAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7FA5A7217096540098BE8F /* AgoraAudioKit.framework */; };
+		8C7FA5AC217096E40098BE8F /* IAgoraRtcEngineForGaming.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C7FA5AA217096E40098BE8F /* IAgoraRtcEngineForGaming.cpp */; };
 		8CB4D61C20FC547700F30218 /* CheckBoxNode_Disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4D61720FC547500F30218 /* CheckBoxNode_Disable.png */; };
 		8CB4D61D20FC547700F30218 /* CheckBox_Press.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4D61820FC547500F30218 /* CheckBox_Press.png */; };
 		8CB4D61E20FC547700F30218 /* CheckBox_Disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB4D61920FC547600F30218 /* CheckBox_Disable.png */; };
@@ -223,11 +223,8 @@
 		2F1F05D81E729CD300244919 /* ButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonPressed.png; sourceTree = "<group>"; };
 		2F1F05D91E729CD300244919 /* HelloAgora.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloAgora.png; sourceTree = "<group>"; };
 		2F1F05DA1E729CD300244919 /* TextBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TextBox.png; sourceTree = "<group>"; };
-		2F1F05F61E72CBF100244919 /* AgoraAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraAudioKit.framework; path = ../AgoraGamingSDK/libs/iOS/AgoraAudioKit.framework; sourceTree = "<group>"; };
-		2F32B2A01F3104960056E2A9 /* libagoraSdkCWrapper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libagoraSdkCWrapper.a; path = ../AgoraGamingSDK/libs/iOS/libagoraSdkCWrapper.a; sourceTree = "<group>"; };
 		2F32B2A21F3104B90056E2A9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		2F32B2A41F3104D10056E2A9 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
-		2F8E06071EB1C28E005A48BA /* AgoraAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraAudioKit.framework; path = ../AgoraGamingSDK/libs/iOS/AgoraAudioKit.framework; sourceTree = "<group>"; };
 		2FDCF0CB1E752AEA00C2AB84 /* MainGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainGameScene.cpp; sourceTree = "<group>"; };
 		2FDCF0CC1E752AEA00C2AB84 /* MainGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGameScene.h; sourceTree = "<group>"; };
 		2FDCF0CD1E752AEA00C2AB84 /* PeerSquareLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PeerSquareLayer.cpp; sourceTree = "<group>"; };
@@ -286,6 +283,9 @@
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8C152BC0201378D10085AFF8 /* boom.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boom.mp3; sourceTree = "<group>"; };
+		8C7FA5A7217096540098BE8F /* AgoraAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraAudioKit.framework; path = ../libs/iOS/AgoraAudioKit.framework; sourceTree = "<group>"; };
+		8C7FA5AA217096E40098BE8F /* IAgoraRtcEngineForGaming.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IAgoraRtcEngineForGaming.cpp; sourceTree = "<group>"; };
+		8C7FA5AB217096E40098BE8F /* IAgoraRtcEngineForGaming.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IAgoraRtcEngineForGaming.hpp; sourceTree = "<group>"; };
 		8CB4D61720FC547500F30218 /* CheckBoxNode_Disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckBoxNode_Disable.png; sourceTree = "<group>"; };
 		8CB4D61820FC547500F30218 /* CheckBox_Press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckBox_Press.png; sourceTree = "<group>"; };
 		8CB4D61920FC547600F30218 /* CheckBox_Disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckBox_Disable.png; sourceTree = "<group>"; };
@@ -314,8 +314,8 @@
 				8CCACA622008CF7000C17363 /* SystemConfiguration.framework in Frameworks */,
 				8CCACA602008CF6700C17363 /* CFNetwork.framework in Frameworks */,
 				2F32B2A61F3104ED0056E2A9 /* CoreMedia.framework in Frameworks */,
+				8C7FA5A8217096540098BE8F /* AgoraAudioKit.framework in Frameworks */,
 				2F32B2A51F3104D10056E2A9 /* CoreVideo.framework in Frameworks */,
-				2F32B2A11F3104960056E2A9 /* libagoraSdkCWrapper.a in Frameworks */,
 				2F1F05CD1E729B6700244919 /* CoreTelephony.framework in Frameworks */,
 				294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */,
 				ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */,
@@ -328,7 +328,6 @@
 				BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */,
 				2F12EB6C1E852C0A00EBC2B4 /* libresolv.tbd in Frameworks */,
 				BF1712471292920000B8313A /* libz.dylib in Frameworks */,
-				2F8E06081EB1C28E005A48BA /* AgoraAudioKit.framework in Frameworks */,
 				BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */,
 				D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */,
 				D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */,
@@ -395,7 +394,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				2F8E06071EB1C28E005A48BA /* AgoraAudioKit.framework */,
 				46880B8319C43A87006E1F66 /* Classes */,
 				46880B7519C43A67006E1F66 /* Resources */,
 				1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */,
@@ -410,13 +408,12 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C7FA5A7217096540098BE8F /* AgoraAudioKit.framework */,
 				8CCACA612008CF7000C17363 /* SystemConfiguration.framework */,
 				8CCACA5E2008CF6700C17363 /* CFNetwork.framework */,
 				2F32B2A41F3104D10056E2A9 /* CoreVideo.framework */,
 				2F32B2A21F3104B90056E2A9 /* CoreMedia.framework */,
-				2F32B2A01F3104960056E2A9 /* libagoraSdkCWrapper.a */,
 				2F12EB6B1E852C0A00EBC2B4 /* libresolv.tbd */,
-				2F1F05F61E72CBF100244919 /* AgoraAudioKit.framework */,
 				2F1F05CC1E729B6700244919 /* CoreTelephony.framework */,
 				294D0D631D0D56D500F7F5D4 /* CoreText.framework */,
 				ED545A7D1B68A1FA00C3958E /* libiconv.dylib */,
@@ -528,6 +525,7 @@
 				2FDCF0CE1E752AEA00C2AB84 /* PeerSquareLayer.h */,
 				2FDCF0E81E758C7F00C2AB84 /* RtcScene.h */,
 				2FDCF0E21E752D7D00C2AB84 /* SceneMgr.h */,
+				8C7FA5A9217096E40098BE8F /* agoraInstance */,
 				8CB4D62620FF812800F30218 /* PopupVoice */,
 				2FEF4C361E7B801E000A57D6 /* DropdownList */,
 				2F0ABE9B1E7D6EDC00A9AD40 /* PopupLayer */,
@@ -583,6 +581,15 @@
 			name = Icons;
 			path = ios;
 			sourceTree = SOURCE_ROOT;
+		};
+		8C7FA5A9217096E40098BE8F /* agoraInstance */ = {
+			isa = PBXGroup;
+			children = (
+				8C7FA5AA217096E40098BE8F /* IAgoraRtcEngineForGaming.cpp */,
+				8C7FA5AB217096E40098BE8F /* IAgoraRtcEngineForGaming.hpp */,
+			);
+			path = agoraInstance;
+			sourceTree = "<group>";
 		};
 		8CB4D62620FF812800F30218 /* PopupVoice */ = {
 			isa = PBXGroup;
@@ -807,6 +814,7 @@
 				8CB4D62A20FF817600F30218 /* VoicePopupLayer.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				2FDCF0E31E752D7D00C2AB84 /* SceneMgr.cpp in Sources */,
+				8C7FA5AC217096E40098BE8F /* IAgoraRtcEngineForGaming.cpp in Sources */,
 				2F0ABE9E1E7D6EDC00A9AD40 /* SettingsPopupLayer.cpp in Sources */,
 				2FDCF0CF1E752AEA00C2AB84 /* MainGameScene.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
@@ -860,7 +868,7 @@
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = 48TB6ZZL5S;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../AgoraGamingSDK/libs/iOS\"";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../libs/iOS\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -902,7 +910,7 @@
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = 48TB6ZZL5S;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../AgoraGamingSDK/libs/iOS\"";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../libs/iOS\"";
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
