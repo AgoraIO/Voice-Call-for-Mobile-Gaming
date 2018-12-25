@@ -10,7 +10,7 @@
 // After you entered the App ID, remove <##> outside of Your App ID
 // For formal released project, please use Dynamic Key
 // http://docs.agora.io/en/user_guide/Component_and_Others/Dynamic_Key_User_Guide.html
-#define AGORA_APP_ID "4c51ad802859440cbfb89eb75919d9ed"
+#define AGORA_APP_ID  #YOUR AGORA APPID#
 
 class SceneMgr
 {

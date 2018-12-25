@@ -882,7 +882,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../AgoraGamingSDK/libs/iOS\"";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../libs/iOS";
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
 					"$(_COCOS_LIB_IOS_END)",
@@ -923,7 +923,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../AgoraGamingSDK/libs/iOS\"";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../libs/iOS";
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_IOS_BEGIN)",
 					"$(_COCOS_LIB_IOS_END)",
