@@ -29,7 +29,6 @@ public class MuteButton : MonoBehaviour {
 	public void MuteClicked () {
 		isMuted = !isMuted;
 		myImageComponent.sprite = isMuted ? mutedImage : unmutedImage;
-
 		gameController.MuteSelf (isMuted);
 	}
 }

@@ -55,9 +55,10 @@ public class Speaker : MonoBehaviour {
 		AudioSource boom = GetComponent<AudioSource> ();
 
 		if (gameController.SpeakerShouldPlayCollideSound ()) {
-			
+			Debug.Log("gameController.SpeakerShouldPlayCollideSound ()");
 			boom.Play ();
 		} else {
+			Debug.Log("gameController.SpeakerCollided");
 			gameController.SpeakerCollided (this);
 		}
 	}
