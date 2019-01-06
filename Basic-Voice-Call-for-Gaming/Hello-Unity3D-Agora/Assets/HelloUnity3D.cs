@@ -130,7 +130,9 @@ public class HelloUnity3D : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		if (mRtcEngine != null) {
+			mRtcEngine.Poll ();
+		}
 	}
 
 	public void JoinChannel ()
