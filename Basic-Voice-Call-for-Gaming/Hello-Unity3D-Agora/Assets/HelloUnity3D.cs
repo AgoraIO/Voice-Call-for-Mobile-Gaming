@@ -18,7 +18,7 @@ public class HelloUnity3D : MonoBehaviour
 	// PLEASE KEEP THIS App ID IN SAFE PLACE
 	// Get your own App ID at https://dashboard.agora.io/
 	// After you entered the App ID, remove ## outside of Your App ID
-	private string appId = #YOUR APP ID#;
+	private string appId = #YOUR APP ID#;;
 
 	void Awake ()
 	{
@@ -102,7 +102,7 @@ public class HelloUnity3D : MonoBehaviour
 				Debug.Log (routeMessage);
 			};
 
-			mRtcEngine.OnRequestToken += () => {
+			mRtcEngine.OnRequestChannelKey += () => {
 				string requestKeyMessage = string.Format ("OnRequestToken");
 				Debug.Log (requestKeyMessage);
 			};
@@ -130,7 +130,9 @@ public class HelloUnity3D : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		if (mRtcEngine != null) {
+			mRtcEngine.Poll ();
+		}	
 	}
 
 	public void JoinChannel ()
