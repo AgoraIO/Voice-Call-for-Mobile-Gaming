@@ -18,7 +18,7 @@ public class HelloUnity3D : MonoBehaviour
 	// PLEASE KEEP THIS App ID IN SAFE PLACE
 	// Get your own App ID at https://dashboard.agora.io/
 	// After you entered the App ID, remove ## outside of Your App ID
-	private string appId = #YOUR APP ID#;;
+	private string appId = #YOUR APP ID#;
 
 	void Awake ()
 	{
@@ -89,12 +89,6 @@ public class HelloUnity3D : MonoBehaviour
 				string rtcStatsMessage = string.Format ("onRtcStats callback duration {0}, tx: {1}, rx: {2}, tx kbps: {3}, rx kbps: {4}, tx(a) kbps: {5}, rx(a) kbps: {6} users {7}",
 					stats.duration, stats.txBytes, stats.rxBytes, stats.txKBitRate, stats.rxKBitRate, stats.txAudioKBitRate, stats.rxAudioKBitRate, stats.users);
 				Debug.Log (rtcStatsMessage);
-
-				int lengthOfMixingFile = mRtcEngine.GetAudioMixingDuration();
-				int currentTs = mRtcEngine.GetAudioMixingCurrentPosition();
-
-				string mixingMessage = string.Format ("Mixing File Meta {0}, {1}", lengthOfMixingFile, currentTs);
-				Debug.Log (mixingMessage);
 			};
 
 			mRtcEngine.OnAudioRouteChanged += (AUDIO_ROUTE route) => {
@@ -102,7 +96,7 @@ public class HelloUnity3D : MonoBehaviour
 				Debug.Log (routeMessage);
 			};
 
-			mRtcEngine.OnRequestChannelKey += () => {
+			mRtcEngine.OnRequestToken += () => {
 				string requestKeyMessage = string.Format ("OnRequestToken");
 				Debug.Log (requestKeyMessage);
 			};
@@ -120,19 +114,12 @@ public class HelloUnity3D : MonoBehaviour
 			mRtcEngine.SetLogFilter (LOG_FILTER.INFO);
 
 			// mRtcEngine.setLogFile("path_to_file_unity.log");
-
-			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_FREE_MODE);
-
-			// mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_COMMAND_MODE);
-			// mRtcEngine.SetClientRole (CLIENT_ROLE.BROADCASTER);
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		if (mRtcEngine != null) {
-			mRtcEngine.Poll ();
-		}	
+		
 	}
 
 	public void JoinChannel ()
