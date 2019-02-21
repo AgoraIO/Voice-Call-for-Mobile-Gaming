@@ -51,9 +51,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Update () {
-		if (mRtcEngine != null) {
-			mRtcEngine.Poll ();
-		}
+
 	}
 
 	void ShowChannelName () {
@@ -233,7 +231,7 @@ public class GameController : MonoBehaviour {
 		Vector2 postion = speaker.transform.position;
 		Vector2 panAndGain = PanAndGain (postion);
 		Double pan = panAndGain.x;
-		effectManager.PlayEffect (1, localPath, false, 1.0, pan, 100);
+		effectManager.PlayEffect (1, localPath, 1, 1.0, pan, 100, true);
 	}
 
 	//Agora Audio Engine
@@ -252,17 +250,17 @@ public class GameController : MonoBehaviour {
 		if (ApplicationModal.AudioGameProfile == 1) {
 
         #if UNITY_IOS || UNITY_ANDROID
-			mRtcEngine.SetClientRole (CLIENT_ROLE.BROADCASTER, "");
+			mRtcEngine.SetClientRole (CLIENT_ROLE.BROADCASTER);
         #else
-			mRtcEngine.SetClientRole (CLIENT_ROLE.AUDIENCE, "");
+			mRtcEngine.SetClientRole (CLIENT_ROLE.AUDIENCE);
         #endif
 
 		} else if (ApplicationModal.AudioGameProfile == 2) {
 
         #if UNITY_IOS || UNITY_ANDROID
-			mRtcEngine.SetClientRole (CLIENT_ROLE.AUDIENCE, "");
+			mRtcEngine.SetClientRole (CLIENT_ROLE.AUDIENCE);
         #else
-			mRtcEngine.SetClientRole (CLIENT_ROLE.AUDIENCE, "");
+			mRtcEngine.SetClientRole (CLIENT_ROLE.AUDIENCE);
         #endif
 
 		}
@@ -293,9 +291,9 @@ public class GameController : MonoBehaviour {
 		if (isInAgoraAudio) {
 			CLIENT_ROLE role = isCommander ? CLIENT_ROLE.BROADCASTER : CLIENT_ROLE.AUDIENCE;
         #if UNITY_IOS || UNITY_ANDROI
-			mRtcEngine.SetClientRole (role, "");
+			mRtcEngine.SetClientRole (role);
         #else
-			mRtcEngine.SetClientRole (role, "");
+			mRtcEngine.SetClientRole (role);
         #endif           
 		}
 	}
