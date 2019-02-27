@@ -1,7 +1,7 @@
 
 # Spacewar with AMG Voice SDK for Unity
 
-*Read this in other languages: [Chinese](README.zh.md)*
+*Read this in other languages: [中文](README.zh.md)*
 
 This tutorial enables you to quickly get started with using a sample app to integrate voice chat into your [Unity 3D](https://unity3d.com) game application using the Agora Gaming SDK.
 
