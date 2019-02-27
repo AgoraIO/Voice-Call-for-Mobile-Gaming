@@ -1,6 +1,6 @@
 # Hello Unity3D Agora
 
-*Read this in other languages: [Chinese](README.zh.md)*
+*Read this in other languages: [中文](README.zh.md)*
 
 This tutorial enables you to quickly get started integrating voice chat into a [Unity 3D](https://unity3d.com) game application, using the Agora Gaming SDK.
 
