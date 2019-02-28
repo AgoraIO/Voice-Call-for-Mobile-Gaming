@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 using agora_gaming_rtc;
 
 public class GameController : MonoBehaviour {
@@ -35,7 +34,6 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		ShowChannelName ();
 		bgmAudioSource = bgmObject.GetComponent<AudioSource> () as AudioSource;
-
 		LoadAgoraKit ();
 	}
 
@@ -53,9 +51,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Update () {
-		if (mRtcEngine != null) {
-			mRtcEngine.Poll ();
-		}
+
 	}
 
 	void ShowChannelName () {
@@ -98,6 +94,7 @@ public class GameController : MonoBehaviour {
 	void EngineOnLeaveChannel (RtcStats stats) {
 		string leaveChannelMessage = string.Format ("leaveChannel callback duration {0}, tx: {1}, rx: {2}, tx kbps: {3}, rx kbps: {4}", stats.duration, stats.txBytes, stats.rxBytes, stats.txKBitRate, stats.rxKBitRate);
 		Debug.Log (leaveChannelMessage);
+		SwitchBackGroundMusicToPlayer ();
 	}
 
 	void EngineOnUserJoined (uint uid, int elapsed) {
@@ -234,8 +231,7 @@ public class GameController : MonoBehaviour {
 		Vector2 postion = speaker.transform.position;
 		Vector2 panAndGain = PanAndGain (postion);
 		Double pan = panAndGain.x;
-
-		effectManager.PlayEffect (1, localPath, false, 1D, pan, 100D);
+		effectManager.PlayEffect (1, localPath, 1, 1.0, pan, 100, true);
 	}
 
 	//Agora Audio Engine
@@ -244,7 +240,10 @@ public class GameController : MonoBehaviour {
 			Debug.Log ("no mRtcEngine!");
 			return;
 		}
-
+		mRtcEngine.SetParameters("{\"che.audio.keep.audiosession\": true}");
+		mRtcEngine.SetParameters("{\"rtc.log_filter\": 65535}");
+		int a = mRtcEngine.SetDefaultAudioRouteToSpeakerphone(true);
+		Debug.Log ("SetDefaultAudioRouteToSpeakerphone  a = " + a);
 		mRtcEngine.JoinChannel (ApplicationModal.ChannelName, "", 0);
 		isInAgoraAudio = true;
 
@@ -296,7 +295,6 @@ public class GameController : MonoBehaviour {
         #else
 			mRtcEngine.SetClientRole (role);
         #endif           
-
 		}
 	}
 
@@ -323,7 +321,6 @@ public class GameController : MonoBehaviour {
 		}
 
 		useAudioMixing = value;
-
 		if (isInAgoraAudio) {
 			if (useAudioMixing) {
 				SwitchBackGroundMusicToAudioMixing ();
@@ -355,7 +352,7 @@ public class GameController : MonoBehaviour {
 	void SetEffectsVolume (float value) {
 		if (isInAgoraAudio) {
 			IAudioEffectManager effectManager = mRtcEngine.GetAudioEffectManager ();
-			effectManager.SetEffectsVolume (value);
+			effectManager.SetEffectsVolume ((int)value);
 		}
 	}
 

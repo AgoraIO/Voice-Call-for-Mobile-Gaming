@@ -58,15 +58,15 @@ struct GameProfile {
                                      GameProfile.audience()]
     
     static func free() -> GameProfile {
-        return GameProfile(channelProfile: .gameFreeMode, clientRole: nil)
+        return GameProfile(channelProfile: .communication, clientRole: nil)
     }
     
     static func commander() -> GameProfile {
-        return GameProfile(channelProfile: .gameCommandMode, clientRole: .broadcaster)
+        return GameProfile(channelProfile: .liveBroadcasting, clientRole: .broadcaster)
     }
     
     static func audience() -> GameProfile {
-        return GameProfile(channelProfile: .gameCommandMode, clientRole: .audience)
+        return GameProfile(channelProfile: .liveBroadcasting, clientRole: .audience)
     }
     
     func description() -> String {
@@ -81,7 +81,7 @@ struct GameProfile {
     }
     
     func isFree() -> Bool {
-        return channelProfile == .gameFreeMode
+        return channelProfile == .communication
     }
     
     func isCommander() -> Bool {
@@ -92,8 +92,8 @@ struct GameProfile {
 extension AgoraChannelProfile {
     func description() -> String {
         switch self {
-        case .gameFreeMode:    return "Free Mode"
-        case .gameCommandMode: return "Command Mode"
+        case .communication:    return "Free Mode"
+        case .liveBroadcasting: return "Command Mode"
         default: return ""
         }
     }
