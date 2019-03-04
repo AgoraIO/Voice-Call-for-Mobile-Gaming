@@ -55,7 +55,7 @@ SDK Folder|Application Folder
 - You can file bugs about this sample [here](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Advanced-Voice-Call-for-Gaming/Spacewar-with-AMG-Voice-SDK-Unity/issues).
 
 ## Learn More
-- A tutorial demo is available [here](https://github.com/AgoraIO/Hello-Unity3D-Agora).
+- A tutorial demo is available [here](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Basic-Voice-Call-for-Gaming/Hello-Unity3D-Agora).
 - Spacewar with AMG Voice SDK for [SpriteKit](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Advanced-Voice-Call-for-Gaming/Spacewar-with-AMG-Voice-SDK-SpriteKit)
 - Spacewar with AMG Voice SDK for [Cocos2D](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Advanced-Voice-Call-for-Gaming/Spacewar-with-AMG-Voice-SDK-Cocos2d)
 

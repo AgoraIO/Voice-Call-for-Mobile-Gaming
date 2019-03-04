@@ -44,17 +44,17 @@ SDK Folder|Application Folder
 
 4. Open the project in Unity and run the sample application.
 
-## Learn More
-- A more complete demo can be found in the [Spacewar with AMG Voice SDK for Unity](https://github.com/AgoraIO/Spacewar-with-AMG-Voice-SDK-Unity) project.
-- Agora Video SDK samples are also available for the following platforms:
-	- Hello Gaming Agora for [iOS](https://github.com/AgoraIO/Hello-Gaming-Agora-iOS)
-	- Hello Gaming Agora for [Android](https://github.com/AgoraIO/Hello-Gaming-Agora-Android)
-	- Hello Gaming Agora for [Cocos2d](https://github.com/AgoraIO/Hello-Cocos2d-Agora)
-
 ## Resources
 - A detailed code walkthrough for this sample is available in [Steps to Create this Sample](./guide.md).
 - Complete API documentation is available at the [Document Center](https://docs.agora.io/en/).
 - You can file bugs about this sample [here](https://github.com/AgoraIO/Hello-Unity3D-Agora/issues).
+
+## Learn More
+- A more complete demo can be found in the [Spacewar with AMG Voice SDK for Unity](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Advanced-Voice-Call-for-Gaming/Spacewar-with-AMG-Voice-SDK-Unity) project.
+- Agora Video SDK samples are also available for the following platforms:
+	- Hello Gaming Agora for [iOS](https://github.com/AgoraIO/Hello-Gaming-Agora-iOS)
+	- Hello Gaming Agora for [Android](https://github.com/AgoraIO/Hello-Gaming-Agora-Android)
+	- Hello Gaming Agora for [Cocos2d](https://github.com/AgoraIO/Hello-Cocos2d-Agora)
 
 ## License
 This software is under the MIT License (MIT). [View the license](LICENSE.md).
