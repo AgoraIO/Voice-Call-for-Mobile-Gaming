@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 using agora_gaming_rtc;
 
+#if(UNITY_2018_3_OR_NEWER)
+using UnityEngine.Android;
+#endif
+
 public class HelloUnity3D : MonoBehaviour
 {
 	public InputField mChannelNameInputField;
@@ -29,6 +33,13 @@ public class HelloUnity3D : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		    #if(UNITY_2018_3_OR_NEWER)
+			if (Permission.HasUserAuthorizedPermission(Permission.Microphone)){
+			
+			} else {
+				Permission.RequestUserPermission(Permission.Microphone);
+			}
+			#endif
 			joinChannel.onClick.AddListener (JoinChannel);	
 			leaveChannel.onClick.AddListener (LeaveChannel);
 

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using agora_gaming_rtc;
+#if(UNITY_2018_3_OR_NEWER)
+using UnityEngine.Android;
+#endif
 
 public class GameController : MonoBehaviour {
 	public Text channelNameText;
@@ -32,6 +35,13 @@ public class GameController : MonoBehaviour {
 	public Text versionText;
 
 	void Start () {
+		#if(UNITY_2018_3_OR_NEWER)
+		if (Permission.HasUserAuthorizedPermission(Permission.Microphone)){
+		
+		} else {
+			Permission.RequestUserPermission(Permission.Microphone);
+		}
+		#endif
 		ShowChannelName ();
 		bgmAudioSource = bgmObject.GetComponent<AudioSource> () as AudioSource;
 		LoadAgoraKit ();
