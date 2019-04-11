@@ -62,8 +62,7 @@ cc.Class({
         profileRole:0,
 
         bDefaultSpeakerphone:false,
-        
-        agoraAppID:"YOUR_AGORA_APPID",
+
     },
 
     onLoad: function () {        
@@ -135,9 +134,9 @@ cc.Class({
     },
 
     createEngine: function (event, customEventData) {
-        // input: APPID. 
-        console.log("Your private agoraAppID:", this.agoraAppID);
-        agora.init(this.agoraAppID);
+        var agoraAppID = "Agora App ID"; //Your Agora App ID
+        console.log("Your private agoraAppID:", agoraAppID);
+        agora.init(agoraAppID);
         this.sdkVer.string =  "sdkVer: " + agora.getVersion();
         this.updateUI(true);
     },

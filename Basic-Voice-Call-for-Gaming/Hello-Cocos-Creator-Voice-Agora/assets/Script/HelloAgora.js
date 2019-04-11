@@ -22,6 +22,11 @@ cc.Class({
             default: null,
             type: cc.Button
         },
+
+        btnLocalAudio: {
+            default: null,
+            type: cc.Button
+        },
         
         btnMuteLocal: {
             default: null,
