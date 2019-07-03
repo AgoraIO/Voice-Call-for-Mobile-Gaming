@@ -8,11 +8,7 @@ This sample app demonstrates the basic voice SDK features:
 
 - join channel & leave channel
 
-- mute & unmute
-
-- volume control
-
-- enable audio & disable audio
+- Publish or subscribe stream
 
 ## Prerequisites
 - CocosCreator 2.0.9 +
@@ -33,7 +29,7 @@ This sample app demonstrates the basic voice SDK features:
 - step 6, Fill in agora AppID in HelloWorld.js:
 
 	```
-	agoraAppID:"YOUR_AGORA_APPID",
+	var appid = #YOUR_APPID;
 	```
 
 - At last， CococsCreator build, compile, play Android, iOS, Web separately.

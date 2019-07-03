@@ -10,11 +10,7 @@ CocosCreator Agora Voice SDK 目前支持的平台： Android,iOS,Web.
 
 - 加入通话和离开通话；
 
-- 静音和取消静音
-
-- 调节音量
-
-- 开启和释放SDK录音
+- 发布音频流和订阅音频流；
 
 ## 运行环境
 * CocosCreator 2.0.9 +
@@ -34,7 +30,7 @@ CocosCreator Agora Voice SDK 目前支持的平台： Android,iOS,Web.
 步骤6，在HelloWorld.js中，填入声网的AppID。
 
 ```
-agoraAppID:"YOUR_AGORA_APPID",
+var appid = #YOUR_APPID;
 ```
 
 最后，使用CococsCreator分别构建、编译、运行Android,iOS, Web工程。
