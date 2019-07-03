@@ -224,8 +224,7 @@ cc.Class({
         // PLEASE KEEP THIS appId IN SAFE PLACE
         // Get your own App ID at https://docs.agora.io/cn/Interactive%20Gaming/game_c?platform=Cocos%20Creator
         // After you entered the appId, remove ## outside of YOUR_APPID
-        //var appid = #YOUR_APPID;
-        var appid = "ef2fa9280c704af693fa8a8a273fefd1";
+        var appid = #YOUR_APPID;
         if (appid == "") {
             this.printLog("Please input appid!");
             return;
