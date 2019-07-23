@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+#if(UNITY_2018_3_OR_NEWER)
+using UnityEngine.Android;
+#endif
 using agora_gaming_rtc;
 
 public class HelloUnity3D : MonoBehaviour
@@ -29,6 +31,13 @@ public class HelloUnity3D : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+			#if(UNITY_2018_3_OR_NEWER)
+			if (Permission.HasUserAuthorizedPermission(Permission.Microphone)){
+			
+			} else {
+				Permission.RequestUserPermission(Permission.Microphone);
+			}
+			#endif
 			joinChannel.onClick.AddListener (JoinChannel);	
 			leaveChannel.onClick.AddListener (LeaveChannel);
 
