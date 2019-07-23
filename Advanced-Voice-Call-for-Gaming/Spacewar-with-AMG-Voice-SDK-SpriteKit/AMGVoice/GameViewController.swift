@@ -169,7 +169,7 @@ private extension GameViewController {
         let current = backgroundPlayer.currentTime
         backgroundPlayer.stop()
         
-        agoraKit?.startAudioMixing(backgroundMusicURL.path, loopback: true, replace: false, cycle: -1, playTime: Int(current*1000))
+        agoraKit?.startAudioMixing(backgroundMusicURL.path, loopback: true, replace: false, cycle: -1)
     }
     
     func leaveGame() {
@@ -188,14 +188,13 @@ private extension GameViewController {
         agoraKit = AgoraRtcEngineKit.sharedEngine(withAppId:KeyCenter.appId, delegate: self)
         agoraKit.setLogFile(FileCenter.audioLogFilePath())
         agoraKit.setLogFilter(AgoraLogFilter.debug.rawValue)
-        
         agoraKit.setChannelProfile(gameProfile.channelProfile)
         agoraKit.enableAudioVolumeIndication(200, smooth: 3)
-        
         isCommander = gameProfile.isCommander()
     }
     
     func joinChannel() {
+        agoraKit.setDefaultAudioRouteToSpeakerphone(true)
         let code = agoraKit.joinChannel(byToken: nil, channelId: roomName, info: nil, uid: 0)
         
         if code != 0 {
@@ -265,7 +264,8 @@ extension GameViewController: GameSceneDelegate {
     func gameScene(scene: GameScene, didMoveSpeakerOfUid uid: UInt, pan : CGFloat, gain: CGFloat) {
         print("didMoveSpeakerOfUid: \(uid), pan: \(pan), gain: \(gain)")
 //        agoraKit?.AgoraRtcEngineKit(uid, pan: Double(pan), gain: Double(gain))
-        agoraKit.setRemoteVoicePosition(uid, pan: Double(pan), gain: Double(gain) )
+        
+        agoraKit.setRemoteVoicePosition(Int32(uid), pan: Double(pan), gain: Double(gain) )
     }
     
     func gameSceneShouldPlayAudioEffect(scene: GameScene) -> Bool {

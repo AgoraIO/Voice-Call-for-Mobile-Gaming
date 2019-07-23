@@ -1,6 +1,6 @@
 # Hello Unity3D Agora
 
-*Read this in other languages: [English](README.en.md)*
+*Read this in other languages: [English](README.md)*
 
 这个开源示例项目演示了如何在 Unity3D 中快速集成Agora游戏SDK，实现在游戏中的音频通话。
 
