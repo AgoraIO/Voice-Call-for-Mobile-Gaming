@@ -13,11 +13,11 @@ using namespace CocosDenshion;
 using namespace agora::rtc;
 
 enum AUDIO_ROUTE_TYPE {
-        AUDIO_ROUTE_DEFAULT = -1,
-        AUDIO_ROUTE_HEADSET = 0,
-        AUDIO_ROUTE_EARPIECE = 1,
-        AUDIO_ROUTE_SPEAKERPHONE = 3,
-        AUDIO_ROUTE_BLUETOOTH = 5,
+        APP_AUDIO_ROUTE_DEFAULT = -1,
+        APP_AUDIO_ROUTE_HEADSET = 0,
+        APP_AUDIO_ROUTE_EARPIECE = 1,
+        APP_AUDIO_ROUTE_SPEAKERPHONE = 3,
+        APP_AUDIO_ROUTE_BLUETOOTH = 5,
 };
 
 #define BACKGROUND_MUSIC_SFX  "background-music-aac.mp3"
@@ -336,7 +336,7 @@ void MainGame::join_Leave_func(void)
         }
         
         if (true == sceneMgr->config.bVoiceOnly) {        
-            agora::base::AParameter apm(rtcEngine);
+            agora::rtc::AParameter apm(rtcEngine);
 		    apm->setParameters("{\"che.audio.voice_over_mode\":true}");
 
             // rtcEngine->getAudioEffectManager()->setVoiceOnlyMode(true);
@@ -685,7 +685,7 @@ void MainGame::onSpeakerReleased(uid_t uid, Vec2 loc, Vec2 myLoc)
     // agora::rtc::IAudioEffectManager* effectMgr = engine->getAudioEffectManager();
 
     IRtcEngine* rtcEngine = AgoraRtcEngineForGaming_getInstance(AGORA_APP_ID);    
-    agora::base::AParameter apm(rtcEngine);
+    agora::rtc::AParameter apm(rtcEngine);
 
     // Location to Pan/Gain
     Vec2 direction = loc - myLoc;
@@ -865,13 +865,13 @@ void MainGame::onAudioRouteChanged(int route)
 {
     CCLOG("onAudioRouteChanged %d", route);
     std::ostringstream oss;
-    if (route == AUDIO_ROUTE_HEADSET) {
+    if (route == APP_AUDIO_ROUTE_HEADSET) {
         oss << "Headset";
-    } else if (route == AUDIO_ROUTE_EARPIECE) {
+    } else if (route == APP_AUDIO_ROUTE_EARPIECE) {
         oss << "Earpiece";
-    } else if (route == AUDIO_ROUTE_SPEAKERPHONE) {
+    } else if (route == APP_AUDIO_ROUTE_SPEAKERPHONE) {
         oss << "Speakerphone";
-    } else if (route == AUDIO_ROUTE_BLUETOOTH) {
+    } else if (route == APP_AUDIO_ROUTE_BLUETOOTH) {
         oss << "Bluetooth";
     } else {
         oss << "Something ";
