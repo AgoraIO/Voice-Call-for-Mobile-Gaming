@@ -45,9 +45,9 @@ SDK Folder|Application Folder
 ---|---
 `libs/Android/`|`Assets/Plugins/Android/`
 `libs/iOS/`|`Assets/Plugins/iOS/`
-`libs/Scripts/AgoraGamingSDK/`|`Assets/Scripts/AgoraGamingSDK/`
+`libs/Scripts/AgoraGamingSDK/`|`Assets/AgoraGamingSDK/`
 
-4. Open the project in Unity and run the sample application.
+4. Open the project in Unity and run the sample application. You may have to remove the mainTemplate.gradle file to get the project to run in Android. Navigate to Assets -> Plugins -> Android and delete the mainTemplate.gradle file
 
 ## Resources
 - A detailed code walkthrough for this sample is available in [Steps to Create this Sample](./guide.md).
