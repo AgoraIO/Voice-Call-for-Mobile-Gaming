@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour {
 
 	void LoadAgoraKit () {
 		mRtcEngine = IRtcEngine.GetEngine (ApplicationModal.AppId);
-
+		mRtcEngine.EnableSoundPositionIndication(true);
 		mRtcEngine.SetLogFilter (LOG_FILTER.DEBUG);
 		string rtcLogFile = LocalLogFilePath ();
 		mRtcEngine.SetLogFile (rtcLogFile);
@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour {
 			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_COMMAND_MODE);
 		}
 
-		mRtcEngine.EnableAudioVolumeIndication (200, 3);
+		mRtcEngine.EnableAudioVolumeIndication (200, 3, true);
 		LoadEngineCallbacks ();
 	}
 
