@@ -130,9 +130,9 @@ public class HelloUnity3D : MonoBehaviour
 
 			// mRtcEngine.setLogFile("path_to_file_unity.log");
 
-			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_FREE_MODE);
+			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.CHANNEL_PROFILE_COMMUNICATION);
 
-			// mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_COMMAND_MODE);
+			// mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.CHANNEL_PROFILE_LIVE_BROADCASTING);
 			// mRtcEngine.SetClientRole (CLIENT_ROLE.BROADCASTER);
 	}
 
