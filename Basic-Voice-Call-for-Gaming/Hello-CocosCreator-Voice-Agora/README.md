@@ -16,7 +16,7 @@ This sample app demonstrates the basic voice SDK features:
 
 ## Run Demo
 
-- step 1, [Download](https://www.cocos.com/download), install CocosCreator 2.0.9 or newer one. Sign up CococsCreator, and certificate your CococsCreator Account. Cocos Official will approve it in less than 3 days.
+- step 1, [Download](https://www.cocos.com/download), install CocosCreator 2.0.9 or newer one. Sign up CococsCreator, and certificate your CococsCreator Account.
 
 - step 2, [craete a CocosCreator game](https://account.cocos.com/#/game/create_game).
 

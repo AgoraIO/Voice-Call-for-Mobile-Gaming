@@ -17,7 +17,7 @@ CocosCreator Agora Voice SDK 目前支持的平台： Android,iOS,Web.
 
 ## 运行示例程序
 
-步骤1，[下载](https://www.cocos.com/download)、安装CocosCreator2.0.9或发布时间更新的版本。注册CococsCreator账号，并完成账号认证（cocos系统认证需要 1-3天)。
+步骤1，[下载](https://www.cocos.com/download)、安装CocosCreator2.0.9或发布时间更新的版本。注册CococsCreator账号，并完成账号认证。
 
 步骤2，[新建一个CocosCreator游戏](https://account.cocos.com/#/game/create_game)。
 
