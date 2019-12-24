@@ -32,9 +32,11 @@ public class HelloUnity3D : MonoBehaviour
 	void Start ()
 	{
 			#if(UNITY_2018_3_OR_NEWER)
-			if (Permission.HasUserAuthorizedPermission(Permission.Microphone)){
+			if (Permission.HasUserAuthorizedPermission(Permission.Microphone))
+			{
 			
-			} else {
+			} else 
+			{
 				Permission.RequestUserPermission(Permission.Microphone);
 			}
 			#endif
@@ -148,7 +150,8 @@ public class HelloUnity3D : MonoBehaviour
 
 		Debug.Log (string.Format ("tap joinChannel with channel name {0}", channelName));
 
-		if (string.IsNullOrEmpty (channelName)) {
+		if (string.IsNullOrEmpty (channelName)) 
+		{
 			return;
 		}
 
