@@ -3,12 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-using agora_gaming_rtc;
-
 #if(UNITY_2018_3_OR_NEWER)
 using UnityEngine.Android;
 #endif
+using agora_gaming_rtc;
 
 public class HelloUnity3D : MonoBehaviour
 {
@@ -33,10 +31,12 @@ public class HelloUnity3D : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		    #if(UNITY_2018_3_OR_NEWER)
-			if (Permission.HasUserAuthorizedPermission(Permission.Microphone)){
+			#if(UNITY_2018_3_OR_NEWER)
+			if (Permission.HasUserAuthorizedPermission(Permission.Microphone))
+			{
 			
-			} else {
+			} else 
+			{
 				Permission.RequestUserPermission(Permission.Microphone);
 			}
 			#endif
@@ -132,9 +132,9 @@ public class HelloUnity3D : MonoBehaviour
 
 			// mRtcEngine.setLogFile("path_to_file_unity.log");
 
-			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_FREE_MODE);
+			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.CHANNEL_PROFILE_COMMUNICATION);
 
-			// mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_COMMAND_MODE);
+			// mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.CHANNEL_PROFILE_LIVE_BROADCASTING);
 			// mRtcEngine.SetClientRole (CLIENT_ROLE.BROADCASTER);
 	}
 
@@ -150,7 +150,8 @@ public class HelloUnity3D : MonoBehaviour
 
 		Debug.Log (string.Format ("tap joinChannel with channel name {0}", channelName));
 
-		if (string.IsNullOrEmpty (channelName)) {
+		if (string.IsNullOrEmpty (channelName)) 
+		{
 			return;
 		}
 

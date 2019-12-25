@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using agora_gaming_rtc;
-#if(UNITY_2018_3_OR_NEWER)
-using UnityEngine.Android;
-#endif
 
 public class GameController : MonoBehaviour {
 	public Text channelNameText;
@@ -35,13 +32,6 @@ public class GameController : MonoBehaviour {
 	public Text versionText;
 
 	void Start () {
-		#if(UNITY_2018_3_OR_NEWER)
-		if (Permission.HasUserAuthorizedPermission(Permission.Microphone)){
-		
-		} else {
-			Permission.RequestUserPermission(Permission.Microphone);
-		}
-		#endif
 		ShowChannelName ();
 		bgmAudioSource = bgmObject.GetComponent<AudioSource> () as AudioSource;
 		LoadAgoraKit ();
@@ -74,7 +64,6 @@ public class GameController : MonoBehaviour {
 
 	void LoadAgoraKit () {
 		mRtcEngine = IRtcEngine.GetEngine (ApplicationModal.AppId);
-
 		mRtcEngine.SetLogFilter (LOG_FILTER.DEBUG);
 		string rtcLogFile = LocalLogFilePath ();
 		mRtcEngine.SetLogFile (rtcLogFile);
@@ -82,12 +71,12 @@ public class GameController : MonoBehaviour {
 		versionText.GetComponent<Text> ().text = "Version : " + IRtcEngine.GetSdkVersion ();
 		Debug.Log (" SDK  version  =  " + IRtcEngine.GetSdkVersion ());
 		if (ApplicationModal.AudioGameProfile == 0) {
-			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_FREE_MODE);
+			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.CHANNEL_PROFILE_COMMUNICATION);
 		} else {
-			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.GAME_COMMAND_MODE);
+			mRtcEngine.SetChannelProfile (CHANNEL_PROFILE.CHANNEL_PROFILE_LIVE_BROADCASTING);
 		}
-
-		mRtcEngine.EnableAudioVolumeIndication (200, 3);
+		mRtcEngine.EnableSoundPositionIndication(true);
+		mRtcEngine.EnableAudioVolumeIndication (200, 3, true);
 		LoadEngineCallbacks ();
 	}
 
