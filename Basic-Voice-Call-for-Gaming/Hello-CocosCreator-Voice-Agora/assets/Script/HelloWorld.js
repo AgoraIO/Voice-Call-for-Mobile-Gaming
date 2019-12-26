@@ -254,8 +254,6 @@ cc.Class({
                 this.printLog("Please input channel!");
                 return;
             }
-            agora && agora.muteLocalAudioStream(this.muteLocal);
-            agora && agora.muteAllRemoteAudioStreams(this.muteRemote);
             agora && agora.joinChannel("", channel, "", 0);
             this.printCode(`agora && agora.joinChannel("", '${channel}', "", 0);`);
         }
@@ -334,6 +332,8 @@ cc.Class({
     },  
 
     onJoinChannelSuccess: function (channel, uid, elapsed) {
+        agora && agora.muteLocalAudioStream(this.muteLocal);
+        agora && agora.muteAllRemoteAudioStreams(this.muteRemote);
         this.btnLocal.interactable = true;
         this.btnRemote.interactable = true;
         this.joined = true;
