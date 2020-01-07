@@ -449,4 +449,11 @@ public class GameController : MonoBehaviour {
 			Debug.Log ("agora   unfocus");
 		}  
 	}
+
+	void OnApplicationQuit() {
+		if (mRtcEngine != null)
+		{
+			IRtcEngine.Destroy();
+		}
+	}
 }
