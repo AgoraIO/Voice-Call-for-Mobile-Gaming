@@ -11,22 +11,22 @@ With this sample app, you can:
 A full-fledged demo can be found here: [Spacewar-with-AMG-Voice-SDK-Unity](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Advanced-Voice-Call-for-Gaming/Spacewar-with-AMG-Voice-SDK-Unity)
 
 ## Running the App
-First, create a developer account at [Agora.io](https://dashboard.agora.io/signin/), and obtain an App ID. Update "HelloUnity3D.cs" with your App ID.
+First, create a developer account at [Agora.io](https://dashboard.agora.io/signin/), and obtain an App ID. 
 
-```
-private static string appId = "YOUR APP ID";
-```
+Note that you will see compiler errors before you download the SDK package.
 
 Next, download the **Agora Gaming SDK** from [Agora.io SDK](https://www.agora.io/en/blog/download/). Unzip the downloaded SDK package and
 
-- copy files from **libs/Android/** in SDK to **Assets/Plugins/Android/AgoraAudioKit.plugin/libs/** in project
-- copy files from **libs/iOS/** in SDK to **Assets/Plugins/iOS/** in project
-- copy files from **libs/Scripts/AgoraGamingSDK/** in SDK to **Assets/Scripts/AgoraGamingSDK/** in project
+- copy files from **libs/Android/** in SDK to **Assets/AgoraEngine/Plugins/Android/AgoraAudioKit.plugin/libs/** in project
+- copy files from **libs/iOS/** in SDK to **Assets/AgoraEngine/Plugins/iOS/** in project
+- copy files from **libs/Scripts/AgoraGamingSDK/** in SDK to **Assets/AgoraEngine/Scripts/AgoraGamingSDK/** in project
 
-Finally, Open project with Unity and run.
+Open project with Unity. And then open the HelloUnity scene from the Demo folder on Unity Editor.  Fill your App ID into the GameController object's field.
+
+Run the game and you are now good to go!
 
 ## Developer Environment Requirements
-* Unity 5.5 +
+* Unity 2017 LTS.
 
 ## Connect Us
 

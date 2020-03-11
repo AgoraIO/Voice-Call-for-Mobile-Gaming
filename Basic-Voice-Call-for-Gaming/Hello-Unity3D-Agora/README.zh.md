@@ -17,22 +17,18 @@ Agora游戏SDK支持 iOS / Android / Unity3D / Cocos2d 等多个平台，你可�
 - [Hello-Cocos2d-Agora](https://github.com/AgoraIO/Hello-Cocos2d-Agora)
 
 ## 运行示例程序
-首先在 [Agora.io 注册](https://dashboard.agora.io/cn/signup/) 注册账号，并创建自己的测试项目，获取到 AppID。将 AppID 填写进 HelloUnity3D.cs
-
-```
-private static string appId = "YOUR APP ID";
-```
+首先在 [Agora.io 注册](https://dashboard.agora.io/cn/signup/) 注册账号，并创建自己的测试项目，获取到 AppID。
 
 然后在 [Agora.io SDK](https://www.agora.io/cn/blog/download/) 下载 **AMG 游戏语音SDK**，解压后
 
-- 把SDK中 **libs/Android/** 下的内容，复制到项目的 **Assets/Plugins/Android/AgoraAudioKit.plugin/libs/** 文件夹下
-- 把SDK中 **libs/iOS/** 下的内容，复制到项目的 **Assets/Plugins/iOS/** 文件夹下
-- 把SDK中 **libs/Scripts/AgoraGamingSDK/** 下的内容，复制到项目的 **Assets/Scripts/AgoraGamingSDK/** 文件夹下
+- 把SDK中 **libs/Android/** 下的内容，复制到项目的 **Assets/AgoraEngine/Plugins/Android/AgoraAudioKit.plugin/libs/** 文件夹下
+- 把SDK中 **libs/iOS/** 下的内容，复制到项目的 **Assets/AgoraEngine/Plugins/iOS/** 文件夹下
+- 把SDK中 **libs/Scripts/AgoraGamingSDK/** 下的内容，复制到项目的 **Assets/AgoraEngine/Scripts/AgoraGamingSDK/** 文件夹下
 
-最后使用 Unity 打开本项目即可运行。
+最后使用 Unity 打开本项目, 打开Demo里的HelloUnity 场景。把 AppID 填写进 GameController 的 App ID 项目里 即可运行！
 
 ## 运行环境
-* Unity 5.5 +
+* Unity 2017 LTS
 
 ## 联系我们
 
