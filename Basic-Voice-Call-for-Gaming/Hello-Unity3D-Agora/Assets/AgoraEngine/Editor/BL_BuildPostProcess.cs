@@ -1,55 +1,78 @@
-﻿using UnityEngine;
+﻿#if UNITY_IPHONE
+using System.IO;
 using UnityEditor;
 using UnityEditor.Callbacks;
-using System.Collections;
 using UnityEditor.iOS.Xcode;
-using System.IO;
 
-public class BL_BuildPostProcess {
 
-	[PostProcessBuild]
-	public static void OnPostprocessBuild(BuildTarget buildTarget, string path) {
+public class BL_BuildPostProcess
+{
 
-		if (buildTarget == BuildTarget.iOS) {
-			// string projPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
-			// DisableBitcode(projPath);
-			LinkLibraries (path);
-		}
-	}
+    [PostProcessBuild]
+    public static void OnPostprocessBuild(BuildTarget buildTarget, string path)
+    {
+        if (buildTarget == BuildTarget.iOS)
+        {
+            LinkLibraries(path);
+        }
+    }
 
-	public static void DisableBitcode (string projPath) {
-		PBXProject proj = new PBXProject();
-		proj.ReadFromString(File.ReadAllText(projPath));
-		string target = proj.TargetGuidByName("Unity-iPhone");
-		proj.SetBuildProperty(target, "ENABLE_BITCODE", "false");
-		File.WriteAllText(projPath, proj.WriteToString());
-	}
+    public static void DisableBitcode(string projPath)
+    {
+        PBXProject proj = new PBXProject();
+        proj.ReadFromString(File.ReadAllText(projPath));
 
-	public static void LinkLibraries (string path) {
-		// linked library
-		string projPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
-		PBXProject proj = new PBXProject();
-		proj.ReadFromFile(projPath);	
-		string target = proj.TargetGuidByName("Unity-iPhone");
-		proj.SetBuildProperty(target, "ENABLE_BITCODE", "false");
-		proj.AddFrameworkToProject(target, "CoreTelephony.framework", true);
-		//proj.AddFrameworkToProject(target, "VideoToolbox.framework", true);
-		proj.AddFrameworkToProject(target, "libresolv.tbd", true);
-		proj.AddFrameworkToProject(target, "libiPhone-lib.a", true);
-		proj.AddFrameworkToProject(target, "CoreText.framework", true);
-		proj.AddFrameworkToProject(target, "CoreML.framework", true);
-		proj.AddFrameworkToProject(target, "Accelerate.framework", true);
-		File.WriteAllText(projPath, proj.WriteToString());
+        string target = GetTargetGuid(proj);
+        proj.SetBuildProperty(target, "ENABLE_BITCODE", "false");
+        File.WriteAllText(projPath, proj.WriteToString());
+    }
 
-		// permission
-		string pListPath = path + "/Info.plist";
-		PlistDocument plist = new PlistDocument();
-		plist.ReadFromString(File.ReadAllText(pListPath));
-		PlistElementDict rootDic = plist.root;
-		//var cameraPermission = "NSCameraUsageDescription";	
-		//rootDic.SetString(cameraPermission, "Video need to use camera");
-		var micPermission = "NSMicrophoneUsageDescription";
-		rootDic.SetString(micPermission, "Voice call need to user mic");
-		File.WriteAllText(pListPath, plist.WriteToString());
-	}
+    static string GetTargetGuid(PBXProject proj)
+    {
+#if UNITY_2019_3_OR_NEWER
+        return proj.GetUnityFrameworkTargetGuid();
+#else
+	    return proj.TargetGuidByName("Unity-iPhone");
+#endif
+    }
+    // The followings are the addtional frameworks to add to the project
+    static string[] ProjectFrameworks = new string[] {
+        "Accelerate.framework",
+        "CoreTelephony.framework",
+        "CoreText.framework",
+        "CoreML.framework",
+        "Metal.framework",
+        "VideoToolbox.framework",
+        "libiPhone-lib.a",
+        "libresolv.tbd",
+    };
+
+    public static void LinkLibraries(string path)
+    {
+        // linked library
+        string projPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
+        PBXProject proj = new PBXProject();
+        proj.ReadFromFile(projPath);
+        string target = GetTargetGuid(proj);
+
+        // disable bit-code
+        proj.SetBuildProperty(target, "ENABLE_BITCODE", "false");
+
+        // Frameworks
+        foreach (string framework in ProjectFrameworks)
+        {
+            proj.AddFrameworkToProject(target, framework, true);
+        }
+        File.WriteAllText(projPath, proj.WriteToString());
+
+        // permission
+        string pListPath = path + "/Info.plist";
+        PlistDocument plist = new PlistDocument();
+        plist.ReadFromString(File.ReadAllText(pListPath));
+        PlistElementDict rootDic = plist.root;
+        var micPermission = "NSMicrophoneUsageDescription";
+        rootDic.SetString(micPermission, "Voice call need to user mic");
+        File.WriteAllText(pListPath, plist.WriteToString());
+    }
 }
+#endif
