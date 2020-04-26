@@ -22,7 +22,7 @@ Next, download the **Agora Gaming SDK** from [Agora.io SDK](https://www.agora.io
 
 - **Run project for Android**
 
-Head to foler `proj.android-studio/app` and execute `ndk-build`.
+Head to folder `proj.android-studio/app` and execute `ndk-build`.
 
 Finally, open project with Android Studio, connect your Android device, build and run.
 
