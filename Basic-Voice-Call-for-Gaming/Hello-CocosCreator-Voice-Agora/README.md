@@ -22,7 +22,7 @@ This sample app demonstrates the basic voice SDK features:
 
 - step 3, CococsCreator open Demo. Click the "Pannel" of CococsCreator status bar, click "Service" of "Pannel", select "Agora Voice" in "Services" on the right side, then, associate the Game created in step2. 
  
-- step 4, Click, open the toggle button of “Agora Voice" on the right sied. Open the ”Agora Voice Service" step by step, according to CococsCreator's tips。 
+- step 4, Click, open the toggle button of “Agora Voice" on the right side. Open the ”Agora Voice Service" step by step, according to CococsCreator's tips。 
 
 - step 5, Click "DashBoard" of Agora Voice Service at CococsCreator right side, arriving at agora dashboard. Then, get the Agora AppId in "Project Manager".
 
