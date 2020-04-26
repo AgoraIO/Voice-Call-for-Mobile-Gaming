@@ -11,7 +11,7 @@ With this sample app, you can:
 - Mute / unmute audio
 - Music mixing and audio effect playing
 - Voice morphing (In Progress)
-- Set posotion of voice and audio effect (In Progress)
+- Set position of voice and audio effect (In Progress)
 - Set volume of voice and audio effect
 
 A tutorial demo can be found here: [Hello-Gaming-Agora-Android](https://github.com/AgoraIO/Voice-Call-for-Mobile-Gaming/tree/master/Basic-Voice-Call-for-Gaming/Hello-Gaming-Agora-Android)
