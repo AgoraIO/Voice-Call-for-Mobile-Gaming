@@ -183,12 +183,6 @@ public class HelloUnity3D : MonoBehaviour
 
     public void LeaveChannel()
     {
-        // int duration = mRtcEngine.GetAudioMixingDuration ();
-        // int current_duration = mRtcEngine.GetAudioMixingCurrentPosition ();
-
-        // IAudioEffectManager effect = mRtcEngine.GetAudioEffectManager();
-        // effect.StopAllEffects ();
-
         mRtcEngine.LeaveChannel();
         string channelName = mChannelNameInputField.text.Trim();
         Debug.Log(string.Format("left channel name {0}", channelName));
@@ -206,17 +200,6 @@ public class HelloUnity3D : MonoBehaviour
     public string getSdkVersion()
     {
         string ver = IRtcEngine.GetSdkVersion();
-        if (ver == "2.9.1.45")
-        {
-            ver = "2.9.2";  // A conversion for the current internal version#
-        }
-        else
-        {
-            if (ver == "2.9.1.46")
-            {
-                ver = "2.9.2.1";  // A conversion for the current internal version#
-            }
-        }
         return ver;
     }
 
