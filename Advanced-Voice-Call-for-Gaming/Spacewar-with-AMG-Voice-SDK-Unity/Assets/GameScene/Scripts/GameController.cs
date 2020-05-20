@@ -401,7 +401,7 @@ public class GameController : MonoBehaviour {
 		bgmAudioSource.Stop ();
 
 		string localPath = LocalAudioFilePath ("space.mp3");
-		mRtcEngine.StartAudioMixing (localPath, true, false, -1, playTime: time);
+		mRtcEngine.StartAudioMixing (localPath, true, false, -1);
 	}
 
 	string LocalAudioFilePath (string subPath) {
