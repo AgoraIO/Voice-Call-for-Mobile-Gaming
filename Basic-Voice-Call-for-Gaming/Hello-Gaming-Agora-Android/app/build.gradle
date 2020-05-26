@@ -6,18 +6,18 @@ repositories {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "io.agora.amg.app"
-        minSdkVersion 14 // ICE_CREAM_SANDWICH
+        minSdkVersion 16 // ICE_CREAM_SANDWICH
         targetSdkVersion 25
         versionCode 19
         versionName "x.y.z"
 
-        jackOptions {
-            enabled false
-        }
+//        jackOptions {
+//            enabled false
+//        }
     }
 
     compileOptions {
@@ -40,16 +40,16 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:design:25.3.1'
-    compile 'org.slf4j:slf4j-api:1.7.21'
-    compile 'com.github.tony19:logback-android-core:1.1.1-4'
-    compile('com.github.tony19:logback-android-classic:1.1.1-4') {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:25.3.1'
+    implementation 'com.android.support:support-v4:25.3.1'
+    implementation 'com.android.support:design:25.3.1'
+    implementation 'org.slf4j:slf4j-api:1.7.21'
+    implementation 'com.github.tony19:logback-android-core:1.1.1-4'
+    implementation('com.github.tony19:logback-android-classic:1.1.1-4') {
         // workaround issue #73
         exclude group: 'com.google.android', module: 'android'
     }
-
-    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.6.3'
+    implementation 'io.agora.rtc:full-sdk:3.0.0'
+    androidTestImplementation 'com.jayway.android.robotium:robotium-solo:5.6.3'
 }

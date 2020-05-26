@@ -532,7 +532,7 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
                     int pos = mPlayer.getCurrentPosition();
                     mPlayer.pause();
                     log.debug("Start AudioMixing: " + mPlayer.getCurrentPosition());
-                    rtcEngine().startAudioMixing("/assets/space.mp3", true, false, -1, 0);
+                    rtcEngine().startAudioMixing("/assets/space.mp3", true, false, 0);
                     rtcEngine().adjustAudioMixingVolume(volume);
                     rtcEngine().setAudioMixingPosition(pos);
 
@@ -570,12 +570,12 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
                 log.debug("effectplaying");
                 aeMgr.stopEffect(mAudioEffects.get(0).getId());
                 aeMgr.setEffectsVolume(effectVolC);
-                aeMgr.playEffect(mAudioEffects.get(0).getId(), "/assets/shoot.mp3", false, mAudioEffectStatus.getPitch(), mAudioEffectStatus.getPan(), mAudioEffectStatus.getGain());
+                aeMgr.playEffect(mAudioEffects.get(0).getId(), "/assets/shoot.mp3", 0, mAudioEffectStatus.getPitch(), mAudioEffectStatus.getPan(), mAudioEffectStatus.getGain());
             } else {
                 log.debug("effectnotplaying");
                 mAudioEffects.get(0).setStatus(AudioEffectItem.STATUS_PLAYING);
                 log.debug("effectVolC: " + effectVolC);
-                aeMgr.playEffect(mAudioEffects.get(0).getId(), "/assets/shoot.mp3", false, mAudioEffectStatus.getPitch(), mAudioEffectStatus.getPan(), mAudioEffectStatus.getGain());
+                aeMgr.playEffect(mAudioEffects.get(0).getId(), "/assets/shoot.mp3", 0, mAudioEffectStatus.getPitch(), mAudioEffectStatus.getPan(), mAudioEffectStatus.getGain());
                 aeMgr.setEffectsVolume(effectVolC);
             }
         } else {
@@ -954,11 +954,11 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
             if (mAudioEffects.get(1).getStatus() == AudioEffectItem.STATUS_PLAYING) {
                 aeMgr.stopEffect(mAudioEffects.get(1).getId());
                 aeMgr.setEffectsVolume(effectVolC);
-                aeMgr.playEffect(mAudioEffects.get(1).getId(), "/assets/boom.mp3", false, mAudioEffectStatus.getPitch(),
+                aeMgr.playEffect(mAudioEffects.get(1).getId(), "/assets/boom.mp3", 0, mAudioEffectStatus.getPitch(),
                         mAudioEffectStatus.getPan(), mAudioEffectStatus.getGain());
             } else {
                 mAudioEffects.get(1).setStatus(AudioEffectItem.STATUS_PLAYING);
-                aeMgr.playEffect(mAudioEffects.get(1).getId(), "/assets/boom.mp3", false, mAudioEffectStatus.getPitch(),
+                aeMgr.playEffect(mAudioEffects.get(1).getId(), "/assets/boom.mp3", 0, mAudioEffectStatus.getPitch(),
                         mAudioEffectStatus.getPan(), mAudioEffectStatus.getGain());
                 aeMgr.setEffectsVolume(effectVolC);
             }
