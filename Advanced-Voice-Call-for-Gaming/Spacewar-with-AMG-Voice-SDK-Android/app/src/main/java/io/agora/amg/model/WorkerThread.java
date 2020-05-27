@@ -160,8 +160,8 @@ public class WorkerThread extends Thread {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            mRtcEngine.setChannelProfile(Constants.CHANNEL_PROFILE_GAME_FREE_MODE);
-            mRtcEngine.enableAudioVolumeIndication(200, 3); // 200 ms
+            mRtcEngine.setChannelProfile(Constants.CHANNEL_PROFILE_GAME);
+            mRtcEngine.enableAudioVolumeIndication(200, 3, false); // 200 ms
             mRtcEngine.setLogFile(Environment.getExternalStorageDirectory()
                     + File.separator + mContext.getPackageName() + "/log/agora-rtc.log");
         }

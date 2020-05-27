@@ -155,11 +155,6 @@ public class MyEngineEventHandler {
             }
 
         }
-
-        @Override
-        public void onRequestChannelKey() {
-            log.debug("onRequestChannelKey");
-        }
     };
 
 }
