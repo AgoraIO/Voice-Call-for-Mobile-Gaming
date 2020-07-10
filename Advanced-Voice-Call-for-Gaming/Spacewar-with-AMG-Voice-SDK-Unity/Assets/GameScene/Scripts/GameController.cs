@@ -280,6 +280,7 @@ public class GameController : MonoBehaviour {
 		isInAgoraAudio = false;
 		RemoveAllSpeakers ();
 		settingsCanvas.SetToDefault ();
+		IRtcEngine.Destroy();
 	}
 
 	public void MuteSelf (bool shouldMute) {
@@ -453,6 +454,7 @@ public class GameController : MonoBehaviour {
 	void OnApplicationQuit() {
 		if (mRtcEngine != null)
 		{
+			Debug.Log("OnApplicationQuit");
 			IRtcEngine.Destroy();
 		}
 	}
