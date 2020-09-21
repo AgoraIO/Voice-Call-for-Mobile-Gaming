@@ -1,4 +1,7 @@
 {
   "engine": "cocos2d-html5",
-  "packages": "packages"
+  "packages": "packages",
+  "version": "2.4.2",
+  "id": "fdbff7f4-ac1e-4c71-ac12-e27cdc4359da",
+  "isNew": false
 }

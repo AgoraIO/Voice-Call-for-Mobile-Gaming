@@ -1,0 +1,28 @@
+{
+  "configSet": [
+    {
+      "id": "4bc698",
+      "name": "HUAWEI  AppGallery Connect",
+      "platform": "3",
+      "channelID": "161221",
+      "channelName": "HUAWEI  AppGallery Connect",
+      "remarks": "",
+      "plugins": [
+        {
+          "hasParam": false,
+          "pParam": {},
+          "pId": "2412",
+          "pName": "HUAWEI HMS",
+          "pType": 14,
+          "pUseType": 14,
+          "hasLocal": true,
+          "hasUpdate": false,
+          "requireParam": true,
+          "pVersion": "1.1.5_5.0.1",
+          "isInstall": false,
+          "packageName": "huawei-hms"
+        }
+      ]
+    }
+  ]
+}

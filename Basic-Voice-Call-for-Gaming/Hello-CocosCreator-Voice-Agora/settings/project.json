@@ -1,0 +1,15 @@
+{
+  "migrate-history": [
+    "cloud-function"
+  ],
+  "excluded-modules": [
+    "3D Physics/Builtin",
+    "Geom Utils",
+    "3D",
+    "3D Primitive",
+    "3D Physics/cannon.js",
+    "3D Particle",
+    "SafeArea"
+  ],
+  "last-module-event-record-time": 1600657492723
+}

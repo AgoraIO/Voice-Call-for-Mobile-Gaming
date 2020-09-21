@@ -1,0 +1,93 @@
+{
+	"game": {
+		"name": "123",
+		"appid": "660156309",
+		"cid": "0"
+	},
+	"configs": [
+		{
+			"appid": "660156309",
+			"services": [
+				{
+					"service_id": "242",
+					"enable": true
+				},
+				{
+					"service_id": "278",
+					"enable": false,
+					"params": {
+						"currentConfigId": "4bc698",
+						"config": {
+							"id": "4bc698",
+							"name": "HUAWEI  AppGallery Connect",
+							"platform": "3",
+							"channelID": "161221",
+							"channelName": "HUAWEI  AppGallery Connect",
+							"remarks": "",
+							"plugins": [
+								{
+									"hasParam": false,
+									"pParam": {},
+									"pId": "2412",
+									"pName": "HUAWEI HMS",
+									"pType": 14,
+									"pUseType": 14,
+									"hasLocal": true,
+									"hasUpdate": false,
+									"requireParam": true,
+									"pVersion": "1.1.5_5.0.1",
+									"isInstall": false,
+									"packageName": "huawei-hms"
+								}
+							]
+						},
+						"appid": "660156309",
+						"plugin_version": "0.6.2_0.1.0"
+					}
+				},
+				{
+					"service_id": "270",
+					"enable": false
+				},
+				{
+					"service_id": "235",
+					"enable": false,
+					"params": {
+						"appid": "660156309",
+						"storeid": "d",
+						"plugin_version": "1.2.9_2.2.0"
+					}
+				},
+				{
+					"service_id": "272",
+					"enable": false
+				},
+				{
+					"service_id": "301",
+					"enable": false
+				},
+				{
+					"service_id": "302",
+					"enable": false
+				},
+				{
+					"service_id": "269",
+					"enable": false
+				}
+			]
+		},
+		{
+			"appid": "UNKNOW"
+		},
+		{
+			"appid": "660156309",
+			"services": [
+				{
+					"service_id": "242",
+					"enable": true
+				}
+			]
+		}
+	],
+	"needExecNative": true
+}
