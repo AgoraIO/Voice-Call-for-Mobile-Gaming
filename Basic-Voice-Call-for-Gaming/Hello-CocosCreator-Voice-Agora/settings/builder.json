@@ -1,7 +1,7 @@
 {
   "title": "Hello-CocosCreator-Voice-Agora",
   "packageName": "org.cocos2d.demo",
-  "startScene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
+  "startScene": "49b9666d-1dad-466f-8a6a-6b974bf2be52",
   "excludeScenes": [],
   "orientation": {
     "landscapeLeft": true,

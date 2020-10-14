@@ -741,6 +741,10 @@ var agora;
         if (param === void 0) { param = {}; }
         return bridge.callNativeMethodAudioEffect(apiType, JSON.stringify(param));
     }
+    function bindTextureId(textureId, uid) {
+        bridge.bindTextureId(textureId, uid);
+    }
+    agora.bindTextureId = bindTextureId;
     function init(appId) {
         initWithAreaCode(appId, AREA_CODE.AREA_CODE_GLOBAL);
     }
