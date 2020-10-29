@@ -1,18 +1,18 @@
 /****************************************************************************
  Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
-
+ 
  http://www.cocos2d-x.org
-
+ 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
-
+ 
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
-
+ 
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,43 +22,57 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef  _APP_DELEGATE_H_
-#define  _APP_DELEGATE_H_
+#ifndef __HELLOWORLD_SCENE_H__
+#define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
 
-/**
-@brief    The cocos2d Application.
+#ifdef __APPLE__
+#include <AgoraRtcKit/IAgoraRtcEngine.h>
+#elif __ANDROID__
+#include "IAgoraRtcEngine.h"
+#endif
 
-Private inheritance here hides part of interface from Director.
-*/
-class  AppDelegate : private cocos2d::Application
+#include "ui/CocosGUI.h"
+#include "./TextBox/TextBox.h"
+
+// PLEASE KEEP THIS App ID IN SAFE PLACE -->
+// Get your own App ID at https://dashboard.agora.io/
+// After you entered the App ID, remove <##> outside of Your App ID
+// For formal released project, please use Dynamic Key
+// http://docs.agora.io/en/user_guide/Component_and_Others/Dynamic_Key_User_Guide.html
+#define AGORA_APP_ID "aab8b8f5a8cd4469a63042fcfafe7063"
+
+class HelloWorld : public cocos2d::Scene
 {
 public:
-    AppDelegate();
-    virtual ~AppDelegate();
+    static cocos2d::Scene* createScene();
 
-    virtual void initGLContextAttrs();
+    bool init() override;
 
-    /**
-    @brief    Implement Director and Scene init code here.
-    @return true    Initialize success, app continue.
-    @return false   Initialize failed, app terminate.
-    */
-    virtual bool applicationDidFinishLaunching();
+    void onEnter() override;
+    
+    void onExit() override;
+    
+    // a selector callback
+    void menuCloseCallback(cocos2d::Ref* pSender);
+    
+    // implement the "static create()" method manually
+    CREATE_FUNC(HelloWorld);
 
-    /**
-    @brief  Called when the application moves to the background
-    @param  the pointer of the application
-    */
-    virtual void applicationDidEnterBackground();
+public:
+    void updateMsgContent(const std::string &msg);
 
-    /**
-    @brief  Called when the application reenters the foreground
-    @param  the pointer of the application
-    */
-    virtual void applicationWillEnterForeground();
+private:
+    void onJoinChannelClicked();
+
+    void onLeaveChannelClicked();
+
+private:
+    TextBox *mMsgBox = nullptr;
+    cocos2d::ui::EditBox *mChannelEditBox = nullptr;
+    agora::rtc::IRtcEngine *engine;
+    agora::rtc::IRtcEngineEventHandler *eventHandler;
 };
 
-#endif // _APP_DELEGATE_H_
-
+#endif // __HELLOWORLD_SCENE_H__

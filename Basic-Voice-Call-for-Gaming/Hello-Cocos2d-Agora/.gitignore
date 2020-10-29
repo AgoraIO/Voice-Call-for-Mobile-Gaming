@@ -157,3 +157,6 @@ tests/cpp-tests/proj.tizen/res/
 tests/lua-empty-test/project/proj.tizen/res/
 tests/lua-tests/project/proj.tizen/res/
 
+cocos2d/*
+sdk/*
+!.gitkeep

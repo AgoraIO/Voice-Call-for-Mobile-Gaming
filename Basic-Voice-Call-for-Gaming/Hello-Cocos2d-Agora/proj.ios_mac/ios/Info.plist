@@ -10,44 +10,8 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string>Icon-57.png</string>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>Icon-29</string>
-		<string>Icon-40</string>
-		<string>Icon-50</string>
-		<string>Icon-57</string>
-		<string>Icon-58</string>
-		<string>Icon-72</string>
-		<string>Icon-76</string>
-		<string>Icon-80</string>
-		<string>Icon-87</string>
-		<string>Icon-100</string>
-		<string>Icon-114</string>
-		<string>Icon-120</string>
-		<string>Icon-144</string>
-		<string>Icon-152</string>
-		<string>Icon-180</string>
-	</array>
-	<key>CFBundleIconFiles~ipad</key>
-	<array>
-		<string>Icon-29</string>
-		<string>Icon-40</string>
-		<string>Icon-50</string>
-		<string>Icon-57</string>
-		<string>Icon-58</string>
-		<string>Icon-72</string>
-		<string>Icon-76</string>
-		<string>Icon-80</string>
-		<string>Icon-87</string>
-		<string>Icon-100</string>
-		<string>Icon-114</string>
-		<string>Icon-120</string>
-		<string>Icon-144</string>
-		<string>Icon-152</string>
-		<string>Icon-180</string>
-	</array>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>io.agora.gaming.cocos2d</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -55,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string></string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -66,7 +30,11 @@
 	<string>Microphone</string>
 	<key>UIAppFonts</key>
 	<array/>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIPrerenderedIcon</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
