@@ -217,12 +217,6 @@ cc.Class({
     },
 
     initTest: function () {
-        agora.bridge.onTestEnd = function () {
-            console.log('onTestEnd');
-            agora.bridge.compareAndDumpRtcEngineEventTestResult('/sdcard/Android/data/org.cocos2d.demo/case/rtcEngineEventCase.json', '/sdcard/Android/data/org.cocos2d.demo/dump/rtcEngineEventDump.json');
-        };
-        agora.bridge.beginRtcEngineEventTest('/sdcard/Android/data/org.cocos2d.demo/case/rtcEngineEventCase.json');
-
         agora.bridge.handleAPICase = function (apiType, paramsJson) {
             if (apiType === -1) {
                 agora.bridge.compareAndDumpApiTestResult('/sdcard/Android/data/org.cocos2d.demo/case/apicase.json', '/sdcard/Android/data/org.cocos2d.demo/dump/apiDump.json');
@@ -1104,6 +1098,12 @@ cc.Class({
             }
         };
         agora.bridge.beginApiTest('/sdcard/Android/data/org.cocos2d.demo/case/apicase.json');
+
+        agora.bridge.onTestEnd = function () {
+            console.log('onTestEnd');
+            agora.bridge.compareAndDumpRtcEngineEventTestResult('/sdcard/Android/data/org.cocos2d.demo/case/rtcEngineEventCase.json', '/sdcard/Android/data/org.cocos2d.demo/dump/rtcEngineEventDump.json');
+        };
+        agora.bridge.beginRtcEngineEventTest('/sdcard/Android/data/org.cocos2d.demo/case/rtcEngineEventCase.json');
     },
 
     initAgora: function () {
@@ -1115,7 +1115,7 @@ cc.Class({
             this.printLog("Please input appid!");
             return;
         }
-        agora && agora.init(appid);
+        // agora && agora.init(appid);
         this.initTest();
         this.btnInit.interactable = false;
         this.btnJoin.interactable = true;
