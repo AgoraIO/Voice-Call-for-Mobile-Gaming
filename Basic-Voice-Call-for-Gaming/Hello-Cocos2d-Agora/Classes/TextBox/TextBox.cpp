@@ -10,6 +10,10 @@ TextBox *TextBox::create(const std::string &bg) {
   return nullptr;
 }
 
+void TextBox::setSize(const float width, const float height) {
+  this->setScale(width/this->getContentSize().width, height/this->getContentSize().height);
+}
+
 bool TextBox::initWithBackgroundImg(const std::string &bg) {
   bool ret;
   ret = initWithFile(bg);
@@ -28,9 +32,9 @@ bool TextBox::initWithBackgroundImg(const std::string &bg) {
 	  ret = false;
 	  break;
 	}
-	this->addChild(txt_, 1);
 	txt_->setAnchorPoint(cocos2d::Vec2(0, 1));
-	txt_->setPosition(cocos2d::Vec2(20, getContentSize().height));
+	txt_->setPosition(cocos2d::Vec2(20, getContentSize().height - 10));
+	addChild(txt_, 1);
   } while (0);
   return ret;
 }

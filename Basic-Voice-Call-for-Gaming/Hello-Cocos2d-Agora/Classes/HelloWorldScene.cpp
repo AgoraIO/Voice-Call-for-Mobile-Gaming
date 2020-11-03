@@ -123,7 +123,7 @@ bool HelloWorld::init() {
   if (textBox==nullptr) {
 	problemLoading("'TextBox.png'");
   } else {
-	textBox->setContentSize(Size(220, 160));
+	textBox->setSize(220, 160);
 
 	textBox->setPosition(Vec2(origin.x + visibleSize.width/2,
 							  origin.y
@@ -138,9 +138,9 @@ bool HelloWorld::init() {
 	problemLoading("'HelloWorld.png'");
   } else {
 	// position the sprite on the center of the screen
-	spriteLocal->setPosition(Vec2(textBox->getPositionX() - textBox->getContentSize().width/2
+	spriteLocal->setPosition(Vec2(textBox->getPositionX() - textBox->getContentSize().width*textBox->getScaleX()/2
 									  + spriteLocal->getContentSize().width/2,
-								  textBox->getPositionY() - textBox->getContentSize().height/2
+								  textBox->getPositionY() - textBox->getContentSize().height*textBox->getScaleY()/2
 									  + spriteLocal->getContentSize().height/2));
 
 	// add the sprite as a child to this layer
@@ -150,7 +150,7 @@ bool HelloWorld::init() {
 	auto frame = new cocos2d::SpriteFrame;
 	frame->initWithTexture(textureLocal, spriteLocal->getTextureRect());
 	textureLocal->initWithData(nullptr,
-							   0,
+							   1,
 							   Texture2D::PixelFormat::RGBA4444,
 							   (int)frame->getRectInPixels().size.width,
 							   (int)frame->getRectInPixels().size.height,
@@ -163,9 +163,9 @@ bool HelloWorld::init() {
 	problemLoading("'HelloWorld.png'");
   } else {
 	// position the sprite on the center of the screen
-	spriteRemote->setPosition(Vec2(textBox->getPositionX() + textBox->getContentSize().width/2
+	spriteRemote->setPosition(Vec2(textBox->getPositionX() + textBox->getContentSize().width*textBox->getScaleX()/2
 									   - spriteRemote->getContentSize().width/2,
-								   textBox->getPositionY() - textBox->getContentSize().height/2
+								   textBox->getPositionY() - textBox->getContentSize().height*textBox->getScaleY()/2
 									   + spriteRemote->getContentSize().height/2));
 
 	// add the sprite as a child to this layer
@@ -175,7 +175,7 @@ bool HelloWorld::init() {
 	auto frame = new cocos2d::SpriteFrame;
 	frame->initWithTexture(textureRemote, spriteRemote->getTextureRect());
 	textureRemote->initWithData(nullptr,
-								0,
+								1,
 								Texture2D::PixelFormat::RGBA4444,
 								(int)frame->getRectInPixels().size.width,
 								(int)frame->getRectInPixels().size.height,

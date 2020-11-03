@@ -12,6 +12,7 @@ public:
   static TextBox *create(const std::string &bg);
   bool addText(const std::string &txt);
   bool setText(const std::string &txt);
+  void setSize(const float width, const float height);
 protected:
   bool initWithBackgroundImg(const std::string &bg);
 
