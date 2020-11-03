@@ -29,223 +29,283 @@ USING_NS_CC;
 
 class MyIGamingRtcEngineEventHandler : public agora::rtc::IRtcEngineEventHandler {
 private:
-    HelloWorld *mUi;
+  HelloWorld *mUi;
 
 public:
-    MyIGamingRtcEngineEventHandler(HelloWorld *ui) : mUi(ui) {
-    }
+  explicit MyIGamingRtcEngineEventHandler(HelloWorld *ui) : mUi(ui) {}
 
-    ~MyIGamingRtcEngineEventHandler() {
-    }
+  void onJoinChannelSuccess(const char *channel, uid_t uid, int elapsed) override {
+	CCLOG("[General C++]:onJoinChannelSuccess %s, %d, %d", channel, uid, elapsed);
+	std::stringstream rawMsg;
+	rawMsg << "onJoinChannelSuccess " << channel << " " << uid << " " << elapsed;
+	mUi->updateMsgContent(rawMsg.str());
+  }
 
-    void onJoinChannelSuccess(const char *channel, uid_t uid, int elapsed) override {
-        CCLOG("[General C++]:onJoinChannelSuccess %s, %d, %d", channel, uid, elapsed);
-        std::stringstream rawMsg;
-        rawMsg << "onJoinChannelSuccess " << channel << " " << uid << " " << elapsed;
-        mUi->updateMsgContent(rawMsg.str());
-    }
+  void onLeaveChannel(const agora::rtc::RtcStats &stats) override {
+	CCLOG("[General C++]:onLeaveChannel %d, %d, %d", stats.duration, stats.txBytes, stats.rxBytes);
+	std::stringstream rawMsg;
+	rawMsg << "onLeaveChannel " << stats.duration << " " << stats.txBytes << " " << stats.rxBytes;
+	mUi->updateMsgContent(rawMsg.str());
+  }
 
-    void onLeaveChannel(const agora::rtc::RtcStats &stats) override {
-        CCLOG("[General C++]:onLeaveChannel %d, %d, %d", stats.duration, stats.txBytes, stats.rxBytes);
-        std::stringstream rawMsg;
-        rawMsg << "onLeaveChannel " << stats.duration << " " << stats.txBytes << " " << stats.rxBytes;
-        mUi->updateMsgContent(rawMsg.str());
-    }
-
-    void onAudioRouteChanged(agora::rtc::AUDIO_ROUTE_TYPE routing) override {
-        CCLOG("[General C++]:onAudioRouteChanged %d", routing);
-    }
+  void onAudioRouteChanged(agora::rtc::AUDIO_ROUTE_TYPE routing) override {
+	CCLOG("[General C++]:onAudioRouteChanged %d", routing);
+  }
 };
 
-Scene* HelloWorld::createScene()
-{
-    return HelloWorld::create();
+Scene *HelloWorld::createScene() {
+  return HelloWorld::create();
 }
 
 // Print useful error message instead of segfaulting when files are not there.
-static void problemLoading(const char* filename)
-{
-    printf("Error while loading: %s\n", filename);
-    printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
+static void problemLoading(const char *filename) {
+  printf("Error while loading: %s\n", filename);
+  printf(
+	  "Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
-{
-    //////////////////////////////
-    // 1. super init first
-    if ( !Scene::init() )
-    {
-        return false;
-    }
+bool HelloWorld::init() {
+  //////////////////////////////
+  // 1. super init first
+  if (!Scene::init()) {
+	return false;
+  }
 
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+  scheduleUpdate();
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
+  auto visibleSize = Director::getInstance()->getVisibleSize();
+  Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+  /////////////////////////////
+  // 2. add a menu item with "X" image, which is clicked to quit the program
+  //    you may modify it.
 
-    if (closeItem == nullptr ||
-        closeItem->getContentSize().width <= 0 ||
-        closeItem->getContentSize().height <= 0)
-    {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
-    }
-    else
-    {
-        float x = origin.x + visibleSize.width - closeItem->getContentSize().width/2;
-        float y = origin.y + closeItem->getContentSize().height/2;
-        closeItem->setPosition(Vec2(x,y));
-    }
+  // add a "close" icon to exit the progress. it's an autorelease object
+  auto closeItem = MenuItemImage::create(
+	  "CloseNormal.png",
+	  "CloseSelected.png",
+	  CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
 
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+  if (closeItem==nullptr ||
+	  closeItem->getContentSize().width <= 0 ||
+	  closeItem->getContentSize().height <= 0) {
+	problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
+  } else {
+	float x = origin.x + visibleSize.width - closeItem->getContentSize().width;
+	float y = origin.y + closeItem->getContentSize().height;
+	closeItem->setPosition(Vec2(x, y));
+  }
 
-    /////////////////////////////
-    // 3. add your codes below...
+  // create menu, it's an autorelease object
+  auto menu = Menu::create(closeItem, NULL);
+  menu->setPosition(Vec2::ZERO);
+  this->addChild(menu, 1);
 
-    // create and initialize a label
+  /////////////////////////////
+  // 3. add your codes below...
 
-    auto label = Label::createWithTTF("HelloWorld", "fonts/Marker Felt.ttf", 24);
-    if (label == nullptr)
-    {
-        problemLoading("'fonts/Marker Felt.ttf'");
-    }
-    else
-    {
-        // position the label on the center of the screen
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
+  // create and initialize a label
 
-        // add the label as a child to this layer
-        this->addChild(label, 1);
-    }
+  auto label = Label::createWithTTF("HelloWorld", "fonts/Marker Felt.ttf", 24);
+  if (label==nullptr) {
+	problemLoading("'fonts/Marker Felt.ttf'");
+  } else {
+	// position the label on the center of the screen
+	label->setPosition(Vec2(origin.x + visibleSize.width/2,
+							origin.y + visibleSize.height - label->getContentSize().height));
 
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+	// add the label as a child to this layer
+	this->addChild(label, 1);
+  }
 
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
+  textBox = TextBox::create("TextBox.png");
+  if (textBox==nullptr) {
+	problemLoading("'TextBox.png'");
+  } else {
+	textBox->setContentSize(Size(220, 160));
 
-    mMsgBox = TextBox::create("TextBox.png");
-    mMsgBox->setPosition(Vec2(origin.x + visibleSize.width / 2 - 110,
-            origin.y + visibleSize.height - 210));
+	textBox->setPosition(Vec2(origin.x + visibleSize.width/2,
+							  origin.y
+								  + (visibleSize.height - label->getContentSize().height*1.5f)/2));
 
-    mMsgBox->setSize(220, 160);
+	this->addChild(textBox, 0);
+  }
 
-    this->addChild(mMsgBox, 0);
+  // add "HelloWorld" splash screen"
+  auto spriteLocal = Sprite::create("HelloWorld.png");
+  if (spriteLocal==nullptr) {
+	problemLoading("'HelloWorld.png'");
+  } else {
+	// position the sprite on the center of the screen
+	spriteLocal->setPosition(Vec2(textBox->getPositionX() - textBox->getContentSize().width/2
+									  + spriteLocal->getContentSize().width/2,
+								  textBox->getPositionY() - textBox->getContentSize().height/2
+									  + spriteLocal->getContentSize().height/2));
 
-    int leftPadding = 10;
+	// add the sprite as a child to this layer
+	this->addChild(spriteLocal, 0);
 
-    mChannelEditBox = cocos2d::ui::EditBox::create(Size(120, 30), "TextBox.png");
-    mChannelEditBox->setPlaceHolder("Enter Chan...");
-    mChannelEditBox->setPosition(Vec2(origin.x + leftPadding + mChannelEditBox->getContentSize().width / 2, origin.y + visibleSize.height - 1.5 * mChannelEditBox->getContentSize().height));
+	textureLocal = new cocos2d::Texture2D;
+	auto frame = new cocos2d::SpriteFrame;
+	frame->initWithTexture(textureLocal, spriteLocal->getTextureRect());
+	textureLocal->initWithData(nullptr,
+							   0,
+							   Texture2D::PixelFormat::RGBA4444,
+							   (int)frame->getRectInPixels().size.width,
+							   (int)frame->getRectInPixels().size.height,
+							   spriteLocal->getContentSize());
+	spriteLocal->setSpriteFrame(frame);
+  }
 
-    this->addChild(mChannelEditBox, 0);
+  auto spriteRemote = Sprite::create("HelloWorld.png");
+  if (spriteRemote==nullptr) {
+	problemLoading("'HelloWorld.png'");
+  } else {
+	// position the sprite on the center of the screen
+	spriteRemote->setPosition(Vec2(textBox->getPositionX() + textBox->getContentSize().width/2
+									   - spriteRemote->getContentSize().width/2,
+								   textBox->getPositionY() - textBox->getContentSize().height/2
+									   + spriteRemote->getContentSize().height/2));
 
-    auto joinButton = cocos2d::ui::Button::create("Button.png", "ButtonPressed.png", "ButtonPressed.png");
-    joinButton->setTitleText("Join Channel");
-    joinButton->setPosition(Vec2(origin.x + leftPadding + joinButton->getContentSize().width / 2, origin.y + visibleSize.height - 1 * joinButton->getContentSize().height - 2 * mChannelEditBox->getContentSize().height));
+	// add the sprite as a child to this layer
+	this->addChild(spriteRemote, 0);
 
-    joinButton->addTouchEventListener([&](cocos2d::Ref *sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                onJoinChannelClicked();
-                break;
-            default:
-                break;
-        }
-    });
+	textureRemote = new cocos2d::Texture2D;
+	auto frame = new cocos2d::SpriteFrame;
+	frame->initWithTexture(textureRemote, spriteRemote->getTextureRect());
+	textureRemote->initWithData(nullptr,
+								0,
+								Texture2D::PixelFormat::RGBA4444,
+								(int)frame->getRectInPixels().size.width,
+								(int)frame->getRectInPixels().size.height,
+								spriteRemote->getContentSize());
+	spriteRemote->setSpriteFrame(frame);
+  }
 
-    this->addChild(joinButton, 0);
+  float leftPadding = 10;
 
-    auto leaveButton = ui::Button::create("Button.png", "ButtonPressed.png", "ButtonPressed.png");
-    leaveButton->setTitleText("Leave Channel");
-    leaveButton->setPosition(Vec2(origin.x + leftPadding + leaveButton->getContentSize().width / 2, origin.y + visibleSize.height - 2 * leaveButton->getContentSize().height - 2 * mChannelEditBox->getContentSize().height));
+  editBox = cocos2d::ui::EditBox::create(Size(120, 30), "TextBox.png");
+  if (editBox==nullptr) {
+	problemLoading("'TextBox.png'");
+  } else {
+	editBox->setPlaceHolder("Channel ID");
 
-    leaveButton->addTouchEventListener([&](cocos2d::Ref *sender, ui::Widget::TouchEventType type) {
-        switch (type) {
-            case ui::Widget::TouchEventType::BEGAN:
-                break;
-            case ui::Widget::TouchEventType::ENDED:
-                onLeaveChannelClicked();
-                break;
-            default:
-                break;
-        }
-    });
+	editBox->setPosition(Vec2(origin.x + leftPadding + editBox->getContentSize().width/2,
+							  origin.y + visibleSize.height
+								  - editBox->getContentSize().height*1.5f));
 
-    this->addChild(leaveButton, 0);
+	this->addChild(editBox, 0);
+  }
 
-    return true;
+  auto joinButton =
+	  cocos2d::ui::Button::create("Button.png", "ButtonPressed.png", "ButtonPressed.png");
+  if (joinButton==nullptr) {
+	problemLoading("'Button.png' and 'ButtonPressed.png'");
+  } else {
+	joinButton->setTitleText("Join Channel");
+
+	joinButton->setPosition(Vec2(origin.x + leftPadding + joinButton->getContentSize().width/2,
+								 origin.y + visibleSize.height
+									 - 1*joinButton->getContentSize().height
+									 - 2*editBox->getContentSize().height));
+
+	joinButton->addTouchEventListener([&](cocos2d::Ref *sender, ui::Widget::TouchEventType type) {
+	  switch (type) {
+	  case ui::Widget::TouchEventType::BEGAN:break;
+	  case ui::Widget::TouchEventType::ENDED:onJoinChannelClicked();
+		break;
+	  default:break;
+	  }
+	});
+
+	this->addChild(joinButton, 0);
+  }
+
+  auto leaveButton = ui::Button::create("Button.png", "ButtonPressed.png", "ButtonPressed.png");
+  if (leaveButton==nullptr) {
+	problemLoading("'Button.png' and 'ButtonPressed.png'");
+  } else {
+	leaveButton->setTitleText("Leave Channel");
+
+	leaveButton->setPosition(Vec2(origin.x + leftPadding + leaveButton->getContentSize().width/2,
+								  origin.y + visibleSize.height
+									  - 2*leaveButton->getContentSize().height
+									  - 2*editBox->getContentSize().height));
+
+	leaveButton->addTouchEventListener([&](cocos2d::Ref *sender, ui::Widget::TouchEventType type) {
+	  switch (type) {
+	  case ui::Widget::TouchEventType::BEGAN:break;
+	  case ui::Widget::TouchEventType::ENDED:onLeaveChannelClicked();
+		break;
+	  default:break;
+	  }
+	});
+
+	this->addChild(leaveButton, 0);
+  }
+
+  return true;
 }
 
+void HelloWorld::menuCloseCallback(Ref *pSender) {
+  //Close the cocos2d-x game scene and quit the application
+  Director::getInstance()->end();
 
-void HelloWorld::menuCloseCallback(Ref* pSender)
-{
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
+  /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
 
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
-
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
+  //EventCustom customEndEvent("game_scene_close_event");
+  //_eventDispatcher->dispatchEvent(&customEndEvent);
 }
 
 void HelloWorld::updateMsgContent(const std::string &msg) {
-    mMsgBox->setText(msg);
+  textBox->addText(msg);
 }
 
 void HelloWorld::onLeaveChannelClicked() {
-    engine->leaveChannel();
+  engine->leaveChannel();
 }
 
 void HelloWorld::onJoinChannelClicked() {
-    if (mChannelEditBox == nullptr || ::strlen(mChannelEditBox->getText()) == 0) {
-        return;
-    }
+  if (editBox==nullptr || strlen(editBox->getText())==0) {
+	return;
+  }
 
-    engine->setChannelProfile(agora::rtc::CHANNEL_PROFILE_GAME);
-    engine->joinChannel(nullptr, mChannelEditBox->getText(), "Cocos2d", 0);
+  engine->enableVideo();
+  engine->setChannelProfile(agora::rtc::CHANNEL_PROFILE_GAME);
+  engine->joinChannel(nullptr, editBox->getText(), "Cocos2d", 0);
 }
 
 void HelloWorld::onEnter() {
-    Node::onEnter();
-    eventHandler = new MyIGamingRtcEngineEventHandler(this);
+  cocos2d::Scene::onEnter();
+  eventHandler = new MyIGamingRtcEngineEventHandler(this);
 
-    engine = createAgoraRtcEngine();
-  	agora::rtc::RtcEngineContext context;
-    context.appId = AGORA_APP_ID;
-    context.eventHandler = eventHandler;
-    engine->initialize(context);
+  engine = createAgoraRtcEngine();
+  agora::rtc::RtcEngineContext context;
+  context.appId = AGORA_APP_ID;
+  context.eventHandler = eventHandler;
+  engine->initialize(context);
+
+  agora::util::AutoPtr<agora::media::IMediaEngine> mediaEngine;
+  mediaEngine.queryInterface(engine, agora::AGORA_IID_MEDIA_ENGINE);
+  if (mediaEngine) {
+	videoFrameObserver = new agora::cocos::VideoFrameObserver;
+	mediaEngine->registerVideoFrameObserver(videoFrameObserver);
+  }
 }
 
 void HelloWorld::onExit() {
-    Node::onExit();
-    engine->release(true);
-    engine = nullptr;
-    delete eventHandler;
-    eventHandler = nullptr;
+  Node::onExit();
+  agora::rtc::IRtcEngine::release(true);
+  engine = nullptr;
+  delete eventHandler;
+  eventHandler = nullptr;
+  delete videoFrameObserver;
+  videoFrameObserver = nullptr;
+}
+
+void HelloWorld::update(float delta) {
+  Node::update(delta);
+  videoFrameObserver->bindTextureId(textureLocal->getName(), 0);
+  videoFrameObserver->bindTextureId(textureRemote->getName(), 123);
 }

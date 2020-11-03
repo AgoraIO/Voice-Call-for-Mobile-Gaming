@@ -51,6 +51,7 @@ list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
      Classes/HelloWorldScene.cpp
      Classes/TextBox/TextBox.cpp
+     Classes/VideoFrameObserver.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h

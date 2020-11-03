@@ -67,6 +67,7 @@
 		F5021CE125498EBD00E16D98 /* ButtonPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = F5021CC62549693D00E16D98 /* ButtonPressed.png */; };
 		F5021CE225498EBD00E16D98 /* TextBox.png in Resources */ = {isa = PBXBuildFile; fileRef = F5021CC52549693D00E16D98 /* TextBox.png */; };
 		F5021CE425498ECC00E16D98 /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F5021CBF2549693100E16D98 /* TextBox.cpp */; };
+		F556A25F25510BA700B0140F /* VideoFrameObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F556A25C25510BA700B0140F /* VideoFrameObserver.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,8 @@
 		F5021CC72549693D00E16D98 /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button.png; sourceTree = "<group>"; };
 		F5021CCD2549695400E16D98 /* AgoraRtcCryptoLoader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraRtcCryptoLoader.framework; path = ../sdk/ios/agora/AgoraRtcCryptoLoader.framework; sourceTree = "<group>"; };
 		F5021CCE2549695400E16D98 /* AgoraRtcKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AgoraRtcKit.framework; path = ../sdk/ios/agora/AgoraRtcKit.framework; sourceTree = "<group>"; };
+		F556A25C25510BA700B0140F /* VideoFrameObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoFrameObserver.cpp; sourceTree = "<group>"; };
+		F556A25E25510BA700B0140F /* VideoFrameObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoFrameObserver.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +325,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F556A25C25510BA700B0140F /* VideoFrameObserver.cpp */,
+				F556A25E25510BA700B0140F /* VideoFrameObserver.h */,
 				F5021CBE2549693100E16D98 /* TextBox */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
@@ -507,6 +512,7 @@
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
 				F5021CC22549693100E16D98 /* TextBox.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
+				F556A25F25510BA700B0140F /* VideoFrameObserver.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

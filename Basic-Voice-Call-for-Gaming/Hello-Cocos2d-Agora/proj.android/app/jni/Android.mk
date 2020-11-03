@@ -14,7 +14,8 @@ LOCAL_MODULE_FILENAME := libMyGame
 LOCAL_SRC_FILES := $(LOCAL_PATH)/hellocpp/main.cpp \
                    $(LOCAL_PATH)/../../../Classes/AppDelegate.cpp \
                    $(LOCAL_PATH)/../../../Classes/HelloWorldScene.cpp \
-                   $(LOCAL_PATH)/../../../Classes/TextBox/TextBox.cpp
+                   $(LOCAL_PATH)/../../../Classes/TextBox/TextBox.cpp \
+                   $(LOCAL_PATH)/../../../Classes/VideoFrameObserver.cpp \
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes \
 					$(LOCAL_PATH)/../../../sdk/android/agora/include

@@ -35,6 +35,7 @@
 
 #include "ui/CocosGUI.h"
 #include "./TextBox/TextBox.h"
+#include "VideoFrameObserver.h"
 
 // PLEASE KEEP THIS App ID IN SAFE PLACE -->
 // Get your own App ID at https://dashboard.agora.io/
@@ -43,36 +44,40 @@
 // http://docs.agora.io/en/user_guide/Component_and_Others/Dynamic_Key_User_Guide.html
 #define AGORA_APP_ID "aab8b8f5a8cd4469a63042fcfafe7063"
 
-class HelloWorld : public cocos2d::Scene
-{
+class HelloWorld : public cocos2d::Scene {
 public:
-    static cocos2d::Scene* createScene();
+  static cocos2d::Scene *createScene();
 
-    bool init() override;
+  bool init() override;
 
-    void onEnter() override;
-    
-    void onExit() override;
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    
-    // implement the "static create()" method manually
-    CREATE_FUNC(HelloWorld);
+  void onEnter() override;
+
+  void onExit() override;
+
+  void update(float delta) override;
+
+  // a selector callback
+  void menuCloseCallback(cocos2d::Ref *pSender);
+
+  // implement the "static create()" method manually
+  CREATE_FUNC(HelloWorld);
 
 public:
-    void updateMsgContent(const std::string &msg);
+  void updateMsgContent(const std::string &msg);
 
 private:
-    void onJoinChannelClicked();
+  void onJoinChannelClicked();
 
-    void onLeaveChannelClicked();
+  void onLeaveChannelClicked();
 
 private:
-    TextBox *mMsgBox = nullptr;
-    cocos2d::ui::EditBox *mChannelEditBox = nullptr;
-    agora::rtc::IRtcEngine *engine;
-    agora::rtc::IRtcEngineEventHandler *eventHandler;
+  TextBox *textBox;
+  cocos2d::ui::EditBox *editBox;
+  agora::rtc::IRtcEngine *engine;
+  agora::rtc::IRtcEngineEventHandler *eventHandler;
+  agora::cocos::VideoFrameObserver *videoFrameObserver;
+  cocos2d::Texture2D *textureLocal;
+  cocos2d::Texture2D *textureRemote;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
