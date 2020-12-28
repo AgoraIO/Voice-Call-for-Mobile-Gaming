@@ -3,6 +3,7 @@ using System.IO;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
+using UnityEditor.iOS.Xcode.Extensions;
 
 
 public class BL_BuildPostProcess
@@ -13,11 +14,12 @@ public class BL_BuildPostProcess
     {
         if (buildTarget == BuildTarget.iOS)
         {
-            #if UNITY_IPHONE
+#if UNITY_IPHONE
             LinkLibraries(path);
-            #endif
+            UpdatePermission(path + "/Info.plist");
+#endif
         }
-         else if (buildTarget == BuildTarget.StandaloneOSX)
+        else if (buildTarget == BuildTarget.StandaloneOSX)
          {
             string plistPath = path + "/Contents/Info.plist"; // straight to a binary
             if (path.EndsWith(".xcodeproj"))
@@ -29,18 +31,7 @@ public class BL_BuildPostProcess
             UpdatePermission(plistPath);
          }
     }
-
 #if UNITY_IPHONE
-    public static void DisableBitcode(string projPath)
-    {
-        PBXProject proj = new PBXProject();
-        proj.ReadFromString(File.ReadAllText(projPath));
-
-        string target = GetTargetGuid(proj);
-        proj.SetBuildProperty(target, "ENABLE_BITCODE", "false");
-        File.WriteAllText(projPath, proj.WriteToString());
-    }
-
     static string GetTargetGuid(PBXProject proj)
     {
 #if UNITY_2019_3_OR_NEWER
@@ -63,30 +54,35 @@ public class BL_BuildPostProcess
 
     public static void LinkLibraries(string path)
     {
-        // linked library
-        string projPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
+      string projPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
         PBXProject proj = new PBXProject();
         proj.ReadFromFile(projPath);
         string target = GetTargetGuid(proj);
 
-        // disable bit-code
-        proj.SetBuildProperty(target, "ENABLE_BITCODE", "false");
 
-        // Frameworks
-        foreach (string framework in ProjectFrameworks)
-        {
-            proj.AddFrameworkToProject(target, framework, true);
-        }
+        // embedded frameworks
+#if UNITY_2019_1_OR_NEWER
+        target = proj.GetUnityMainTargetGuid();
+#endif
+        const string defaultLocationInProj = "AgoraEngine/Plugins/iOS";
+        const string AgoraRtcKitFrameworkName = "AgoraRtcKit.framework";
+        const string AgorafdkaacFrameworkName = "Agorafdkaac.framework";
+        const string AgoraSoundTouchFrameworkName = "AgoraSoundTouch.framework";
+
+        string AgoraRtcKitFrameworkPath = Path.Combine(defaultLocationInProj, AgoraRtcKitFrameworkName);
+        string AgorafdkaacFrameworkPath = Path.Combine(defaultLocationInProj, AgorafdkaacFrameworkName);
+        string AgoraSoundTouchFrameworkPath = Path.Combine(defaultLocationInProj, AgoraSoundTouchFrameworkName);
+
+        string fileGuid = proj.AddFile(AgoraRtcKitFrameworkPath, "Frameworks/" + AgoraRtcKitFrameworkPath, PBXSourceTree.Sdk);
+        PBXProjectExtensions.AddFileToEmbedFrameworks(proj, target, fileGuid);
+        fileGuid = proj.AddFile(AgorafdkaacFrameworkPath, "Frameworks/" + AgorafdkaacFrameworkPath, PBXSourceTree.Sdk);
+        PBXProjectExtensions.AddFileToEmbedFrameworks(proj, target, fileGuid);
+        fileGuid = proj.AddFile(AgoraSoundTouchFrameworkPath, "Frameworks/" + AgoraSoundTouchFrameworkPath, PBXSourceTree.Sdk);
+        PBXProjectExtensions.AddFileToEmbedFrameworks(proj, target, fileGuid);
+        proj.SetBuildProperty(target, "LD_RUNPATH_SEARCH_PATHS", "$(inherited) @executable_path/Frameworks");
+
+        // done, write to the project file
         File.WriteAllText(projPath, proj.WriteToString());
-
-        // permission
-        string pListPath = path + "/Info.plist";
-        PlistDocument plist = new PlistDocument();
-        plist.ReadFromString(File.ReadAllText(pListPath));
-        PlistElementDict rootDic = plist.root;
-        var micPermission = "NSMicrophoneUsageDescription";
-        rootDic.SetString(micPermission, "Voice call need to user mic");
-        File.WriteAllText(pListPath, plist.WriteToString());
     }
 #endif
 
