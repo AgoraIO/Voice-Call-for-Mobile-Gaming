@@ -20,13 +20,14 @@ public class HelloUnity3D : MonoBehaviour
     // Get your own App ID at https://dashboard.agora.io/
     // After you entered the App ID, remove ## outside of Your App ID
     [SerializeField]
-    private string appId = "YOUR APP ID";
+    private string AppID = "app_id";
 
     void Awake()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
         muteButton.enabled = false;
+        CheckAppId();
     }
 
     // Use this for initialization
@@ -46,7 +47,7 @@ public class HelloUnity3D : MonoBehaviour
         leaveChannel.onClick.AddListener(LeaveChannel);
         muteButton.onClick.AddListener(MuteButtonTapped);
 
-        mRtcEngine = IRtcEngine.GetEngine(appId);
+        mRtcEngine = IRtcEngine.GetEngine(AppID);
         versionText.GetComponent<Text>().text = "Version : " + getSdkVersion();
 
         mRtcEngine.OnJoinChannelSuccess += (string channelName, uint uid, int elapsed) =>
@@ -161,10 +162,26 @@ public class HelloUnity3D : MonoBehaviour
         // mRtcEngine.SetClientRole (CLIENT_ROLE.BROADCASTER);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CheckAppId()
     {
-
+        Debug.Assert(AppID.Length > 10, "Please fill in your AppId first on Game Controller object.");
+        GameObject go = GameObject.Find("AppIDText");
+        if (go != null)
+        {
+            Text appIDText = go.GetComponent<Text>();
+            if (appIDText != null)
+            {
+                if (string.IsNullOrEmpty(AppID))
+                {
+                    appIDText.text = "AppID: " + "UNDEFINED!";
+                    appIDText.color = Color.red;
+                }
+                else
+                {
+                    appIDText.text = "AppID: " + AppID.Substring(0, 4) + "********" + AppID.Substring(AppID.Length - 4, 4);
+                }
+            }
+        }
     }
 
     public void JoinChannel()
