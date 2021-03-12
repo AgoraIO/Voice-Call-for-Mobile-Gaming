@@ -34,6 +34,8 @@ echo "start restructure framework links..."
 echo "--------------------------------------"
 APP="$PWD/$1"
 ENTITLEMENT="App.entitlements"
+AGORA_FRAMEWORKS="$APP/Contents/PlugIns/agoraSdkCWrapper.bundle/Contents/Resources"
+AGORA_CLIB="$APP/Contents/Plugins/agoraSdkCWrapper.bundle/Contents/MacOS/agoraSdkCWrapper"
 
 shopt -s extglob
 
@@ -82,25 +84,28 @@ function relink {
 }
 
 function signhelp {
-AGORA_FRAMEWORK='$APP/Contents/PlugIns/agoraSdkCWrapper.bundle/Contents/Resources/AgoraRtcKit.framework'
-AGORA_CLIB='$APP/Contents/Plugins/agoraSdkCWrapper.bundle/Contents/MacOS/agoraSdkCWrapper'
 
 echo ""
 echo "Make sure you code sign the following items in addition to the App itself:"
-echo "1. $AGORA_FRAMEWORK"
-echo "2. $AGORA_CLIB"
+echo "        $AGORA_CLIB"
+for framework in $AGORA_FRAMEWORKS/*; do
+    echo "        $framework" 
+done
 
 }
 
 # remove all meta files
 find $APP -type f -name "*.meta" -delete
 
-(cd $APP/Contents/Plugins/agoraSdkCWrapper.bundle/Contents/Resources/AgoraRtcKit.framework && relink) 2>/dev/null
-(cd $APP/Contents/Plugins/agoraSdkCWrapper.bundle/Contents/Frameworks/AgoraRtcKit.framework && relink) 2>/dev/null
+
+# re-estasbish version symlinks inside the frameworks
+for framework in $AGORA_FRAMEWORKS/*; do
+    (cd $framework && relink) 2>/dev/null
+done
 
 create_entitlement
 
 echo "--------------------------------------"
 echo "done."
-signhelp
+signhelp 
 echo "--------------------------------------"
