@@ -61,7 +61,7 @@ public class BL_BuildPostProcess
 
 
         // embedded frameworks
-#if UNITY_2019_1_OR_NEWER
+#if UNITY_2019_3_OR_NEWER
         target = proj.GetUnityMainTargetGuid();
 #endif
         const string defaultLocationInProj = "AgoraEngine/Plugins/iOS";
