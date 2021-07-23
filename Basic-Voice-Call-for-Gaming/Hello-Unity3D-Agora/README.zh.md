@@ -1,12 +1,14 @@
 # Hello Unity3D Agora
 
-*Read this in other languages: [English](README.en.md)*
+*Read this in other languages: [English](README.md)*
 
 这个开源示例项目演示了如何在 Unity3D 中快速集成Agora游戏SDK，实现在游戏中的音频通话。
 
 在这个示例项目中包含了以下功能：
 
-- 加入通话和离开通话；
+- 加入频道和离开频道
+- 通话
+- 静音
 
 你也可以在这里查看进阶版的示例项目：[Spacewar-with-AMG-Voice-SDK-Unity](https://github.com/AgoraIO/Spacewar-with-AMG-Voice-SDK-Unity)
 
@@ -17,22 +19,22 @@ Agora游戏SDK支持 iOS / Android / Unity3D / Cocos2d 等多个平台，你可�
 - [Hello-Cocos2d-Agora](https://github.com/AgoraIO/Hello-Cocos2d-Agora)
 
 ## 运行示例程序
-首先在 [Agora.io 注册](https://dashboard.agora.io/cn/signup/) 注册账号，并创建自己的测试项目，获取到 AppID。将 AppID 填写进 HelloUnity3D.cs
+首先在 [Agora.io 注册](https://dashboard.agora.io/cn/signup/) 注册账号，并创建自己的测试项目，获取到 AppID。
+接着， 克隆此仓库。 请注意，在下载SDK软件包之前，您将看到Unity编译器错误。
+然后下载SDK软件包。 这样做有两种选择。
 
-```
-private static string appId = "YOUR APP ID";
-```
+选择1： 在Unity Asset Store搜寻 Agora Voice 及下载， [这个是地址](https://assetstore.unity.com/packages/tools/audio/agora-voice-sdk-for-unity-134505).
 
-然后在 [Agora.io SDK](https://www.agora.io/cn/blog/download/) 下载 **AMG 游戏语音SDK**，解压后
+选择2:   在 [Agora.io SDK](https://docs.agora.io/cn/All/downloads?platform=Unity) 下载 **音频 SDK**，解压后
 
-- 把SDK中 **libs/Android/** 下的内容，复制到项目的 **Assets/Plugins/Android/AgoraAudioKit.plugin/libs/** 文件夹下
-- 把SDK中 **libs/iOS/** 下的内容，复制到项目的 **Assets/Plugins/iOS/** 文件夹下
-- 把SDK中 **libs/Scripts/AgoraGamingSDK/** 下的内容，复制到项目的 **Assets/Scripts/AgoraGamingSDK/** 文件夹下
+- 把SDK中 **libs/Android/** 下的内容，复制到项目的 **Assets/AgoraEngine/Plugins/Android/AgoraAudioKit.plugin/libs/** 文件夹下
+- 把SDK中 **libs/iOS/** 下的内容，复制到项目的 **Assets/AgoraEngine/Plugins/iOS/** 文件夹下
+- 把SDK中 **libs/Scripts/AgoraGamingSDK/** 下的内容，复制到项目的 **Assets/AgoraEngine/Scripts/AgoraGamingSDK/** 文件夹下
 
-最后使用 Unity 打开本项目即可运行。
+最后使用 Unity 打开本项目, 打开Demo里的HelloUnity3D 场景。把 AppID 填写进 GameController 的 App ID 项目里 即可运行！
 
 ## 运行环境
-* Unity 5.5 +
+* Unity 2017 LTS
 
 ## 联系我们
 
