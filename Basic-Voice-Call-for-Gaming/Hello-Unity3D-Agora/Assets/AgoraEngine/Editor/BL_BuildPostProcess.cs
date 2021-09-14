@@ -2,9 +2,10 @@
 using System.IO;
 using UnityEditor;
 using UnityEditor.Callbacks;
+#if UNITY_IPHONE
 using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
-
+#endif
 
 public class BL_BuildPostProcess
 {
@@ -19,17 +20,6 @@ public class BL_BuildPostProcess
             UpdatePermission(path + "/Info.plist");
 #endif
         }
-        else if (buildTarget == BuildTarget.StandaloneOSX)
-         {
-            string plistPath = path + "/Contents/Info.plist"; // straight to a binary
-            if (path.EndsWith(".xcodeproj"))
-            {
-                // This must be a build that exports Xcode
-                string dir = Path.GetDirectoryName(path);
-                plistPath = dir + "/" + PlayerSettings.productName + "/Info.plist";
-            }
-            UpdatePermission(plistPath);
-         }
     }
 #if UNITY_IPHONE
     static string GetTargetGuid(PBXProject proj)
@@ -100,12 +90,14 @@ public class BL_BuildPostProcess
     /// <param name="pListPath">path to the Info.plist file</param>
     static void UpdatePermission(string pListPath)
     {
+#if UNITY_IPHONE
         PlistDocument plist = new PlistDocument();
         plist.ReadFromString(File.ReadAllText(pListPath));
         PlistElementDict rootDic = plist.root;
         var micPermission = "NSMicrophoneUsageDescription";
         rootDic.SetString(micPermission, "Voice call need to user mic");
         File.WriteAllText(pListPath, plist.WriteToString());
+#endif
     }
 }
 #endif
