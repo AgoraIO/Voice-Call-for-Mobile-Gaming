@@ -28,7 +28,7 @@ public class BL_BuildPostProcess
                 string dir = Path.GetDirectoryName(path);
                 plistPath = dir + "/" + PlayerSettings.productName + "/Info.plist";
             }
-            UpdatePermission(plistPath);
+            // UpdatePermission(plistPath);
          }
     }
 #if UNITY_IPHONE
